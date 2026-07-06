@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>agendt.de — KI-Automatisierung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAF0E6;
+            --bg-warm: #F5F5DC;
+            --text: #333333;
+            --text-muted: #6B5E55;
+            --accent: #5D4037;
+            --accent-light: #8D6E63;
+            --divider: rgba(93, 64, 55, 0.18);
+            --divider-strong: rgba(93, 64, 55, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.65;
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        ::selection {
+            background: rgba(93, 64, 55, 0.15);
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Logo */
+        .site-header {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .tagline {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 2px solid var(--accent);
+            margin: 0 auto;
+            max-width: 120px;
+            opacity: 0.5;
+        }
+
+        .divider-wide {
+            border: none;
+            border-top: 1px solid var(--divider);
+            margin: 0;
+        }
+
+        .divider-wide-strong {
+            border: none;
+            border-top: 2px solid var(--divider-strong);
+            margin: 0;
+        }
+
+        /* Sections */
+        .section {
+            padding: 64px 0;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 24px;
+        }
+
+        .section-headline {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-body {
+            font-size: 1.05rem;
+            color: var(--text);
+            max-width: 680px;
+        }
+
+        .section-body p + p {
+            margin-top: 18px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 40px 0 80px;
+            text-align: center;
+        }
+
+        .hero-typing {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+            color: var(--accent);
+            min-height: 2.4em;
+            display: inline-block;
+        }
+
+        .hero-typing::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+            color: var(--accent-light);
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-top: 24px;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Lists */
+        .service-list {
+            list-style: none;
+            margin-top: 28px;
+        }
+
+        .service-list li {
+            position: relative;
+            padding: 22px 0 22px 36px;
+            border-bottom: 1px solid var(--divider);
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .service-list li:hover {
+            transform: translateX(8px);
+            background: rgba(93, 64, 55, 0.03);
+        }
+
+        .service-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            top: 22px;
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-light);
+            font-weight: 700;
+        }
+
+        .service-list strong {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .service-list span {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .card {
+            background: var(--bg-warm);
+            border: 1px solid var(--divider);
+            padding: 28px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(93, 64, 55, 0.08);
+            border-color: var(--accent-light);
+        }
+
+        .card-title {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .card-body {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* USP Bar */
+        .usp-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .usp-pill {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            border: 1px solid var(--divider);
+            padding: 8px 14px;
+            transition: all 0.2s ease;
+        }
+
+        .usp-pill:hover {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 80px 0 100px;
+        }
+
+        .cta-title {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--bg);
+            background: var(--accent);
+            text-decoration: none;
+            padding: 16px 32px;
+            border: 2px solid var(--accent);
+            transition: all 0.25s ease;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .cta-note {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0 60px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--divider);
+            transition: border-color 0.2s ease;
+        }
+
+        .footer a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .page {
+                padding: 0 18px;
+            }
+            .site-header {
+                padding: 48px 0 32px;
+            }
+            .section {
+                padding: 48px 0;
+            }
+            .service-list li {
+                padding: 18px 0 18px 28px;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+            <h1 class="logo">AGENDT.DE</h1>
+            <p class="tagline">KI-Automatisierung · Made in Germany</p>
+        </header>
+
+        <hr class="divider">
+
+        <section class="hero">
+            <div class="hero-typing" id="hero-typing"></div>
+            <p class="hero-sub">
+                Wir bauen Automatisierungen, die wirklich laufen. Für Immobilien, E-Commerce und jedes Unternehmen, das wieder Zeit für das Wesentliche gewinnen will.
+            </p>
+        </section>
+
+        <hr class="divider-wide">
+
+        <section class="section" data-animate>
+            <p class="section-title">[Was wir machen]</p>
+            <h2 class="section-headline">Praxisnahe KI-Systeme, keine PowerPoint-Projekte.</h2>
+            <div class="section-body">
+                <p>
+                    Unser Fokus liegt auf Agenten und Workflows, die echte Arbeit übernehmen: Inhalte recherchieren, verfassen und veröffentlichen, Leads sortieren, Dokumente verarbeiten, Daten synchronisieren. Alles verknüpft über <strong>n8n</strong> und ergänzt durch lokale KI-Modelle – ohne dass sensible Daten das Büro verlassen.
+                </p>
+            </div>
+            <ul class="service-list">
+                <li>
+                    <strong>Multi-Agent Content Factory</strong>
+                    <span>Recherche, Text, Kritik und Veröffentlichung in einem automatisierten Workflow – für Social Media, Blogs und Newsrooms.</span>
+                </li>
+                <li>
+                    <strong>Workflow-Automatisierung mit n8n</strong>
+                    <span>Verbindung von CRM, Shop, E-Mail, Datenbanken und APIs zu einem robusten, wartbaren Prozess.</span>
+                </li>
+                <li>
+                    <strong>Lokale LLM-Deployment</strong>
+                    <span>Betrieb eigener Sprachmodelle auf deiner Infrastruktur mit Ollama, Llama und passender Hardware.</span>
+                </li>
+                <li>
+                    <strong>DSGVO-konforme Architektur</strong>
+                    <span>Self-hosted oder europäische Cloud. Klare Datenflüsse, Verarbeitungsverzeichnis und dokumentierte Schnittstellen.</span>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="divider-wide">
+
+        <section class="section" data-animate>
+            <p class="section-title">[Für wen]</p>
+            <h2 class="section-headline">Zwei Branchen, ein Ziel: weniger Wiederholung.</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">Real Estate</div>
+                    <div class="card-body">
+                        Exposés automatisch erstellen, Anfragen vorqualifizieren, Termine koordinieren und Objektdaten zwischen Portalen synchronisieren.
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">E-Commerce</div>
+                    <div class="card-body">
+                        Produktbeschreibungen generieren, Kundenanfragen klassifizieren, Retouren-Workflows beschleunigen und Lageralerts automatisieren.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider-wide">
+
+        <section class="section" data-animate>
+            <p class="section-title">[Warum agendt?]</p>
+            <h2 class="section-headline">Daten bleiben bei dir. Verantwortung bei uns.</h2>
+            <div class="section-body">
+                <p>
+                    Viele Agenturen setzen auf US-Cloud-APIs. Das ist schnell, aber für deutsche Kunden oft ein Problem. Wir arbeiten deshalb primär mit <strong>self-hosted KI</strong> und europäischen Diensten. Das macht unsere Lösungen nicht nur DSGVO-konformer, sondern auch unabhängiger und langfristig kostengünstiger.
+                </p>
+                <p>
+                    Du behältst die Kontrolle über deine Daten, deine Modelle und deine Prozesse. Wir sorgen dafür, dass das Ganze funktioniert.
+                </p>
+            </div>
+            <div class="usp-bar">
+                <span class="usp-pill">Self-hosted</span>
+                <span class="usp-pill">DSGVO-konform</span>
+                <span class="usp-pill">Keine US-Cloud</span>
+                <span class="usp-pill">Transparent</span>
+            </div>
+        </section>
+
+        <hr class="divider-wide">
+
+        <section class="section" data-animate>
+            <p class="section-title">[So arbeiten wir]</p>
+            <h2 class="section-headline">Von der Idee zum laufenden Workflow.</h2>
+            <div class="section-body">
+                <p>
+                    Wir starten nicht mit einem 30-Seiten-Konzept, sondern mit einem konkreten Prozess in deinem Betrieb. In wenigen Tagen bauen wir einen ersten Prototyp, den du wirklich nutzen kannst. Danach iterieren wir gemeinsam, bis der Workflow stabil läuft.
+                </p>
+            </div>
+            <ul class="service-list">
+                <li>
+                    <strong>1. Analyse</strong>
+                    <span>Wir identifizieren den Prozess mit dem größten Automatisierungspotenzial.</span>
+                </li>
+                <li>
+                    <strong>2. Prototyp</strong>
+                    <span>Ein erster lauffähiger Workflow in wenigen Tagen, nicht Wochen.</span>
+                </li>
+                <li>
+                    <strong>3. Iteration</strong>
+                    <span>Gemeinsames Feintuning, bis der Ablauf zuverlässig und handhabbar ist.</span>
+                </li>
+                <li>
+                    <strong>4. Übergabe</strong>
+                    <span>Dokumentation, kleine Schulung, optional Wartung oder Weiterentwicklung.</span>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="divider-wide-strong">
+
+        <section class="cta" data-animate>
+            <h2 class="cta-title">Lass uns deinen ersten Workflow bauen.</h2>
+            <a href="mailto:hello@agendt.de" class="cta-button">hello@agendt.de</a>
+            <p class="cta-note">Antwort innerhalb eines Werktags.</p>
+        </section>
+
+        <footer class="footer">
+            <p>AGENDT.DE · KI-Automatisierung · Made in Germany</p>
+            <p style="margin-top: 8px;">
+                <a href="mailto:hello@agendt.de">hello@agendt.de</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Typing effect for hero
+        const heroText = "KI-Automatisierung für Unternehmen.";
+        const heroElement = document.getElementById('hero-typing');
+        let i = 0;
+
+        function typeWriter() {
+            if (i < heroText.length) {
+                heroElement.textContent += heroText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 55);
+            }
+        }
+
+        // Fade-in sections on scroll
+        const sections = document.querySelectorAll('[data-animate]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            typeWriter();
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>

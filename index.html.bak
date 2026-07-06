@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>agendt.de — KI-Automatisierung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #FAF0E6;
+            color: #333333;
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .cursor {
+            width: 12px;
+            height: 12px;
+            border: 2px solid #5D4037;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-glow {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(93, 64, 55, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.15s ease-out;
+        }
+
+        .cursor.hover {
+            transform: scale(1.5);
+            border-color: #8D6E63;
+        }
+
+        .cursor-glow.hover {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(93, 64, 55, 0.25) 0%, transparent 70%);
+        }
+
+        .terminal {
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .blink::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+            color: #5D4037;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #5D4037;
+            margin-bottom: 10px;
+        }
+
+        .divider {
+            border: none;
+            border-top: 2px solid #5D4037;
+            margin: 20px 0;
+            opacity: 0.6;
+        }
+
+        .divider-light {
+            border: none;
+            border-top: 1px solid #5D4037;
+            margin: 15px 0;
+            opacity: 0.3;
+        }
+
+        .section {
+            margin: 25px 0;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            color: #8D6E63;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            color: #5D4037;
+        }
+
+        .email {
+            display: inline-block;
+            margin-top: 20px;
+            color: #5D4037;
+            text-decoration: none;
+            border-bottom: 1px solid #5D4037;
+            transition: all 0.3s ease;
+        }
+
+        .email:hover {
+            color: #8D6E63;
+            border-bottom-color: #8D6E63;
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 2s steps(30, end);
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @media (max-width: 600px) {
+            .terminal {
+                padding: 20px;
+            }
+            .logo {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <div class="terminal">
+        <div class="header">
+            <div class="logo">AGENDT.DE</div>
+            <hr class="divider">
+            <div class="typing">KI-Automatisierung für Unternehmen</div>
+            <div>Real Estate · E-Commerce · Workflows</div>
+        </div>
+
+        <hr class="divider-light">
+
+        <div class="section">
+            <div class="section-title">[Leistungen]</div>
+            <div class="section-content">
+                <ul>
+                    <li>Multi-Agent Content Factory</li>
+                    <li>Workflow-Automatisierung (n8n)</li>
+                    <li>DSGVO-konforme KI-Lösungen</li>
+                    <li>Lokale LLM-Deployment (Ollama)</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="divider-light">
+
+        <div class="section">
+            <div class="section-title">[Warum agendt?]</div>
+            <div class="section-content">
+                <ul>
+                    <li>Self-hosted & datenschutzsicher</li>
+                    <li>Keine US-Cloud-Abhängigkeit</li>
+                    <li>Praxisnah, keine Theorie</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="divider-light">
+
+        <div class="section">
+            <a href="mailto:hello@agendt.de" class="email">hello@agendt.de</a>
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const cursorGlow = document.getElementById('cursor-glow');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 6 + 'px';
+            cursor.style.top = e.clientY - 6 + 'px';
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorGlow.classList.add('hover');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorGlow.classList.remove('hover');
+            });
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'scale(0.8)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+</html>
