@@ -1,0 +1,103 @@
+---
+const navItems = [
+  { href: '/', label: 'Start' },
+  { href: '/leistungen', label: 'Leistungen' },
+  { href: '/dsgvo-trust', label: 'DSGVO & Trust' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="page">
+    <a href="/" class="logo-link">
+      <h1 class="logo">AGENDT.DE</h1>
+    </a>
+    <p class="tagline">KI-Automatisierung · Made in Germany</p>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <div class="page">
+    <ul>
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class={currentPath === item.href || currentPath.startsWith(item.href + '/') ? 'active' : ''}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .site-header {
+    text-align: center;
+    padding: 56px 0 12px;
+  }
+
+  .logo-link {
+    border-bottom: none;
+  }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  .tagline {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .main-nav {
+    padding: 18px 0 0;
+  }
+
+  .main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+  }
+
+  .main-nav a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .main-nav a:hover,
+  .main-nav a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .site-header {
+      padding: 42px 0 8px;
+    }
+    .main-nav ul {
+      gap: 8px 18px;
+    }
+  }
+</style>

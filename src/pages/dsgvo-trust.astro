@@ -1,0 +1,155 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import Card from '../components/Card.astro';
+---
+
+<Base title="DSGVO & Trust — agendt.de" description="So arbeiten wir DSGVO-konform: self-hosted KI, europäische Infrastruktur, klare Datenflüsse.">
+  <Header />
+
+  <hr class="divider">
+
+  <Section
+    title="[DSGVO & Trust]"
+    headline="Datenschutz ist kein Anhang, sondern Basis unserer Architektur."
+    intro="Wir glauben, dass Automatisierung nicht mit dem Verlust der Kontrolle über eigene Daten einhergehen muss. Deshalb entwickeln wir Lösungen, bei denen sensible Informationen nach Möglichkeit auf deiner Infrastruktur bleiben."
+  >
+    <div class="section-body">
+      <p>
+        Viele KI-Dienstleistungen übertragen Eingaben in US-Clouds. Das führt zu rechtlichen Unsicherheiten, insbesondere nach dem Schrems-II-Urteil. Wir vermeiden das, indem wir auf self-hosted Modelle und europäische Dienste setzen.
+      </p>
+    </div>
+  </Section>
+
+  <hr class="divider-wide">
+
+  <Section
+    title="[Prinzipien]"
+    headline="Wie wir Datenschutz umsetzen."
+  >
+    <div class="card-grid">
+      <Card title="Data Ownership" body="Deine Daten bleiben auf deinen Systemen oder bei europäischen Anbietern. Kein undokumentierter Transfer in Drittländer." />
+      <Card title="Self-Hosted KI" body="Lokale Sprachmodelle mit Ollama/Llama, die ohne Internetverbindung laufen können." />
+      <Card title="Dokumentierte Schnittstellen" body="Wir dokumentieren Datenflüsse, Speicherorte und Betreiber – als Grundlage für dein Verarbeitungsverzeichnis." />
+      <Card title="Transparente Architektur" body="Keine Blackbox. Du weißt, welche Komponenten laufen, wo sie laufen und wer Zugriff hat." />
+    </div>
+  </Section>
+
+  <hr class="divider-wide">
+
+  <Section
+    title="[Kein-US-Cloud-Versprechen]"
+    headline="Wir vermeiden US-Cloud-APIs, wo immer es möglich ist."
+    intro="Wenn externe Dienste nötig sind, wählen wir europäische Anbieter. US-Cloud-APIs wie OpenAI, Anthropic oder Google Gemini werden nur auf ausdrücklichen Wunsch und mit klarem Hinweis eingesetzt."
+  >
+    <div class="usp-bar">
+      <span class="usp-pill">Ollama</span>
+      <span class="usp-pill">Qdrant</span>
+      <span class="usp-pill">n8n</span>
+      <span class="usp-pill">Europäische Cloud</span>
+    </div>
+  </Section>
+
+  <hr class="divider-wide">
+
+  <Section
+    title="[Hinweis]"
+    headline="Rechtliche Sicherheit liegt auch bei dir."
+  >
+    <div class="section-body">
+      <p>
+        Wir unterstützen bei der technischen Umsetzung datenschutzfreundlicher Systeme. Eine rechtsverbindliche Beurteilung der DSGVO-Konformität obliegt jedoch deinem Datenschutzbeauftragten oder Rechtsberater. Gerade für Pilotprojekte empfehlen wir eine kurze Absprache mit der zuständigen Person.
+      </p>
+    </div>
+  </Section>
+
+  <hr class="divider-wide-strong">
+
+  <section class="cta" data-animate>
+    <div class="page">
+      <h2 class="cta-title">Fragen zur DSGVO-Konformität?</h2>
+      <a href="mailto:hello@agendt.de" class="cta-button">hello@agendt.de</a>
+      <p class="cta-note">Wir besprechen dein Setup gerne unverbindlich.</p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .section-body {
+    margin-top: 18px;
+  }
+
+  .section-body p + p {
+    margin-top: 18px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .usp-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .usp-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    border: 1px solid var(--divider);
+    padding: 8px 14px;
+    transition: all 0.2s ease;
+  }
+
+  .usp-pill:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  .cta {
+    text-align: center;
+    padding: 80px 0 100px;
+  }
+
+  .cta-title {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--bg);
+    background: var(--accent);
+    text-decoration: none;
+    padding: 16px 32px;
+    border: 2px solid var(--accent);
+    transition: all 0.25s ease;
+  }
+
+  .cta-button:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .cta-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+</style>

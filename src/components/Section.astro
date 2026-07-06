@@ -1,0 +1,88 @@
+---
+export interface Props {
+  title?: string;
+  headline?: string;
+  intro?: string;
+}
+
+const { title, headline, intro } = Astro.props;
+---
+
+<section class="section" data-animate>
+  <div class="page">
+    {title && <p class="section-title">{title}</p>}
+    {headline && <h2 class="section-headline">{headline}</h2>}
+    {intro && (
+      <div class="section-body">
+        <p>{intro}</p>
+      </div>
+    )}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 64px 0;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 24px;
+  }
+
+  .section-headline {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .section-body {
+    font-size: 1.05rem;
+    color: var(--text);
+    max-width: 700px;
+  }
+
+  .section-body p + p {
+    margin-top: 18px;
+  }
+
+  @media (max-width: 640px) {
+    .section {
+      padding: 48px 0;
+    }
+  }
+</style>
+
+<script>
+  const sections = document.querySelectorAll('[data-animate]');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+</script>

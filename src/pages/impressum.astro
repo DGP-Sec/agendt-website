@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+---
+
+<Base title="Impressum — agendt.de" description="Impressum von agendt.de">
+  <Header />
+
+  <hr class="divider">
+
+  <Section
+    title="[Impressum]"
+    headline="Angaben gemäß § 5 DDG."
+  >
+    <div class="impressum-body">
+      <p><strong>agendt.de</strong></p>
+      <p>[Vorname Nachname]</p>
+      <p>[Straße Hausnummer]</p>
+      <p>[PLZ Ort]</p>
+      <p>Deutschland</p>
+
+      <p class="spacer"><strong>Kontakt:</strong></p>
+      <p>E-Mail: <a href="mailto:hello@agendt.de">hello@agendt.de</a></p>
+      <p>Web: <a href="https://agendt.de">https://agendt.de</a></p>
+
+      <p class="spacer"><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</strong></p>
+      <p>[Vorname Nachname]</p>
+      <p>[Anschrift wie oben]</p>
+
+      <p class="spacer"><strong>Hinweis:</strong></p>
+      <p>
+        Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+      </p>
+    </div>
+  </Section>
+
+  <Footer />
+</Base>
+
+<style>
+  .impressum-body {
+    margin-top: 28px;
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .impressum-body p {
+    margin: 0;
+  }
+
+  .impressum-body p.spacer {
+    margin-top: 24px;
+  }
+
+  .impressum-body strong {
+    color: var(--accent);
+  }
+
+  .impressum-body a {
+    color: var(--accent);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .impressum-body a:hover {
+    border-bottom-color: var(--accent);
+  }
+</style>

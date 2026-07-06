@@ -1,0 +1,41 @@
+---
+export interface Props {
+  title: string;
+  body: string;
+}
+
+const { title, body } = Astro.props;
+---
+
+<div class="card">
+  <div class="card-title">{title}</div>
+  <div class="card-body">{body}</div>
+</div>
+
+<style>
+  .card {
+    background: var(--bg-warm);
+    border: 1px solid var(--divider);
+    padding: 28px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(93, 64, 55, 0.08);
+    border-color: var(--accent-light);
+  }
+
+  .card-title {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+
+  .card-body {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+---
+
+<section class="hero">
+  <div class="page">
+    <div class="hero-typing" id="hero-typing"></div>
+    <p class="hero-sub">
+      Wir bauen Automatisierungen, die wirklich laufen. Für Immobilien, E-Commerce und jedes Unternehmen, das wieder Zeit für das Wesentliche gewinnen will.
+    </p>
+  </div>
+</section>
+
+<script>
+  const heroText = "KI-Automatisierung für Unternehmen.";
+  const heroElement = document.getElementById('hero-typing');
+  let i = 0;
+
+  function typeWriter() {
+    if (heroElement && i < heroText.length) {
+      heroElement.textContent += heroText.charAt(i);
+      i++;
+      setTimeout(typeWriter, 55);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', typeWriter);
+  } else {
+    typeWriter();
+  }
+</script>
+
+<style>
+  .hero {
+    padding: 32px 0 72px;
+    text-align: center;
+  }
+
+  .hero-typing {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.2rem, 3.5vw, 1.9rem);
+    color: var(--accent);
+    min-height: 2.4em;
+    display: inline-block;
+  }
+
+  .hero-typing::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+    color: var(--accent-light);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 24px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+</style>

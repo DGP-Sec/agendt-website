@@ -1,0 +1,101 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "agendt.de — KI-Automatisierung",
+  description = "KI-Automatisierung für Immobilien und E-Commerce. DSGVO-konform, self-hosted, praxisnah."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style is:global>
+        :root {
+            --bg: #FAF0E6;
+            --bg-warm: #F5F5DC;
+            --text: #333333;
+            --text-muted: #6B5E55;
+            --accent: #5D4037;
+            --accent-light: #8D6E63;
+            --divider: rgba(93, 64, 55, 0.18);
+            --divider-strong: rgba(93, 64, 55, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.65;
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        ::selection {
+            background: rgba(93, 64, 55, 0.15);
+        }
+
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--divider);
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        .divider {
+            border: none;
+            border-top: 2px solid var(--accent);
+            margin: 0 auto;
+            max-width: 120px;
+            opacity: 0.5;
+        }
+
+        .divider-wide {
+            border: none;
+            border-top: 1px solid var(--divider);
+            margin: 0;
+        }
+
+        .divider-wide-strong {
+            border: none;
+            border-top: 2px solid var(--divider-strong);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <slot />
+</body>
+</html>

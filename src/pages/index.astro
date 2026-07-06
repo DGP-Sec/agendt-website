@@ -1,0 +1,188 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import ServiceItem from '../components/ServiceItem.astro';
+import Card from '../components/Card.astro';
+---
+
+<Base>
+  <Header />
+
+  <hr class="divider">
+
+  <Hero />
+
+  <hr class="divider-wide">
+
+  <Section
+    title="[Was wir machen]"
+    headline="Praxisnahe KI-Systeme, keine PowerPoint-Projekte."
+    intro="Unser Fokus liegt auf Agenten und Workflows, die echte Arbeit übernehmen: Inhalte recherchieren, verfassen und veröffentlichen, Leads sortieren, Dokumente verarbeiten, Daten synchronisieren. Alles verknüpft über n8n und ergänzt durch lokale KI-Modelle – ohne dass sensible Daten das Büro verlassen."
+  >
+    <ul class="service-list">
+      <ServiceItem
+        title="Multi-Agent Content Factory"
+        description="Recherche, Text, Kritik und Veröffentlichung in einem automatisierten Workflow – für Social Media, Blogs und Newsrooms."
+      />
+      <ServiceItem
+        title="Workflow-Automatisierung mit n8n"
+        description="Verbindung von CRM, Shop, E-Mail, Datenbanken und APIs zu einem robusten, wartbaren Prozess."
+      />
+      <ServiceItem
+        title="Lokale LLM-Deployment"
+        description="Betrieb eigener Sprachmodelle auf deiner Infrastruktur mit Ollama, Llama und passender Hardware."
+      />
+      <ServiceItem
+        title="DSGVO-konforme Architektur"
+        description="Self-hosted oder europäische Cloud. Klare Datenflüsse, Verarbeitungsverzeichnis und dokumentierte Schnittstellen."
+      />
+    </ul>
+  </Section>
+
+  <hr class="divider-wide">
+
+  <Section
+    title="[Für wen]"
+    headline="Zwei Branchen, ein Ziel: weniger Wiederholung."
+  >
+    <div class="card-grid">
+      <Card
+        title="Real Estate"
+        body="Exposés automatisch erstellen, Anfragen vorqualifizieren, Termine koordinieren und Objektdaten zwischen Portalen synchronisieren."
+      />
+      <Card
+        title="E-Commerce"
+        body="Produktbeschreibungen generieren, Kundenanfragen klassifizieren, Retouren-Workflows beschleunigen und Lageralerts automatisieren."
+      />
+    </div>
+  </Section>
+
+  <hr class="divider-wide">
+
+  <Section
+    title="[Warum agendt?]"
+    headline="Daten bleiben bei dir. Verantwortung bei uns."
+    intro="Viele Agenturen setzen auf US-Cloud-APIs. Das ist schnell, aber für deutsche Kunden oft ein Problem. Wir arbeiten deshalb primär mit self-hosted KI und europäischen Diensten. Das macht unsere Lösungen nicht nur DSGVO-konformer, sondern auch unabhängiger und langfristig kostengünstiger."
+  >
+    <div class="section-body">
+      <p>Du behältst die Kontrolle über deine Daten, deine Modelle und deine Prozesse. Wir sorgen dafür, dass das Ganze funktioniert.</p>
+    </div>
+    <div class="usp-bar">
+      <span class="usp-pill">Self-hosted</span>
+      <span class="usp-pill">DSGVO-konform</span>
+      <span class="usp-pill">Keine US-Cloud</span>
+      <span class="usp-pill">Transparent</span>
+    </div>
+  </Section>
+
+  <hr class="divider-wide">
+
+  <Section
+    title="[So arbeiten wir]"
+    headline="Von der Idee zum laufenden Workflow."
+    intro="Wir starten nicht mit einem 30-Seiten-Konzept, sondern mit einem konkreten Prozess in deinem Betrieb. In wenigen Tagen bauen wir einen ersten Prototyp, den du wirklich nutzen kannst. Danach iterieren wir gemeinsam, bis der Workflow stabil läuft."
+  >
+    <ul class="service-list">
+      <ServiceItem title="1. Analyse" description="Wir identifizieren den Prozess mit dem größten Automatisierungspotenzial." />
+      <ServiceItem title="2. Prototyp" description="Ein erster lauffähiger Workflow in wenigen Tagen, nicht Wochen." />
+      <ServiceItem title="3. Iteration" description="Gemeinsames Feintuning, bis der Ablauf zuverlässig und handhabbar ist." />
+      <ServiceItem title="4. Übergabe" description="Dokumentation, kleine Schulung, optional Wartung oder Weiterentwicklung." />
+    </ul>
+  </Section>
+
+  <hr class="divider-wide-strong">
+
+  <section class="cta" data-animate>
+    <div class="page">
+      <h2 class="cta-title">Lass uns deinen ersten Workflow bauen.</h2>
+      <a href="mailto:hello@agendt.de" class="cta-button">hello@agendt.de</a>
+      <p class="cta-note">Antwort innerhalb eines Werktags.</p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .service-list {
+    list-style: none;
+    margin-top: 28px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .section-body {
+    margin-top: 18px;
+  }
+
+  .section-body p + p {
+    margin-top: 18px;
+  }
+
+  .usp-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .usp-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    border: 1px solid var(--divider);
+    padding: 8px 14px;
+    transition: all 0.2s ease;
+  }
+
+  .usp-pill:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  .cta {
+    text-align: center;
+    padding: 80px 0 100px;
+  }
+
+  .cta-title {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--bg);
+    background: var(--accent);
+    text-decoration: none;
+    padding: 16px 32px;
+    border: 2px solid var(--accent);
+    transition: all 0.25s ease;
+  }
+
+  .cta-button:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .cta-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+</style>

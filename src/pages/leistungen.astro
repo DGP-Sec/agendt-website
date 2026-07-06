@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import ServiceItem from '../components/ServiceItem.astro';
+import Card from '../components/Card.astro';
+---
+
+<Base title="Leistungen — agendt.de" description="Unsere Leistungen: Multi-Agent Content Factory, n8n-Workflows, lokale LLMs und DSGVO-konforme Architektur.">
+  <Header />
+
+  <hr class="divider">
+
+  <Section
+    title="[Leistungen]"
+    headline="Wir automatisieren das, was dich aufhält."
+    intro="Jedes Unternehmen hat repetitive Prozesse. Wir identifizieren sie, bauen Workflows und sorgen dafür, dass sie stabil laufen."
+  >
+    <ul class="service-list">
+      <ServiceItem
+        title="Multi-Agent Content Factory"
+        description="Recherche, Schreiben, Kritik und Veröffentlichung in einem durchgängigen Workflow. Ideal für Social-Media-Teams, Blogs und Newsrooms, die regelmäßig Inhalte produzieren müssen."
+      />
+      <ServiceItem
+        title="Workflow-Automatisierung mit n8n"
+        description="Verbindung von CRM, Shop, E-Mail, Datenbanken und APIs. Wir entwickeln wartbare Workflows, die auch bei Ausfällen nicht sofort zusammenbrechen."
+      />
+      <ServiceItem
+        title="Lokale LLM-Deployment"
+        description="Sprachmodelle auf eigener Hardware oder dedizierter Server-Infrastruktur betreiben. Wir setzen auf Ollama, Llama und passende Hardware-Beratung."
+      />
+      <ServiceItem
+        title="Datenschutzsichere Architektur"
+        description="Planung und Umsetzung von Systemen, bei denen sensible Daten nicht über US-Clouds laufen. Inklusive Doku für Verarbeitungsverzeichnis und Datenschutz."
+      />
+      <ServiceItem
+        title="Prozessanalyse & Prototyping"
+        description="Gemeinsame Analyse des aktuellen Arbeitsablaufs. In wenigen Tagen entsteht ein erster Prototyp, der direkt getestet werden kann."
+      />
+      <ServiceItem
+        title="Wartung & Weiterentwicklung"
+        description="Optionale Betreuung nach der Übergabe: Monitoring, Fehlerbehebung, Anpassungen bei neuen Anforderungen."
+      />
+    </ul>
+  </Section>
+
+  <hr class="divider-wide">
+
+  <Section
+    title="[Technologien]"
+    headline="Tools, auf die wir uns verlassen."
+  >
+    <div class="card-grid">
+      <Card title="n8n" body="Open-Source Workflow-Automation mit voller Kontrolle über Daten und Hosting." />
+      <Card title="Ollama" body="Lokale Ausführung von LLMs ohne Cloud-Abhängigkeit." />
+      <Card title="Qdrant" body="Vektordatenbank für semantische Suche und Wissensbasen." />
+      <Card title="Self-Hosted Stack" body="Docker, Linux, eigene Server oder europäische Cloud-Anbieter." />
+    </div>
+  </Section>
+
+  <hr class="divider-wide-strong">
+
+  <section class="cta" data-animate>
+    <div class="page">
+      <h2 class="cta-title">Lass uns über deinen Prozess sprechen.</h2>
+      <a href="mailto:hello@agendt.de" class="cta-button">hello@agendt.de</a>
+      <p class="cta-note">Kostenloses Erstgespräch.</p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .service-list {
+    list-style: none;
+    margin-top: 28px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .cta {
+    text-align: center;
+    padding: 80px 0 100px;
+  }
+
+  .cta-title {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--bg);
+    background: var(--accent);
+    text-decoration: none;
+    padding: 16px 32px;
+    border: 2px solid var(--accent);
+    transition: all 0.25s ease;
+  }
+
+  .cta-button:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .cta-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+</style>
