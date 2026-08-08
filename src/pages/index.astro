@@ -6,183 +6,383 @@ import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
 import ServiceItem from '../components/ServiceItem.astro';
 import Card from '../components/Card.astro';
+
+// SVG Icons (inline fuer Performance)
+const iconProcess = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>';
+const iconContent = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
+const iconShield = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>';
 ---
 
 <Base>
   <Header />
-
-  <hr class="divider">
-
   <Hero />
 
-  <hr class="divider-wide">
+  <!-- STATS BAR: Social Proof durch konkrete Zahlen (Cialdini) -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-num">3&ndash;5</span>
+          <span class="stat-label">Tage bis zum Prototyp</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">&lt; 24h</span>
+          <span class="stat-label">Antwortzeit an Werktagen</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">DSGVO-konforme Architektur</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-label">US-Cloud-Abhaengigkeit</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- PROBLEM SECTION: Loss Aversion (Kahneman/Tversky) -->
   <Section
-    title="[Was wir machen]"
-    headline="Praxisnahe KI-Systeme, keine PowerPoint-Projekte."
-    intro="Unser Fokus liegt auf Agenten und Workflows, die echte Arbeit übernehmen: Inhalte recherchieren, verfassen und veröffentlichen, Leads sortieren, Dokumente verarbeiten, Daten synchronisieren. Alles verknüpft über n8n und ergänzt durch lokale KI-Modelle – ohne dass sensible Daten das Büro verlassen."
+    label="[Das Problem]"
+    title="Jeder Tag ohne Automatisierung kostet Sie bares Geld."
+    intro="Repetitive Aufgaben binden Personal, das eigentlich fuer Wichtigeres gebraucht wird. Waehrend Ihre Mitarbeiter Daten abtippen, Exposés formatieren und E-Mails sortieren, macht die Konkurrenz bereits mehr mit weniger Aufwand."
+  >
+    <div class="pain-grid">
+      <div class="pain-item">
+        <span class="pain-icon">&#9888;</span>
+        <p><strong>Manuelle Datenpflege</strong> zwischen CRM, Shop und Portalen &ndash; stuendlich, taeglich, fehleranfaellig.</p>
+      </div>
+      <div class="pain-item">
+        <span class="pain-icon">&#9888;</span>
+        <p><strong>Wiederkehrende Kundenanfragen</strong>, die immer aehnlich sind und ehemalig viel Zeit kosten.</p>
+      </div>
+      <div class="pain-item">
+        <span class="pain-icon">&#9888;</span>
+        <p><strong>Inhalte muessen erstellt werden</strong> &ndash; Exposés, Produktbeschreibungen, Social-Media-Posts. Immer wieder von vorn.</p>
+      </div>
+      <div class="pain-item">
+        <span class="pain-icon">&#9888;</span>
+        <p><strong>Datenflut ohne Struktur</strong> &ndash; Dokumente, E-Mails und Informationen, die nicht durchsuchbar sind.</p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- SERVICES SECTION: Loesungen mit Outcomes -->
+  <Section
+    alt
+    label="[Was wir tun]"
+    title="Automatisierung, die Ihre Prozesse uebernimmt &ndash; nicht nur begleitet."
+    intro="Wir bauen nicht nur Tools. Wir bauen Systeme, die Arbeit wirklich abnehmen: vom ersten Workflow bis zur vollstaendigen Prozessautomatisierung."
   >
     <ul class="service-list">
       <ServiceItem
         title="Multi-Agent Content Factory"
-        description="Recherche, Text, Kritik und Veröffentlichung in einem automatisierten Workflow – für Social Media, Blogs und Newsrooms."
+        description="Recherche, Texterstellung, Qualitaetspruefung und Veroeffentlichung in einem automatisierten Workflow. Fuer Social Media, Blogs, Exposés und Newsrooms."
+        outcome="Inhalte in Minuten statt Stunden, konsistente Qualitaet, 24/7 Verfuegbarkeit."
       />
       <ServiceItem
         title="Workflow-Automatisierung mit n8n"
-        description="Verbindung von CRM, Shop, E-Mail, Datenbanken und APIs zu einem robusten, wartbaren Prozess."
+        description="Verbindung von CRM, Shop-System, E-Mail, Datenbanken und APIs zu robusten, wartbaren Prozessen. Inklusive Fehlerbehandlung und Monitoring."
+        outcome="Manuelle Dateneingabe drastisch reduziert, Prozesse laufen zuverlaessig 24/7."
       />
       <ServiceItem
-        title="Lokale LLM-Deployment"
-        description="Betrieb eigener Sprachmodelle auf deiner Infrastruktur mit Ollama, Llama und passender Hardware."
+        title="Lokale KI-Deployment (LLM)"
+        description="Eigene Sprachmodelle auf Ihrer Infrastruktur mit Ollama und Llama. Keine Cloud-Abhaengigkeit, keine Datenfluesse nach aussen."
+        outcome="Vollstaendige Kontrolle ueber Daten und Modelle, keine API-Kosten, DSGVO-sicher."
       />
       <ServiceItem
-        title="DSGVO-konforme Architektur"
-        description="Self-hosted oder europäische Cloud. Klare Datenflüsse, Verarbeitungsverzeichnis und dokumentierte Schnittstellen."
+        title="Intelligente Dokumentenverarbeitung"
+        description="Automatische Extraktion, Klassifizierung und Verarbeitung von Dokumenten, Rechnungen, Vertraegen und E-Mails mit KI."
+        outcome="Stunden manueller Erfassung pro Woche eingespart, weniger Fehler, schnellere Durchlaufzeiten."
       />
     </ul>
   </Section>
 
-  <hr class="divider-wide">
-
+  <!-- ZIELGRUPPE: Spezifitaet schafft Vertrauen -->
   <Section
-    title="[Für wen]"
-    headline="Zwei Branchen, ein Ziel: weniger Wiederholung."
+    label="[Fuer wen]"
+    title="Zwei Branchen. Eine Loesung: weniger Wiederholung."
   >
-    <div class="card-grid">
-      <Card
-        title="Real Estate"
-        body="Exposés automatisch erstellen, Anfragen vorqualifizieren, Termine koordinieren und Objektdaten zwischen Portalen synchronisieren."
-      />
-      <Card
-        title="E-Commerce"
-        body="Produktbeschreibungen generieren, Kundenanfragen klassifizieren, Retouren-Workflows beschleunigen und Lageralerts automatisieren."
-      />
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-icon" set:html={iconContent} />
+        <h3>Immobilienwirtschaft</h3>
+        <ul>
+          <li>Exposés automatisch aus Rohdaten generieren</li>
+          <li>Anfragen vorqualifizieren und an den richtigen Mitarbeiter leiten</li>
+          <li>Objektdaten zwischen Portalen synchronisieren</li>
+          <li>Terminkoordination automatisieren</li>
+        </ul>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon" set:html={iconServer} />
+        <h3>E-Commerce</h3>
+        <ul>
+          <li>Produktbeschreibungen in Grossen Mengen generieren</li>
+          <li>Kundenanfragen klassifizieren und automatisch beantworten</li>
+          <li>Retouren-Workflows beschleunigen</li>
+          <li>Lageralerts und Bestellvorgaenge automatisieren</li>
+        </ul>
+      </div>
     </div>
   </Section>
 
-  <hr class="divider-wide">
-
+  <!-- PROZESS: Zeigarnik-Effekt (Schritte motivieren zum Abschliessen) -->
   <Section
-    title="[Warum agendt?]"
-    headline="Daten bleiben bei dir. Verantwortung bei uns."
-    intro="Viele Agenturen setzen auf US-Cloud-APIs. Das ist schnell, aber für deutsche Kunden oft ein Problem. Wir arbeiten deshalb primär mit self-hosted KI und europäischen Diensten. Das macht unsere Lösungen nicht nur DSGVO-konformer, sondern auch unabhängiger und langfristig kostengünstiger."
+    dark
+    label="[So arbeiten wir]"
+    title="Vom Problem zum laufenden Workflow in 4 Schritten."
+    intro="Kein 30-Seiten-Konzept. Keine wochenlangen Analysephasen. Wir starten mit einem konkreten Prototyp und iterieren von dort."
   >
-    <div class="section-body">
-      <p>Du behältst die Kontrolle über deine Daten, deine Modelle und deine Prozesse. Wir sorgen dafür, dass das Ganze funktioniert.</p>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h3>Analyse</h3>
+        <p>Gemeinsam identifizieren wir den Prozess mit dem groessten Automatisierungspotenzial. Kostenloser Ersttermin, 20 Minuten.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h3>Prototyp</h3>
+        <p>In 3&ndash;5 Tagen bauen wir einen ersten lauffaehigen Workflow, den Sie in Ihrem Betrieb testen koennen.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h3>Iteration</h3>
+        <p>Wir verfeinern den Workflow basierend auf Ihrem Feedback, bis er zuverlaessig und handhabbar ist.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <h3>Uebergabe</h3>
+        <p>Vollstaendige Dokumentation, kurze Schulung Ihres Teams. Optional: Wartung und Weiterentwicklung.</p>
+      </div>
     </div>
-    <div class="usp-bar">
-      <span class="usp-pill">Self-hosted</span>
-      <span class="usp-pill">DSGVO-konform</span>
-      <span class="usp-pill">Keine US-Cloud</span>
-      <span class="usp-pill">Transparent</span>
+    <div class="process-cta">
+      <a href="/kontakt" class="btn btn-primary btn-large">Schritt 1 starten &rarr;</a>
     </div>
   </Section>
 
-  <hr class="divider-wide">
-
+  <!-- WARUM AGENDT: Differenzierung -->
   <Section
-    title="[So arbeiten wir]"
-    headline="Von der Idee zum laufenden Workflow."
-    intro="Wir starten nicht mit einem 30-Seiten-Konzept, sondern mit einem konkreten Prozess in deinem Betrieb. In wenigen Tagen bauen wir einen ersten Prototyp, den du wirklich nutzen kannst. Danach iterieren wir gemeinsam, bis der Workflow stabil läuft."
+    label="[Warum agendt?]"
+    title="Daten bleiben bei Ihnen. Kontrolle bleibt bei Ihnen."
+    intro="Die meisten KI-Dienstleister schicken Ihre Daten in US-Clouds. Das ist schnell gebaut, aber ein DSGVO-Risiko. Wir machen es anders."
   >
-    <ul class="service-list">
-      <ServiceItem title="1. Analyse" description="Wir identifizieren den Prozess mit dem größten Automatisierungspotenzial." />
-      <ServiceItem title="2. Prototyp" description="Ein erster lauffähiger Workflow in wenigen Tagen, nicht Wochen." />
-      <ServiceItem title="3. Iteration" description="Gemeinsames Feintuning, bis der Ablauf zuverlässig und handhabbar ist." />
-      <ServiceItem title="4. Übergabe" description="Dokumentation, kleine Schulung, optional Wartung oder Weiterentwicklung." />
-    </ul>
+    <div class="why-grid">
+      <Card title="Self-Hosted First" body="Lokale Sprachmodelle auf Ihrer Infrastruktur. Wenn Sie wollen, funktioniert alles ohne Internetverbindung." icon={iconServer} />
+      <Card title="DSGVO von Tag 1" body="Klare Datenfluesse, dokumentierte Schnittstellen, Verarbeitungsverzeichnis-tauglich. Keine Grauzonen." icon={iconShield} />
+      <Card title="Schnell statt buerokratisch" body="Statt monatelanger Konzeptphasen: ein Prototyp in unter einer Woche. Danach iterieren wir gemeinsam." icon={iconProcess} />
+      <Card title="Transparent & ehrlich" body="Sie verstehen, was passiert. Keine Blackbox. Volle Dokumentation. Keine versteckten Abhaengigkeiten." icon={iconContent} />
+    </div>
   </Section>
 
-  <hr class="divider-wide-strong">
-
-  <section class="cta" data-animate>
-    <div class="page">
-      <h2 class="cta-title">Lass uns deinen ersten Workflow bauen.</h2>
-      <a href="mailto:hello@agendt.de" class="cta-button">hello@agendt.de</a>
-      <p class="cta-note">Antwort innerhalb eines Werktags.</p>
+  <!-- FINAL CTA: Scarcity + Reciprocity -->
+  <div class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <p class="cta-label">Kostenlos. Unverbindlich. In 24 Stunden.</p>
+        <h2 class="cta-title">Bereit, Ihren ersten Workflow zu automatisieren?</h2>
+        <p class="cta-text">
+          Vereinbaren Sie ein 20-minuetiges Erstgespraech. Wir analysieren gemeinsam, welcher Prozess sich am schnellsten automatisieren laesst &ndash; kostenlos und ohne Verpflichtung.
+        </p>
+        <a href="/kontakt" class="btn btn-primary btn-large">Kostenloses Erstgespraech buchen &rarr;</a>
+        <p class="cta-fineprint">Keine Spam. Keine Verkaufsmasche. Nur konkrete Antworten.</p>
+      </div>
     </div>
-  </section>
+  </div>
 
   <Footer />
 </Base>
 
 <style>
-  .service-list {
-    list-style: none;
-    margin-top: 28px;
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--primary);
+    padding: 40px 0;
   }
-
-  .card-grid {
+  .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    margin-top: 32px;
-  }
-
-  .section-body {
-    margin-top: 18px;
-  }
-
-  .section-body p + p {
-    margin-top: 18px;
-  }
-
-  .usp-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 28px;
-  }
-
-  .usp-pill {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    border: 1px solid var(--divider);
-    padding: 8px 14px;
-    transition: all 0.2s ease;
-  }
-
-  .usp-pill:hover {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
-
-  .cta {
     text-align: center;
-    padding: 80px 0 100px;
+  }
+  .stat-num {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1.1;
+  }
+  .stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 8px;
+  }
+  @media (max-width: 640px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
   }
 
-  .cta-title {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  /* PAIN POINTS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .pain-item {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    align-items: flex-start;
+  }
+  .pain-icon {
+    font-size: 1.4rem;
+    color: #dc2626;
+    flex-shrink: 0;
+  }
+  .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
+  .pain-item strong { color: var(--text); }
+  @media (max-width: 640px) { .pain-grid { grid-template-columns: 1fr; } }
+
+  /* SERVICE LIST */
+  .service-list { list-style: none; }
+
+  /* AUDIENCE */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .audience-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .audience-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-light);
+  }
+  .audience-icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-bg);
+    border-radius: var(--radius);
     color: var(--accent);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
+  .audience-icon :global(svg) { width: 24px; height: 24px; }
+  .audience-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .audience-card ul {
+    list-style: none;
+  }
+  .audience-card li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 0.96rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .audience-card li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: 700;
+  }
+  @media (max-width: 768px) { .audience-grid { grid-template-columns: 1fr; } }
 
-  .cta-button {
-    display: inline-block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.95rem;
-    color: var(--bg);
+  /* PROCESS */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+  .process-step {
+    position: relative;
+  }
+  .step-num {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
     background: var(--accent);
-    text-decoration: none;
-    padding: 16px 32px;
-    border: 2px solid var(--accent);
-    transition: all 0.25s ease;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 50%;
+    margin-bottom: 20px;
   }
+  .process-step h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .process-step p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  .process-cta {
+    text-align: center;
+    margin-top: 48px;
+  }
+  @media (max-width: 768px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
 
-  .cta-button:hover {
-    background: transparent;
+  /* WHY GRID */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 960px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .why-grid { grid-template-columns: 1fr; } }
+
+  /* FINAL CTA */
+  .cta-section {
+    background: var(--bg-alt);
+    padding: 100px 0;
+  }
+  .cta-content {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .cta-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--accent);
+    margin-bottom: 16px;
   }
-
-  .cta-note {
+  .cta-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .cta-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+  .cta-fineprint {
     margin-top: 16px;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--text-light);
   }
 </style>

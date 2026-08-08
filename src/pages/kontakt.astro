@@ -5,119 +5,200 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 ---
 
-<Base title="Kontakt — agendt.de" description="Kontaktiere agendt.de für KI-Automatisierung, n8n-Workflows und DSGVO-konforme KI-Systeme.">
+<Base title="Kontakt — agendt.de" description="Kontaktieren Sie uns fuer KI-Automatisierung, n8n-Workflows und DSGVO-konforme KI-Systeme.">
   <Header />
 
-  <hr class="divider">
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[Kontakt]</p>
+      <h1 class="page-title">Schreiben Sie uns.<br>Wir antworten schnell.</h1>
+      <p class="page-sub">Beschreiben Sie kurz, welchen Prozess Sie automatisieren moechten. Wir melden uns mit einem konkreten Vorschlag &ndash; nicht mit einem Verkaufs-Pitch.</p>
+    </div>
+  </section>
 
+  <!-- CONTACT OPTIONS: Reciprocity + Low Friction -->
   <Section
-    title="[Kontakt]"
-    headline="Schreib uns. Wir antworten innerhalb eines Werktags."
-    intro="Am besten beschreibst du kurz, welchen Prozess du automatisieren möchtest. Wir melden uns mit einem konkreten Vorschlag für ein erstes Gespräch."
+    title="Drei Wege, uns zu erreichen"
+    intro="Waehlen Sie den fuer Sie einfachsten Weg. Auf allen Wegen gilt: Antwort innerhalb von 24 Stunden an Werktagen."
   >
     <div class="contact-grid">
-      <div class="contact-card">
-        <div class="contact-label">E-Mail</div>
-        <a href="mailto:hello@agendt.de" class="contact-value">hello@agendt.de</a>
+      <a href="mailto:hello@agendt.de" class="contact-card">
+        <div class="contact-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>E-Mail</h3>
+        <p class="contact-link">hello&#64;agendt.de</p>
+        <p class="contact-meta">Schnellster Weg. Antwort &lt; 24h.</p>
+      </a>
+
+      <div class="contact-card no-link">
+        <div class="contact-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Erstgespraech</h3>
+        <p class="contact-text">20 Minuten, kostenlos, unverbindlich. Wir klaeren, ob und wie wir helfen koennen.</p>
+        <p class="contact-meta">Per E-Mail vereinbaren.</p>
       </div>
 
-      <div class="contact-card">
-        <div class="contact-label">Anfrage</div>
-        <p class="contact-text">Beschreibe deinen Prozess, deine Ziele und deinen ungefähren Zeitplan.</p>
-      </div>
-
-      <div class="contact-card">
-        <div class="contact-label">Erstgespräch</div>
-        <p class="contact-text">Kostenlos, unverbindlich, 20 Minuten. Gemeinsam klären wir, ob und wie wir helfen können.</p>
+      <div class="contact-card no-link">
+        <div class="contact-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Response-Versprechen</h3>
+        <p class="contact-text">Sie erhalten eine Antwort innerhalb von 24 Stunden an Werktagen. Kein Auto-Responder, kein Ticket-System.</p>
+        <p class="contact-meta">Eine echte Person. Jedes Mal.</p>
       </div>
     </div>
   </Section>
 
-  <hr class="divider-wide-strong">
-
-  <section class="cta" data-animate>
-    <div class="page">
-      <h2 class="cta-title">Bereit für den ersten Workflow?</h2>
-      <a href="mailto:hello@agendt.de" class="cta-button">hello@agendt.de</a>
-      <p class="cta-note">Wir freuen uns auf deine Nachricht.</p>
+  <!-- WHAT TO EXPECT: Reduces uncertainty (Cognitive Ease) -->
+  <Section
+    dark
+    label="[Was Sie erwarten koennen]"
+    title="Keine Ueberraschungen. Keine Verkaufsdruck."
+  >
+    <div class="expect-grid">
+      <div class="expect-item">
+        <span class="expect-check">&#10003;</span>
+        <p><strong>Kostenlose Analyse:</strong> Wir schauen uns Ihren Prozess an und sagen Ihnen, ob sich Automatisierung lohnt &ndash; auch wenn die Antwort <em>nein</em> ist.</p>
+      </div>
+      <div class="expect-item">
+        <span class="expect-check">&#10003;</span>
+        <p><strong>Konkrete Empfehlung:</strong> Statt "KI fuer alles" bekommen Sie einen spezifischen Vorschlag fuer Ihren ersten Workflow.</p>
+      </div>
+      <div class="expect-item">
+        <span class="expect-check">&#10003;</span>
+        <p><strong>Ehrliche Einschaetzung:</strong> Wenn ein Prozess besser manuell bleibt, sagen wir das. Unser Ziel ist Ihr Erfolg, nicht ein Verkauf.</p>
+      </div>
+      <div class="expect-item">
+        <span class="expect-check">&#10003;</span>
+        <p><strong>Keine Folge-Mails:</strong> Wir setzen Sie nicht auf einen Newsletter. Eine Antwort, ein Vorschlag, Ihre Entscheidung.</p>
+      </div>
     </div>
-  </section>
+  </Section>
+
+  <!-- EMAIL CTA: Foot-in-the-door (kleinster Schritt) -->
+  <div class="cta-section">
+    <div class="container text-center">
+      <h2 class="section-title">Eine E-Mail. Das reicht.</h2>
+      <p class="section-intro" style="margin:0 auto 32px;">Beschreiben Sie in 2&ndash;3 Saetzen, was Sie automatisieren moechten. Wir melden uns mit einer konkreten Antwort.</p>
+      <a href="mailto:hello@agendt.de" class="btn btn-primary btn-large">E-Mail schreiben &rarr;</a>
+    </div>
+  </div>
 
   <Footer />
 </Base>
 
 <style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, #fff 100%);
+    padding: 80px 0 60px;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .page-sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 620px;
+  }
+
+  /* CONTACT GRID */
   .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    margin-top: 32px;
   }
-
   .contact-card {
-    background: var(--bg-warm);
-    border: 1px solid var(--divider);
-    padding: 28px;
-  }
-
-  .contact-label {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-  }
-
-  .contact-value {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.1rem;
-    color: var(--accent);
-    border-bottom: 1px solid var(--divider);
-  }
-
-  .contact-value:hover {
-    border-bottom-color: var(--accent);
-  }
-
-  .contact-text {
-    color: var(--text-muted);
-    font-size: 0.98rem;
-  }
-
-  .cta {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px 28px;
     text-align: center;
-    padding: 80px 0 100px;
+    border-bottom: none;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
   }
-
-  .cta-title {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  .contact-card:not(.no-link):hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--accent-light);
+    border-bottom: none;
+    color: inherit;
+  }
+  .contact-icon {
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-bg);
+    border-radius: var(--radius);
     color: var(--accent);
-    margin-bottom: 24px;
+    margin: 0 auto 20px;
   }
-
-  .cta-button {
-    display: inline-block;
-    font-family: 'Space Mono', monospace;
+  .contact-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .contact-link {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .contact-text {
     font-size: 0.95rem;
-    color: var(--bg);
-    background: var(--accent);
-    text-decoration: none;
-    padding: 16px 32px;
-    border: 2px solid var(--accent);
-    transition: all 0.25s ease;
-  }
-
-  .cta-button:hover {
-    background: transparent;
-    color: var(--accent);
-  }
-
-  .cta-note {
-    margin-top: 16px;
-    font-size: 0.85rem;
     color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  .contact-meta {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 8px;
+  }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+
+  /* EXPECT */
+  .expect-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .expect-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .expect-check {
+    color: var(--success);
+    font-size: 1.3rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .expect-item p {
+    font-size: 0.96rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  .expect-item strong { color: #fff; }
+  .expect-item em { color: var(--accent-light); }
+  @media (max-width: 640px) { .expect-grid { grid-template-columns: 1fr; } }
+
+  .cta-section {
+    background: var(--bg-alt);
+    padding: 80px 0;
   }
 </style>

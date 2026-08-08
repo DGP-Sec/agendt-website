@@ -5,118 +5,247 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import ServiceItem from '../components/ServiceItem.astro';
 import Card from '../components/Card.astro';
+
+const iconN8n = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/></svg>';
+const iconLlm = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>';
+const iconDb = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>';
+const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="6" y2="16"/><line x1="10" y1="12" x2="10" y2="16"/><line x1="14" y1="12" x2="14" y2="16"/></svg>';
 ---
 
-<Base title="Leistungen — agendt.de" description="Unsere Leistungen: Multi-Agent Content Factory, n8n-Workflows, lokale LLMs und DSGVO-konforme Architektur.">
+<Base title="Leistungen — agendt.de" description="KI-Automatisierung: Multi-Agent Content Factory, n8n-Workflows, lokale LLMs, DSGVO-konforme Architektur.">
   <Header />
 
-  <hr class="divider">
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[Leistungen]</p>
+      <h1 class="page-title">Wir automatisieren das,<br>was Sie aufhaelt.</h1>
+      <p class="page-sub">Jedes Unternehmen hat repetitive Prozesse. Wir identifizieren sie, bauen Workflows und sorgen dafuer, dass sie stabil laufen &ndash; ohne Ihre Daten in US-Clouds zu schicken.</p>
+      <div class="page-cta">
+        <a href="/kontakt" class="btn btn-primary btn-large">Kostenloses Erstgespraech &rarr;</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- SERVICES DETAIL -->
   <Section
-    title="[Leistungen]"
-    headline="Wir automatisieren das, was dich aufhält."
-    intro="Jedes Unternehmen hat repetitive Prozesse. Wir identifizieren sie, bauen Workflows und sorgen dafür, dass sie stabil laufen."
+    title="Unsere Leistungen im Detail"
+    intro="Jede Leistung kann einzeln oder in Kombination gebucht werden. Wir beginnen immer mit dem Prozess, der Ihnen den groessten Nutzen bringt."
   >
     <ul class="service-list">
       <ServiceItem
         title="Multi-Agent Content Factory"
-        description="Recherche, Schreiben, Kritik und Veröffentlichung in einem durchgängigen Workflow. Ideal für Social-Media-Teams, Blogs und Newsrooms, die regelmäßig Inhalte produzieren müssen."
+        description="Ein vollstaendiger Workflow fuer die Content-Produktion: Recherche, Texterstellung, Qualitaetspruefung und Veroeffentlichung. Ideal fuer Social-Media-Teams, Blogs und Newsrooms, die regelmaessig Inhalte produzieren muessen."
+        outcome="Redaktionelle Inhalte in Minuten statt Stunden. Konstante Qualitaet. 24/7 verfuegbar."
       />
       <ServiceItem
         title="Workflow-Automatisierung mit n8n"
-        description="Verbindung von CRM, Shop, E-Mail, Datenbanken und APIs. Wir entwickeln wartbare Workflows, die auch bei Ausfällen nicht sofort zusammenbrechen."
+        description="Verbindung von CRM, Shop, E-Mail, Datenbanken und APIs zu robusten, wartbaren Prozessen. Inklusive Fehlerbehandlung, Logging und Monitoring, damit Prozesse auch bei Ausfaellen nicht sofort zusammenbrechen."
+        outcome="Weniger manuelle Dateneingabe. Weniger Fehler. Prozesse laufen zuverlaessig rund um die Uhr."
       />
       <ServiceItem
-        title="Lokale LLM-Deployment"
-        description="Sprachmodelle auf eigener Hardware oder dedizierter Server-Infrastruktur betreiben. Wir setzen auf Ollama, Llama und passende Hardware-Beratung."
+        title="Lokale KI-Deployment (LLM)"
+        description="Sprachmodelle auf eigener Hardware oder dedizierter Server-Infrastruktur. Wir setzen auf Ollama, Llama und passendes Hardware-Sizing. Ohne Cloud-Abhaengigkeit, ohne API-Kosten."
+        outcome="Volle Kontrolle ueber Daten und Modelle. Keine API-Kosten. DSGVO-sicher."
       />
       <ServiceItem
-        title="Datenschutzsichere Architektur"
-        description="Planung und Umsetzung von Systemen, bei denen sensible Daten nicht über US-Clouds laufen. Inklusive Doku für Verarbeitungsverzeichnis und Datenschutz."
+        title="Intelligente Dokumentenverarbeitung"
+        description="Automatische Extraktion, Klassifizierung und Verarbeitung von Dokumenten, Rechnungen, Vertraegen und E-Mails mit KI. Strukturieren Sie unstrukturierte Daten."
+        outcome="Stunden manueller Erfassung pro Woche eingespart. Weniger Fehler. Schnellere Durchlaufzeiten."
       />
       <ServiceItem
         title="Prozessanalyse & Prototyping"
-        description="Gemeinsame Analyse des aktuellen Arbeitsablaufs. In wenigen Tagen entsteht ein erster Prototyp, der direkt getestet werden kann."
+        description="Gemeinsame Analyse Ihres aktuellen Arbeitsablaufs. In wenigen Tagen entsteht ein erster lauffaehiger Prototyp, den Sie direkt in Ihrem Betrieb testen koennen."
+        outcome="Klarheit ueber Automatisierungspotenzial. Konkreter Prototyp statt Powerpoint."
       />
       <ServiceItem
         title="Wartung & Weiterentwicklung"
-        description="Optionale Betreuung nach der Übergabe: Monitoring, Fehlerbehebung, Anpassungen bei neuen Anforderungen."
+        description="Optionale Betreuung nach der Uebergabe: Monitoring, Fehlerbehebung, Anpassungen bei neuen Anforderungen. So bleibt Ihr Workflow langfristig am Laufen."
+        outcome="Langfristige Zuverlaessigkeit. Schnelle Reaktion bei Problemen."
       />
     </ul>
   </Section>
 
-  <hr class="divider-wide">
-
+  <!-- TECH STACK -->
   <Section
-    title="[Technologien]"
-    headline="Tools, auf die wir uns verlassen."
+    dark
+    label="[Technologien]"
+    title="Tools, auf die wir uns verlassen."
+    intro="Open-Source zuerst. Das bedeutet: keine teuren Lizenzen, keine Vendor-Lock-ins, volle Transparenz."
   >
-    <div class="card-grid">
-      <Card title="n8n" body="Open-Source Workflow-Automation mit voller Kontrolle über Daten und Hosting." />
-      <Card title="Ollama" body="Lokale Ausführung von LLMs ohne Cloud-Abhängigkeit." />
-      <Card title="Qdrant" body="Vektordatenbank für semantische Suche und Wissensbasen." />
-      <Card title="Self-Hosted Stack" body="Docker, Linux, eigene Server oder europäische Cloud-Anbieter." />
+    <div class="tech-grid">
+      <div class="tech-item">
+        <div class="tech-icon" set:html={iconN8n} />
+        <h3>n8n</h3>
+        <p>Open-Source Workflow-Automation mit voller Kontrolle ueber Daten und Hosting.</p>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon" set:html={iconLlm} />
+        <h3>Ollama / Llama</h3>
+        <p>Lokale Ausfuehrung von Sprachmodellen ohne Cloud-Abhaengigkeit.</p>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon" set:html={iconDb} />
+        <h3>Qdrant</h3>
+        <p>Vektordatenbank fuer semantische Suche und KI-gestuetzte Wissensbasen.</p>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon" set:html={iconDocker} />
+        <h3>Docker / Linux</h3>
+        <p>Containerisierte Deployment-Pipeline. Funktioniert ueberall, skaliert mit.</p>
+      </div>
     </div>
   </Section>
 
-  <hr class="divider-wide-strong">
-
-  <section class="cta" data-animate>
-    <div class="page">
-      <h2 class="cta-title">Lass uns über deinen Prozess sprechen.</h2>
-      <a href="mailto:hello@agendt.de" class="cta-button">hello@agendt.de</a>
-      <p class="cta-note">Kostenloses Erstgespräch.</p>
+  <!-- FAQ: Objection Handling (reduziert kognitive Dissonanz) -->
+  <Section
+    alt
+    label="[Haeufige Fragen]"
+    title="Was Geschaeftsfuehrer uns zuerst fragen."
+  >
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Wie viel kostet eine Automatisierung?</summary>
+        <div class="faq-answer">
+          <p>Ein Pilotprojekt (Prototyp in 3&ndash;5 Tagen) starten wir oft kostenfrei oder zum Selbstkostenpreis. Danach richtet sich der Preis nach Komplexitaet und Umfang. Das klaren wir im kostenlosen Erstgespraech.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Muessen unsere Daten in die Cloud?</summary>
+        <div class="faq-answer">
+          <p>Nein. Wir arbeiten primar mit self-hosted Loesungen (Ollama, Llama). Wenn externe Dienste noetig sind, waehlen wir europaeische Anbieter. US-Cloud-APIs (OpenAI, Google) setzen wir nur auf ausdruecklichen Wunsch ein.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Was passiert, wenn etwas kaputtgeht?</summary>
+        <div class="faq-answer">
+          <p>Jeder Workflow wird mit Fehlerbehandlung, Logging und Monitoring ausgeliefert. Sie bekommen eine Dokumentation und wissen genau, was zu tun ist. Optional bieten wir Wartungsvertraege an.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Wir haben keine eigene IT-Abteilung. Geht das trotzdem?</summary>
+        <div class="faq-answer">
+          <p>Ja. Wir uebernehmen Setup, Konfiguration und Betrieb. Sie muessen keine Server administrieren. Wenn Sie moechten, hosten wir auf einem dedizierten Server und Sie haben einen Ansprechpartner fuer alles.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Wie lange dauert es, bis etwas laeuft?</summary>
+        <div class="faq-answer">
+          <p>Ein erster Prototyp steht in der Regel innerhalb von 3&ndash;5 Werktagen. Die vollstaendige Implementierung und Iteration dauert je nach Komplexitaet 1&ndash;4 Wochen.</p>
+        </div>
+      </details>
     </div>
-  </section>
+  </Section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="container text-center">
+      <h2 class="section-title">Bereit fuer den ersten Workflow?</h2>
+      <p class="section-intro" style="margin: 0 auto 32px;">20 Minuten. Kostelos. Konkret.</p>
+      <a href="/kontakt" class="btn btn-primary btn-large">Jetzt Erstgespraech vereinbaren &rarr;</a>
+    </div>
+  </div>
 
   <Footer />
 </Base>
 
 <style>
-  .service-list {
-    list-style: none;
-    margin-top: 28px;
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, #fff 100%);
+    padding: 80px 0 60px;
   }
-
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    margin-top: 32px;
-  }
-
-  .cta {
-    text-align: center;
-    padding: 80px 0 100px;
-  }
-
-  .cta-title {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--accent);
-    margin-bottom: 24px;
+    margin-bottom: 12px;
   }
-
-  .cta-button {
-    display: inline-block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.95rem;
-    color: var(--bg);
-    background: var(--accent);
-    text-decoration: none;
-    padding: 16px 32px;
-    border: 2px solid var(--accent);
-    transition: all 0.25s ease;
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary);
+    margin-bottom: 20px;
+    line-height: 1.2;
   }
-
-  .cta-button:hover {
-    background: transparent;
-    color: var(--accent);
-  }
-
-  .cta-note {
-    margin-top: 16px;
-    font-size: 0.85rem;
+  .page-sub {
+    font-size: 1.15rem;
     color: var(--text-muted);
+    max-width: 620px;
+    margin-bottom: 32px;
+  }
+  .service-list { list-style: none; }
+
+  /* TECH GRID */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .tech-item { text-align: center; }
+  .tech-icon {
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(212, 160, 23, 0.12);
+    border-radius: var(--radius);
+    color: var(--accent-light);
+    margin: 0 auto 20px;
+  }
+  .tech-icon :global(svg) { width: 28px; height: 28px; }
+  .tech-item h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .tech-item p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  @media (max-width: 768px) { .tech-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .tech-grid { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .faq-item summary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 24px 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--accent);
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item summary:hover { color: var(--accent); }
+  .faq-answer {
+    padding: 0 0 24px;
+    font-size: 0.96rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--bg-alt);
+    padding: 80px 0;
   }
 </style>

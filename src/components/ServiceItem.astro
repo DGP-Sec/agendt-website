@@ -2,55 +2,78 @@
 export interface Props {
   title: string;
   description: string;
+  outcome?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, outcome } = Astro.props;
 ---
 
 <li class="service-item">
-  <strong>{title}</strong>
-  <span>{description}</span>
+  <div class="service-header">
+    <span class="service-arrow">&rarr;</span>
+    <div>
+      <h3 class="service-title">{title}</h3>
+      <p class="service-desc">{description}</p>
+      {outcome && <p class="service-outcome"><span class="outcome-label">Ergebnis:</span> {outcome}</p>}
+    </div>
+  </div>
 </li>
 
 <style>
   .service-item {
-    position: relative;
-    padding: 22px 0 22px 36px;
-    border-bottom: 1px solid var(--divider);
-    transition: transform 0.25s ease, background 0.25s ease;
+    list-style: none;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    transition: transform 0.2s;
   }
 
-  .service-item:hover {
-    transform: translateX(8px);
-    background: rgba(93, 64, 55, 0.03);
+  .service-item:last-child { border-bottom: none; }
+
+  .service-item:hover { transform: translateX(6px); }
+
+  .service-header {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
   }
 
-  .service-item::before {
-    content: '>';
-    position: absolute;
-    left: 0;
-    top: 22px;
-    font-family: 'Space Mono', monospace;
-    color: var(--accent-light);
-    font-weight: 700;
-  }
-
-  .service-item strong {
-    font-family: 'Space Mono', monospace;
+  .service-arrow {
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--accent);
-    display: block;
+    flex-shrink: 0;
+    line-height: 1.5;
+  }
+
+  .service-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
     margin-bottom: 6px;
   }
 
-  .service-item span {
+  .service-desc {
+    font-size: 0.96rem;
     color: var(--text-muted);
-    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .service-outcome {
+    margin-top: 8px;
+    font-size: 0.88rem;
+    color: var(--success);
+    font-weight: 500;
+  }
+
+  .outcome-label {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.78rem;
   }
 
   @media (max-width: 640px) {
-    .service-item {
-      padding: 18px 0 18px 28px;
-    }
+    .service-header { gap: 12px; }
+    .service-arrow { font-size: 1rem; }
   }
 </style>

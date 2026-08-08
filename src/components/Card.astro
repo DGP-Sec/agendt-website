@@ -2,40 +2,61 @@
 export interface Props {
   title: string;
   body: string;
+  icon?: string;
 }
 
-const { title, body } = Astro.props;
+const { title, body, icon } = Astro.props;
 ---
 
 <div class="card">
-  <div class="card-title">{title}</div>
-  <div class="card-body">{body}</div>
+  {icon && <div class="card-icon" set:html={icon} />}
+  <h3 class="card-title">{title}</h3>
+  <p class="card-body">{body}</p>
 </div>
 
 <style>
   .card {
-    background: var(--bg-warm);
-    border: 1px solid var(--divider);
-    padding: 28px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
   }
 
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(93, 64, 55, 0.08);
     border-color: var(--accent-light);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-bg);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    color: var(--accent);
+  }
+
+  .card-icon :global(svg) {
+    width: 22px;
+    height: 22px;
   }
 
   .card-title {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    color: var(--accent);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
     margin-bottom: 10px;
-    font-size: 1rem;
   }
 
   .card-body {
     font-size: 0.95rem;
     color: var(--text-muted);
+    line-height: 1.65;
   }
 </style>

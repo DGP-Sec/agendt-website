@@ -5,8 +5,8 @@ export interface Props {
 }
 
 const {
-  title = "agendt.de — KI-Automatisierung",
-  description = "KI-Automatisierung für Immobilien und E-Commerce. DSGVO-konform, self-hosted, praxisnah."
+  title = "agendt.de — KI-Automatisierung für Unternehmen",
+  description = "KI-Automatisierung für Immobilien und E-Commerce. DSGVO-konform, self-hosted, praxisnah. Prototyp in 3–5 Tagen."
 } = Astro.props;
 ---
 
@@ -17,30 +17,55 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <meta name="description" content={description}>
+
+    <!-- Psychologie: Authority/Trust durch professionelle Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style is:global>
         :root {
-            --bg: #FAF0E6;
-            --bg-warm: #F5F5DC;
-            --text: #333333;
-            --text-muted: #6B5E55;
-            --accent: #5D4037;
-            --accent-light: #8D6E63;
-            --divider: rgba(93, 64, 55, 0.18);
-            --divider-strong: rgba(93, 64, 55, 0.35);
+            /* Navy: universell vertrauenswuerdig (Singh 2006, Mehta & Zhu 2009) */
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --bg-dark: #0f172a;
+            --bg-dark-alt: #1e293b;
+
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            --text-inverse: #f1f5f9;
+
+            --primary: #1e293b;
+            --primary-hover: #0f172a;
+            --primary-light: #334155;
+
+            /* Gold: Premium-Warmakzent, behaelt Markenccharakter (Von Restorff: CTA sticht heraus) */
+            --accent: #b8860b;
+            --accent-hover: #9a7209;
+            --accent-light: #d4a017;
+            --accent-bg: #fef9ee;
+
+            --border: #e2e8f0;
+            --border-strong: #cbd5e1;
+
+            --success: #16a34a;
+            --success-bg: #f0fdf4;
+
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+
+            --radius: 8px;
+            --radius-lg: 12px;
+
+            --max-w: 1080px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background: var(--bg);
@@ -50,48 +75,131 @@ const {
             line-height: 1.65;
             min-height: 100vh;
             overflow-x: hidden;
-            cursor: default;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        ::selection {
-            background: rgba(93, 64, 55, 0.15);
+        ::selection { background: var(--accent-bg); }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
-        .page {
-            max-width: 960px;
+        .container {
+            max-width: var(--max-w);
             margin: 0 auto;
             padding: 0 24px;
         }
 
         a {
-            color: var(--accent);
+            color: var(--primary);
             text-decoration: none;
-            border-bottom: 1px solid var(--divider);
-            transition: border-color 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid var(--border-strong);
+            transition: border-color 0.2s, color 0.2s;
         }
 
         a:hover {
+            color: var(--accent);
             border-bottom-color: var(--accent);
         }
 
-        .divider {
-            border: none;
-            border-top: 2px solid var(--accent);
-            margin: 0 auto;
-            max-width: 120px;
-            opacity: 0.5;
+        /* Cogntive Ease: klare visuelle Hierarchie */
+        .section {
+            padding: 80px 0;
         }
 
-        .divider-wide {
-            border: none;
-            border-top: 1px solid var(--divider);
-            margin: 0;
+        .section-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 12px;
         }
 
-        .divider-wide-strong {
+        .section-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin-bottom: 48px;
+        }
+
+        .section-alt {
+            background: var(--bg-alt);
+        }
+
+        .section-dark {
+            background: var(--bg-dark);
+            color: var(--text-inverse);
+        }
+
+        .section-dark .section-title { color: #fff; }
+        .section-dark .section-intro { color: var(--text-light); }
+        .section-dark a { color: var(--accent-light); }
+
+        /* Von Restorff: CTA sticht durch Farbe heraus */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px 28px;
+            border-radius: var(--radius);
             border: none;
-            border-top: 2px solid var(--divider-strong);
-            margin: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            border-bottom: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--border-strong);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--bg-alt);
+        }
+
+        .btn-large {
+            font-size: 1.05rem;
+            padding: 16px 36px;
+        }
+
+        /* Hilfsklassen */
+        .text-center { text-align: center; }
+        .mt-0 { margin-top: 0 !important; }
+
+        @media (max-width: 640px) {
+            .section { padding: 56px 0; }
         }
     </style>
 </head>

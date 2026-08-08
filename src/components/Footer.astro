@@ -1,35 +1,153 @@
 ---
+// Footer: Vertrauen durch Transparenz und Vollstaendigkeit (Stanford Credibility)
+const year = new Date().getFullYear();
 ---
 
-<footer class="footer">
-  <div class="page">
-    <p>AGENDT.DE · KI-Automatisierung · Made in Germany</p>
-    <p class="footer-links">
-      <a href="mailto:hello@agendt.de">hello@agendt.de</a>
-      <span class="sep">·</span>
-      <a href="/impressum">Impressum</a>
-    </p>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <span class="logo">agendt<span class="dot">.</span>de</span>
+        <p class="footer-desc">KI-Automatisierung fuer Immobilien und E-Commerce. DSGVO-konform, self-hosted, praxisnah.</p>
+        <div class="footer-badges">
+          <span class="badge">DSGVO-konform</span>
+          <span class="badge">Self-Hosted</span>
+          <span class="badge">Made in Germany</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="/">Start</a>
+        <a href="/leistungen">Leistungen</a>
+        <a href="/prozess">Prozess</a>
+        <a href="/kontakt">Kontakt</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Rechtliches</h4>
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutzerklaerung</a>
+        <a href="/dsgvo-trust">DSGVO & Trust</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="mailto:hello@agendt.de">hello&#64;agendt.de</a>
+        <p class="footer-note">Antwort innerhalb von 24 Stunden an Werktagen.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {year} agendt.de &middot; Alle Rechte vorbehalten.</p>
+    </div>
   </div>
 </footer>
 
 <style>
-  .footer {
-    text-align: center;
-    padding: 48px 0 64px;
+  .site-footer {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    padding: 64px 0 32px;
+    margin-top: 0;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: none;
+    letter-spacing: -0.03em;
+  }
+
+  .dot { color: var(--accent-light); }
+
+  .footer-desc {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  .footer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .badge {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-light);
+    border: 1px solid rgba(212, 160, 23, 0.3);
+    border-radius: 4px;
+    padding: 4px 10px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+    margin-bottom: 16px;
   }
 
-  .footer p + p {
+  .footer-col a {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    border-bottom: none;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent-light);
+  }
+
+  .footer-note {
+    font-size: 0.82rem;
+    color: var(--text-light);
     margin-top: 8px;
+    opacity: 0.7;
   }
 
-  .footer a {
-    color: var(--accent);
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    text-align: center;
   }
 
-  .sep {
-    margin: 0 8px;
-    color: var(--divider-strong);
+  .footer-bottom p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
   }
 </style>

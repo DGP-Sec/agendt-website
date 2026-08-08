@@ -2,6 +2,7 @@
 const navItems = [
   { href: '/', label: 'Start' },
   { href: '/leistungen', label: 'Leistungen' },
+  { href: '/prozess', label: 'Prozess' },
   { href: '/dsgvo-trust', label: 'DSGVO & Trust' },
   { href: '/kontakt', label: 'Kontakt' },
 ];
@@ -10,94 +11,148 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="site-header">
-  <div class="page">
-    <a href="/" class="logo-link">
-      <h1 class="logo">AGENDT.DE</h1>
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <span class="logo-text">agendt<span class="logo-dot">.</span>de</span>
     </a>
-    <p class="tagline">KI-Automatisierung · Made in Germany</p>
-  </div>
-</header>
-
-<nav class="main-nav">
-  <div class="page">
-    <ul>
+    <nav class="nav-desktop">
       {navItems.map((item) => (
-        <li>
-          <a
-            href={item.href}
-            class={currentPath === item.href || currentPath.startsWith(item.href + '/') ? 'active' : ''}
-          >
-            {item.label}
-          </a>
-        </li>
+        <a
+          href={item.href}
+          class={currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? 'active' : ''}
+        >
+          {item.label}
+        </a>
       ))}
-    </ul>
+    </nav>
+    <a href="/kontakt" class="btn btn-primary header-cta">Kostenloses Erstgespraech</a>
+    <button class="nav-toggle" aria-label="Menu" id="nav-toggle">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</nav>
+  <nav class="nav-mobile" id="nav-mobile">
+    {navItems.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+    <a href="/kontakt" class="btn btn-primary" style="margin-top:12px;">Kostenloses Erstgespraech</a>
+  </nav>
+</header>
 
 <style>
   .site-header {
-    text-align: center;
-    padding: 56px 0 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
   }
 
-  .logo-link {
-    border-bottom: none;
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 68px;
+    max-width: var(--max-w);
+    margin: 0 auto;
   }
 
   .logo {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.35rem;
     font-weight: 700;
+    color: var(--primary);
+    border-bottom: none;
     letter-spacing: -0.03em;
+  }
+
+  .logo-dot {
     color: var(--accent);
-    line-height: 1;
-    margin-bottom: 14px;
   }
 
-  .tagline {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(0.75rem, 2vw, 0.9rem);
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-  }
-
-  .main-nav {
-    padding: 18px 0 0;
-  }
-
-  .main-nav ul {
-    list-style: none;
+  .nav-desktop {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px 28px;
+    gap: 32px;
+    align-items: center;
   }
 
-  .main-nav a {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  .nav-desktop a {
+    font-size: 0.92rem;
+    font-weight: 500;
     color: var(--text-muted);
     border-bottom: 2px solid transparent;
-    padding-bottom: 4px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    padding: 4px 0;
+    transition: color 0.2s, border-color 0.2s;
   }
 
-  .main-nav a:hover,
-  .main-nav a.active {
-    color: var(--accent);
+  .nav-desktop a:hover {
+    color: var(--primary);
     border-bottom-color: var(--accent);
   }
 
-  @media (max-width: 640px) {
-    .site-header {
-      padding: 42px 0 8px;
-    }
-    .main-nav ul {
-      gap: 8px 18px;
-    }
+  .nav-desktop a.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  .header-cta {
+    font-size: 0.85rem;
+    padding: 10px 20px;
+    white-space: nowrap;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .nav-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 24px 24px;
+    border-top: 1px solid var(--border);
+    background: #fff;
+  }
+
+  .nav-mobile.open {
+    display: flex;
+  }
+
+  .nav-mobile a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  @media (max-width: 860px) {
+    .nav-desktop { display: none; }
+    .header-cta { display: none; }
+    .nav-toggle { display: flex; }
   }
 </style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const mobile = document.getElementById('nav-mobile');
+  toggle?.addEventListener('click', () => {
+    mobile?.classList.toggle('open');
+    toggle.classList.toggle('active');
+  });
+</script>

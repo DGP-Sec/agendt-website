@@ -1,65 +1,134 @@
 ---
+// Hero: Loss Aversion (Kahneman/Tversky) + Klarheit (Cognitive Ease)
+// Verluste sind psychologisch ~2x staerker als Gewinne -> Problem zuerst, dann Loesung
 ---
 
 <section class="hero">
-  <div class="page">
-    <div class="hero-typing" id="hero-typing"></div>
-    <p class="hero-sub">
-      Wir bauen Automatisierungen, die wirklich laufen. Für Immobilien, E-Commerce und jedes Unternehmen, das wieder Zeit für das Wesentliche gewinnen will.
-    </p>
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-label">KI-Automatisierung &middot; Made in Germany</p>
+      <h1 class="hero-title">
+        Wie viele Stunden verliert Ihr Team<br>
+        <span class="hero-highlight">an Wiederholungsarbeiten?</span>
+      </h1>
+      <p class="hero-sub">
+        Wir automatisieren Ihre Geschaeftsprozesse mit KI-Workflows, lokalen Sprachmodlen und n8n.
+        Prototyp in 3&ndash;5 Tagen. DSGVO-konform. Keine US-Cloud.
+      </p>
+      <div class="hero-cta">
+        <a href="/kontakt" class="btn btn-primary btn-large">
+          Kostenloses Erstgespraech &rarr;
+        </a>
+        <a href="/leistungen" class="btn btn-secondary btn-large">
+          Leistungen ansehen
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Antwort &lt; 24h</span>
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>100% DSGVO-konform</span>
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Self-Hosted moeglich</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<script>
-  const heroText = "KI-Automatisierung für Unternehmen.";
-  const heroElement = document.getElementById('hero-typing');
-  let i = 0;
-
-  function typeWriter() {
-    if (heroElement && i < heroText.length) {
-      heroElement.textContent += heroText.charAt(i);
-      i++;
-      setTimeout(typeWriter, 55);
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', typeWriter);
-  } else {
-    typeWriter();
-  }
-</script>
-
 <style>
   .hero {
-    padding: 32px 0 72px;
-    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, var(--bg-alt) 100%);
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .hero-typing {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(1.2rem, 3.5vw, 1.9rem);
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-bg) 0%, transparent 70%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 780px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--accent);
-    min-height: 2.4em;
-    display: inline-block;
+    margin-bottom: 20px;
   }
 
-  .hero-typing::after {
-    content: '_';
-    animation: blink 1s step-end infinite;
-    color: var(--accent-light);
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--primary);
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-highlight {
+    color: var(--accent);
   }
 
   .hero-sub {
-    font-size: 1.1rem;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
     color: var(--text-muted);
-    margin-top: 24px;
-    max-width: 580px;
-    margin-left: auto;
-    margin-right: auto;
+    line-height: 1.65;
+    margin-bottom: 36px;
+    max-width: 620px;
   }
 
-  @keyframes blink {
-    50% { opacity: 0; }
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .hero-trust {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  .trust-item svg {
+    color: var(--success);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 60px 0 48px; }
+    .hero-trust { gap: 16px; }
+    .hero-cta { flex-direction: column; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
   }
 </style>

@@ -1,0 +1,220 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+---
+
+<Base title="Prozess — agendt.de" description="So arbeiten wir: Analyse, Prototyp, Iteration, Uebergabe. In 3–5 Tagen zum ersten Workflow.">
+  <Header />
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[Prozess]</p>
+      <h1 class="page-title">Vom Problem zum<br>laufenden Workflow.</h1>
+      <p class="page-sub">Keine monatelangen Konzeptphasen. Keine Powerpoint-Schlachten. Wir bauen schnell, testen real und iterieren gemeinsam.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS STEPS DETAILED -->
+  <Section
+    title="Die 4 Phasen im Detail"
+    intro="Jede Phase hat ein klares Ergebnis. Sie wissen jederzeit, wo Sie stehen und was als naechstes kommt."
+  >
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-header">
+          <span class="phase-num">01</span>
+          <div>
+            <h3>Analyse &amp; Identifikation</h3>
+            <span class="phase-time">Dauer: 1&ndash;2 Tage</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p>Wir analysieren gemeinsam Ihre aktuellen Arbeitsablaeufe und identifizieren den Prozess mit dem groessten Automatisierungspotenzial. Kriterien: Zeitaufwand, Fehleranfaelligkeit, Wiederholungshaeufigkeit.</p>
+          <ul>
+            <li>Kostenloser Ersttermin (20&ndash;30 Minuten)</li>
+            <li>Prozess-Mapping Ihrer Workflows</li>
+            <li>Einschaetzung des Potenzials (Stunden/Monat einsparbar)</li>
+            <li>Empfehlung: welcher Prozess zuerst?</li>
+          </ul>
+          <div class="phase-result">
+            <strong>Ergebnis:</strong> Sie wissen genau, was sich automatisieren laesst und was es Ihnen bringt.
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-header">
+          <span class="phase-num">02</span>
+          <div>
+            <h3>Prototyp-Entwicklung</h3>
+            <span class="phase-time">Dauer: 3&ndash;5 Tage</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p>Wir bauen einen ersten lauffaehigen Workflow, den Sie in Ihrem Betrieb testen koennen. Kein Mockup, keine Demo &ndash; ein echter Prozess, der echte Arbeit erledigt.</p>
+          <ul>
+            <li>Aufbau der Workflow-Architektur</li>
+            <li>Anbindung an Ihre Systeme (CRM, Shop, E-Mail, etc.)</li>
+            <li>Integration der KI-Komponenten</li>
+            <li>Erster Testlauf mit echten Daten</li>
+          </ul>
+          <div class="phase-result">
+            <strong>Ergebnis:</strong> Ein Workflow, der funktioniert. Nicht perfekt, aber real.
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-header">
+          <span class="phase-num">03</span>
+          <div>
+            <h3>Iteration &amp; Verfeinerung</h3>
+            <span class="phase-time">Dauer: 1&ndash;3 Wochen</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p>Der Prototyp laeuft. Jetzt verfeinern wir gemeinsam: Was passt noch nicht? Welche Edge Cases fehlen? Wo kann die KI besser werden?</p>
+          <ul>
+            <li>Feedback-Schleifen mit Ihrem Team</li>
+            <li>Fehlerbehandlung und Edge Cases</li>
+            <li>Performance-Optimierung</li>
+            <li>Monitoring und Alerting einrichten</li>
+          </ul>
+          <div class="phase-result">
+            <strong>Ergebnis:</strong> Ein robuster Workflow, der zuverlaessig in Ihrem Alltag laeuft.
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-header">
+          <span class="phase-num">04</span>
+          <div>
+            <h3>Uebergabe &amp; Betrieb</h3>
+            <span class="phase-time">Dauer: 1&ndash;2 Tage</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p>Der Workflow ist stabil. Jetzt uebergeben wir sauber: Dokumentation, Schulung, optional Wartung.</p>
+          <ul>
+            <li>Vollstaendige technische Dokumentation</li>
+            <li>Kurze Schulung Ihres Teams</li>
+            <li>Verarbeitungsverzeichnis-Vorlage fuer DSGVO</li>
+            <li>Optional: Wartungsvertrag oder Weiterentwicklung</li>
+          </ul>
+          <div class="phase-result">
+            <strong>Ergebnis:</strong> Sie koennen den Workflow selbst betreiben &ndash; oder uns damit beauftragen.
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- CTA -->
+  <Section dark>
+    <div class="text-center">
+      <h2 class="section-title">Bereit, Schritt 1 zu gehen?</h2>
+      <p class="section-intro" style="margin:0 auto 32px;">Kostenlos. Unverbindlich. 20 Minuten.</p>
+      <a href="/kontakt" class="btn btn-primary btn-large">Analyse starten &rarr;</a>
+    </div>
+  </Section>
+
+  <Footer />
+</Base>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, #fff 100%);
+    padding: 80px 0 60px;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .page-sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 620px;
+  }
+
+  .phases { max-width: 800px; margin: 0 auto; }
+  .phase {
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .phase:last-child { border-bottom: none; margin-bottom: 0; }
+  .phase-header {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .phase-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    opacity: 0.8;
+  }
+  .phase-header h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .phase-time {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .phase-body p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+  .phase-body ul {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  .phase-body li {
+    padding-left: 24px;
+    position: relative;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .phase-body li::before {
+    content: '\2192';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .phase-result {
+    background: var(--success-bg);
+    border-left: 3px solid var(--success);
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .phase-result strong { color: var(--success); }
+</style>
