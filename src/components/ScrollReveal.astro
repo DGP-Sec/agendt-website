@@ -1,0 +1,36 @@
+---
+// ScrollReveal: IntersectionObserver fuer dezente Fade-in Animationen
+// Performance: nur ein Observer, unobserve nach erstem Sichtbarwerden
+---
+
+<script>
+  function initScrollReveal() {
+    const elements = document.querySelectorAll('.reveal, .reveal-stagger');
+
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: alle sofort sichtbar
+      elements.forEach(el => el.classList.add('visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    elements.forEach(el => observer.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollReveal);
+  } else {
+    initScrollReveal();
+  }
+</script>

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
 ---
 
 <Base title="Prozess — agendt.de" description="So arbeiten wir: Analyse, Prototyp, Iteration, Übergabe. In 3–5 Tagen zum ersten Workflow.">
@@ -21,7 +22,7 @@ import Section from '../components/Section.astro';
     title="Die 4 Phasen im Detail"
     intro="Jede Phase hat ein klares Ergebnis. Sie wissen jederzeit, wo Sie stehen und was als nächstes kommt."
   >
-    <div class="phases">
+    <div class="phases reveal-stagger">
       <div class="phase">
         <div class="phase-header">
           <span class="phase-num">01</span>
@@ -121,6 +122,7 @@ import Section from '../components/Section.astro';
     </div>
   </Section>
 
+  <ScrollReveal />
   <Footer />
 </Base>
 

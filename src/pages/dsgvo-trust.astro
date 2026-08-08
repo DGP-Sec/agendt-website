@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import Card from '../components/Card.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
 ---
 
 <Base title="DSGVO & Trust — agendt.de" description="DSGVO-konforme KI-Architektur: self-hosted Modelle, europaeische Infrastruktur, dokumentierte Datenfluesse.">
@@ -34,7 +35,7 @@ import Card from '../components/Card.astro';
     label="[Unsere Prinzipien]"
     title="Wie wir Datenschutz umsetzen – technisch."
   >
-    <div class="principles-grid">
+    <div class="principles-grid reveal-stagger">
       <Card title="Data Ownership" body="Ihre Daten bleiben auf Ihren Systemen oder bei europaeischen Anbietern. Kein undokumentierter Transfer in Drittländer." />
       <Card title="Self-Hosted KI" body="Lokale Sprachmodelle mit Ollama/Llama. Funktionieren auch ohne Internetverbindung. Daten verlassen nie Ihr Netzwerk." />
       <Card title="Dokumentierte Schnittstellen" body="Wir dokumentieren alle Datenfluesse, Speicherorte und Betreiber – als Grundlage für Ihr Verarbeitungsverzeichnis (Art. 30 DSGVO)." />
@@ -47,7 +48,7 @@ import Card from '../components/Card.astro';
     label="[Vergleich]"
     title="Standard-KI vs. Unsere Architektur"
   >
-    <div class="compare-table">
+    <div class="compare-table reveal">
       <div class="compare-row compare-head">
         <div class="compare-cell"></div>
         <div class="compare-cell">Standard-KI-Agentur</div>
@@ -104,6 +105,7 @@ import Card from '../components/Card.astro';
     </div>
   </Section>
 
+  <ScrollReveal />
   <Footer />
 </Base>
 

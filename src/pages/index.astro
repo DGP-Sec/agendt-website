@@ -6,6 +6,7 @@ import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
 import ServiceItem from '../components/ServiceItem.astro';
 import Card from '../components/Card.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
 
 // SVG Icons (inline für Performance)
 const iconProcess = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>';
@@ -21,7 +22,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <!-- STATS BAR: Social Proof durch konkrete Zahlen (Cialdini) -->
   <div class="stats-bar">
     <div class="container">
-      <div class="stats-grid">
+      <div class="stats-grid reveal-stagger">
         <div class="stat">
           <span class="stat-num">3–5</span>
           <span class="stat-label">Tage bis zum Prototyp</span>
@@ -48,7 +49,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     title="Jeder Tag ohne Automatisierung kostet Sie bares Geld."
     intro="Repetitive Aufgaben binden Personal, das eigentlich für Wichtigeres gebraucht wird. Während Ihre Mitarbeiter Daten abtippen, Exposés formatieren und E-Mails sortieren, macht die Konkurrenz bereits mehr mit weniger Aufwand."
   >
-    <div class="pain-grid">
+    <div class="pain-grid reveal-stagger">
       <div class="pain-item">
         <span class="pain-icon">&#9888;</span>
         <p><strong>Manuelle Datenpflege</strong> zwischen CRM, Shop und Portalen – stuendlich, taeglich, fehleranfällig.</p>
@@ -75,7 +76,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     title="Automatisierung, die Ihre Prozesse übernimmt – nicht nur begleitet."
     intro="Wir bauen nicht nur Tools. Wir bauen Systeme, die Arbeit wirklich abnehmen: vom ersten Workflow bis zur vollstaendigen Prozessautomatisierung."
   >
-    <ul class="service-list">
+    <ul class="service-list reveal-stagger">
       <ServiceItem
         title="Multi-Agent Content Factory"
         description="Recherche, Texterstellung, Qualitätspruefung und Veröffentlichung in einem automatisierten Workflow. Für Social Media, Blogs, Exposés und Newsrooms."
@@ -104,7 +105,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     label="[Für wen]"
     title="Zwei Branchen. Eine Lösung: weniger Wiederholung."
   >
-    <div class="audience-grid">
+    <div class="audience-grid reveal-stagger">
       <div class="audience-card">
         <div class="audience-icon" set:html={iconContent} />
         <h3>Immobilienwirtschaft</h3>
@@ -135,7 +136,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     title="Vom Problem zum laufenden Workflow in 4 Schritten."
     intro="Kein 30-Seiten-Konzept. Keine wochenlangen Analysephasen. Wir starten mit einem konkreten Prototyp und iterieren von dort."
   >
-    <div class="process-grid">
+    <div class="process-grid reveal-stagger">
       <div class="process-step">
         <div class="step-num">1</div>
         <h3>Analyse</h3>
@@ -168,7 +169,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     title="Daten bleiben bei Ihnen. Kontrolle bleibt bei Ihnen."
     intro="Die meisten KI-Dienstleister schicken Ihre Daten in US-Clouds. Das ist schnell gebaut, aber ein DSGVO-Risiko. Wir machen es anders."
   >
-    <div class="why-grid">
+    <div class="why-grid reveal-stagger">
       <Card title="Self-Hosted First" body="Lokale Sprachmodelle auf Ihrer Infrastruktur. Wenn Sie wollen, funktioniert alles ohne Internetverbindung." icon={iconServer} />
       <Card title="DSGVO von Tag 1" body="Klare Datenfluesse, dokumentierte Schnittstellen, Verarbeitungsverzeichnis-tauglich. Keine Grauzonen." icon={iconShield} />
       <Card title="Schnell statt buerokratisch" body="Statt monatelanger Konzeptphasen: ein Prototyp in unter einer Woche. Danach iterieren wir gemeinsam." icon={iconProcess} />
@@ -191,6 +192,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     </div>
   </div>
 
+  <ScrollReveal />
   <Footer />
 </Base>
 
