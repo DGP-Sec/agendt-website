@@ -94,16 +94,32 @@ const orgSchema = {
         <div class="hv-panel">
           <div class="hv-head">
             <span class="hv-dot"></span><span class="hv-dot"></span><span class="hv-dot"></span>
-            <span class="hv-title">Workflow · live</span>
+            <span class="hv-live-dot" aria-hidden="true"></span><span class="hv-title">Workflow · live</span>
           </div>
-          <div class="hv-rows">
-            <div class="hv-row"><span class="hv-icon" set:html={icons.mail} /><span class="hv-label">E-Mail eingeht</span><span class="hv-status ok">&#10003;</span></div>
+          <div class="hv-rows" id="hv-flow">
+            <div class="hv-row">
+              <span class="hv-icon" set:html={icons.mail} />
+              <span class="hv-label">E-Mail eingeht</span>
+              <span class="hv-status"><svg class="st-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="st-run"></span></span>
+            </div>
             <div class="hv-arrow">&#8595;</div>
-            <div class="hv-row"><span class="hv-icon" set:html={icons.bot} /><span class="hv-label">KI klassifiziert</span><span class="hv-status ok">&#10003;</span></div>
+            <div class="hv-row">
+              <span class="hv-icon" set:html={icons.bot} />
+              <span class="hv-label">KI klassifiziert</span>
+              <span class="hv-status"><svg class="st-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="st-run"></span></span>
+            </div>
             <div class="hv-arrow">&#8595;</div>
-            <div class="hv-row"><span class="hv-icon" set:html={icons.chart} /><span class="hv-label">CRM aktualisiert</span><span class="hv-status ok">&#10003;</span></div>
+            <div class="hv-row">
+              <span class="hv-icon" set:html={icons.chart} />
+              <span class="hv-label">CRM aktualisiert</span>
+              <span class="hv-status"><svg class="st-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="st-run"></span></span>
+            </div>
             <div class="hv-arrow">&#8595;</div>
-            <div class="hv-row"><span class="hv-icon" set:html={icons.calendar} /><span class="hv-label">Termin gebucht</span><span class="hv-status run">&#9679;</span></div>
+            <div class="hv-row">
+              <span class="hv-icon" set:html={icons.calendar} />
+              <span class="hv-label">Termin gebucht</span>
+              <span class="hv-status"><svg class="st-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="st-run"></span></span>
+            </div>
           </div>
           <div class="hv-foot">n8n · self-hosted · 0 ms API-Latenz</div>
         </div>
@@ -340,6 +356,68 @@ const orgSchema = {
     </div>
   </section>
 
+  <script>
+    // Live-Workflow-Sequenz: Block fuer Block verarbeiten, Paket zum naechsten,
+    // am Ende kurzer Halt, dann Reset. Laeuft nur im sichtbaren Bereich.
+    (() => {
+      const panel = document.getElementById('hv-flow');
+      if (!panel) return;
+      const rows = Array.from(panel.querySelectorAll('.hv-row'));
+      const arrows = Array.from(panel.querySelectorAll('.hv-arrow'));
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      if (reduce.matches || !('IntersectionObserver' in window)) {
+        rows.forEach((r) => r.classList.add('is-done'));
+        return;
+      }
+
+      const PROC = 1300;   // Dauer "verarbeitet"
+      const FLOW = 550;    // Dauer Daten-Paket
+      const GAP = 350;     // Pause zwischen Bloecken
+      const HOLD = 2800;   // Halt nach letztem Block
+      let timers = [];
+      let running = false;
+
+      const reset = () => {
+        rows.forEach((r) => r.classList.remove('is-processing', 'is-done'));
+        arrows.forEach((a) => a.classList.remove('is-flowing'));
+      };
+
+      const cycle = () => {
+        if (!running) return;
+        reset();
+        rows.forEach((row, i) => {
+          const t0 = i * (PROC + FLOW + GAP);
+          timers.push(setTimeout(() => row.classList.add('is-processing'), t0));
+          timers.push(setTimeout(() => {
+            row.classList.remove('is-processing');
+            row.classList.add('is-done');
+            if (arrows[i]) arrows[i].classList.add('is-flowing');
+          }, t0 + PROC));
+          if (arrows[i]) {
+            timers.push(setTimeout(() => arrows[i].classList.remove('is-flowing'), t0 + PROC + FLOW));
+          }
+        });
+        timers.push(setTimeout(cycle, rows.length * (PROC + FLOW + GAP) + HOLD));
+      };
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !running) {
+            running = true;
+            cycle();
+          } else if (!e.isIntersecting && running) {
+            running = false;
+            timers.forEach(clearTimeout);
+            timers = [];
+            reset();
+          }
+        });
+      }, { threshold: 0.25 });
+      io.observe(panel);
+    })();
+  </script>
+
   <ScrollReveal />
   <Footer />
 
@@ -423,6 +501,19 @@ const orgSchema = {
   .hv-dot:nth-child(3) { background: var(--success); opacity: 0.7; }
   .hv-title { margin-left: 8px; font-size: 0.75rem; color: var(--text-light); font-family: ui-monospace, monospace; }
   .hv-rows { padding: 20px 16px; }
+
+  /* Live-Dot im Panel-Kopf */
+  .hv-live-dot {
+    width: 8px; height: 8px;
+    margin-left: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+    animation: hvLiveBlink 2s ease-in-out infinite;
+  }
+  @keyframes hvLiveBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  /* Workflow-Zeilen: warten -> verarbeiten -> fertig */
   .hv-row {
     display: flex;
     align-items: center;
@@ -431,19 +522,67 @@ const orgSchema = {
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: var(--radius);
     padding: 12px 14px;
+    opacity: 0.45;
+    transition: opacity 0.4s, border-color 0.4s, box-shadow 0.4s;
   }
+  .hv-row.is-processing {
+    opacity: 1;
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.14);
+  }
+  .hv-row.is-processing .hv-icon { animation: hvIconPulse 1s ease-in-out infinite; }
+  @keyframes hvIconPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+  .hv-row.is-done { opacity: 1; }
+
   .hv-icon { display: inline-flex; color: var(--accent); }
   .hv-icon :global(svg) { width: 16px; height: 16px; }
   .hv-label { flex: 1; font-size: 0.88rem; color: var(--text-muted); font-weight: 500; }
-  .hv-status { font-size: 0.8rem; }
-  .hv-status.ok { color: var(--success); }
-  .hv-status.run { color: var(--accent); animation: hvPulse 1.6s ease-in-out infinite; }
-  @keyframes hvPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* Status: Haken (fertig) + pulsierender Ring (verarbeitet) */
+  .hv-status { position: relative; width: 18px; height: 18px; flex-shrink: 0; }
+  .st-ok {
+    position: absolute; inset: 0;
+    width: 18px; height: 18px;
+    color: var(--success);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .hv-row.is-done .st-ok { opacity: 1; transform: scale(1); }
+  .st-run {
+    position: absolute; inset: 1px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    opacity: 0;
+  }
+  .hv-row.is-processing .st-run { opacity: 1; animation: hvRunPulse 0.9s ease-in-out infinite; }
+  @keyframes hvRunPulse { 0%,100% { transform: scale(0.65); opacity: 0.55; } 50% { transform: scale(1.2); opacity: 1; } }
+
+  /* Pfeil: Daten-Paket wandert zum naechsten Block */
   .hv-arrow {
+    position: relative;
     text-align: center;
     color: var(--text-light);
     font-size: 0.9rem;
     padding: 4px 0;
+    transition: color 0.3s;
+  }
+  .hv-arrow.is-flowing { color: var(--accent); }
+  .hv-arrow.is-flowing::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.9);
+    animation: hvPacket 0.55s ease-in forwards;
+  }
+  @keyframes hvPacket {
+    from { transform: translate(-50%, -14px); opacity: 0; }
+    25% { opacity: 1; }
+    to { transform: translate(-50%, 14px); opacity: 0; }
   }
   .hv-foot {
     padding: 10px 16px;
