@@ -15,6 +15,7 @@ const {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A1628">
     <title>{title}</title>
     <meta name="description" content={description}>
 
@@ -25,37 +26,41 @@ const {
 
     <style is:global>
         :root {
-            /* Navy: universell vertrauenswürdig (Singh 2006, Mehta & Zhu 2009) */
-            --bg: #ffffff;
-            --bg-alt: #f8fafc;
-            --bg-dark: #0f172a;
-            --bg-dark-alt: #1e293b;
+            /* Dark-Navy: Vertrauen, Autoritaet, Premium-Positionierung
+               (Singh 2006: Blau = Trust; Labrecque 2010: dunkle UIs = Kompetenz/Expertise)
+               Elevation-Prinzip: dunklere Basis, hellere Karten — Tiefe ohne harte Kontraste */
+            --bg: #0A1628;
+            --bg-alt: #0E1D33;
+            --bg-dark: #060D1A;
+            --bg-dark-alt: #0C1A2E;
+            --card: #12243D;
 
-            --text: #1e293b;
-            --text-muted: #64748b;
-            --text-light: #94a3b8;
-            --text-inverse: #f1f5f9;
+            /* Halation-Ausgleich: helle Textstufen leicht angehoben fuer Lesbarkeit auf Navy */
+            --text: #E2E8F0;
+            --text-muted: #94A3B8;
+            --text-light: #7E93B3;
+            --text-inverse: #0A1628;
 
-            --primary: #1e293b;
-            --primary-hover: #0f172a;
-            --primary-light: #334155;
+            --primary: #F1F5F9;
+            --primary-hover: #FFFFFF;
+            --primary-light: #C7D2E3;
 
-            /* Gold: Premium-Warmakzent, behält Markenccharakter (Von Restorff: CTA sticht heraus) */
-            --accent: #b8860b;
-            --accent-hover: #9a7209;
-            --accent-light: #d4a017;
-            --accent-bg: #fef9ee;
+            /* Gold auf Navy: starker Isolationseffekt (Von Restorff) — CTAs stechen maximal heraus */
+            --accent: #D4A017;
+            --accent-hover: #E8B830;
+            --accent-light: #EAC65D;
+            --accent-bg: rgba(212, 160, 23, 0.10);
 
-            --border: #e2e8f0;
-            --border-strong: #cbd5e1;
+            --border: #1D3252;
+            --border-strong: #2C4468;
 
-            --success: #16a34a;
-            --success-bg: #f0fdf4;
+            --success: #4ADE80;
+            --success-bg: rgba(74, 222, 128, 0.10);
 
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+            --shadow: 0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -2px rgba(0,0,0,0.3);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.55), 0 10px 10px -5px rgba(0,0,0,0.3);
 
             --radius: 8px;
             --radius-lg: 12px;
@@ -140,7 +145,7 @@ const {
 
         .section-dark {
             background: var(--bg-dark);
-            color: var(--text-inverse);
+            color: var(--text-muted);
         }
 
         .section-dark .section-title { color: #fff; }
@@ -166,15 +171,15 @@ const {
 
         .btn-primary {
             background: var(--accent);
-            color: #fff;
-            box-shadow: var(--shadow);
+            color: var(--text-inverse);
+            box-shadow: 0 0 0 1px rgba(212, 160, 23, 0.25), var(--shadow);
         }
 
         .btn-primary:hover {
             background: var(--accent-hover);
-            color: #fff;
+            color: var(--text-inverse);
             transform: translateY(-1px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 4px 24px rgba(212, 160, 23, 0.25), var(--shadow-lg);
         }
 
         .btn-secondary {

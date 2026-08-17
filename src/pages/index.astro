@@ -199,7 +199,9 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 <style>
   /* STATS BAR */
   .stats-bar {
-    background: var(--primary);
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     padding: 40px 0;
   }
   .stats-grid {
@@ -236,14 +238,14 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     display: flex;
     gap: 16px;
     padding: 24px;
-    background: #fff;
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     align-items: flex-start;
   }
   .pain-icon {
     font-size: 1.4rem;
-    color: #dc2626;
+    color: #F87171;
     flex-shrink: 0;
   }
   .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
@@ -260,7 +262,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     gap: 32px;
   }
   .audience-card {
-    background: #fff;
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 36px 32px;
@@ -319,7 +321,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     width: 48px; height: 48px;
     display: flex; align-items: center; justify-content: center;
     background: var(--accent);
-    color: #fff;
+    color: var(--text-inverse);
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
