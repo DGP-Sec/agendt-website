@@ -222,8 +222,11 @@ const breadcrumbSchema = {
     position: relative;
     display: flex;
     flex-direction: column;
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: rgba(31, 41, 55, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: var(--radius-lg);
     padding: 32px 28px;
     transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
@@ -302,8 +305,11 @@ const breadcrumbSchema = {
 
   .prinzip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .prinzip {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: rgba(31, 41, 55, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: var(--radius-lg);
     padding: 32px 28px;
   }

@@ -1,0 +1,27 @@
+/* Glassmorphism: Standard-Property (nicht praefixiert).
+   Wird unverarbeitet ausgeliefert; die gebundelten Stylesheets liefern
+   zusaetzlich die -webkit- Variante. Beide Properties koennen koexistieren. */
+.card,
+.quiz-card,
+.process-col,
+.pain-item,
+.branche-card,
+.ordnung-item,
+.texttype,
+.tech-item,
+.hub-card,
+.price-card,
+.prinzip,
+.contact-card,
+.phase,
+.breadcrumb,
+.hv-panel,
+.mini-process li,
+.agent-cycle li,
+.tv-chip {
+  backdrop-filter: blur(14px);
+}
+
+.breadcrumb {
+  backdrop-filter: blur(10px);
+}

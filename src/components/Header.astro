@@ -122,7 +122,10 @@ const currentPath = Astro.url.pathname;
 
   .nav-desktop a:hover {
     color: var(--text);
-    background: var(--bg-card);
+    background: rgba(31, 41, 55, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   .nav-desktop a.active {

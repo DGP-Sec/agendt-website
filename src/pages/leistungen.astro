@@ -204,8 +204,11 @@ const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   .hub-card {
     display: flex;
     flex-direction: column;
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: rgba(31, 41, 55, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: var(--radius-lg);
     padding: 36px 32px;
     border-bottom: 1px solid var(--border);
