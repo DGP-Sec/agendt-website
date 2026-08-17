@@ -22,7 +22,7 @@ const {
     <!-- Psychologie: Authority/Trust durch professionelle Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 
     <style is:global>
         :root {
@@ -152,7 +152,7 @@ const {
         .section-dark .section-intro { color: var(--text-light); }
         .section-dark a { color: var(--accent-light); }
 
-        /* Von Restorff: CTA sticht durch Farbe heraus */
+        /* Von Restorff: CTA sticht durch Farbe + Bewegung heraus (Everlast-Stil) */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -161,25 +161,79 @@ const {
             font-weight: 600;
             font-size: 0.95rem;
             padding: 14px 28px;
-            border-radius: var(--radius);
+            border-radius: 100px;
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s;
             text-decoration: none;
             border-bottom: none;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 60%, var(--accent) 100%);
+            background-size: 200% 100%;
             color: var(--text-inverse);
-            box-shadow: 0 0 0 1px rgba(212, 160, 23, 0.25), var(--shadow);
+            box-shadow: 0 0 24px rgba(212, 160, 23, 0.2), 0 0 60px rgba(212, 160, 23, 0.08), var(--shadow);
+        }
+
+        /* Shimmer-Sweep: Lichtreflex wandert periodisch ueber den Button */
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(105deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: skewX(-20deg);
+            animation: btnShimmer 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes btnShimmer {
+            0%, 55% { left: -80%; }
+            85%, 100% { left: 160%; }
         }
 
         .btn-primary:hover {
-            background: var(--accent-hover);
+            background-position: 100% 0;
             color: var(--text-inverse);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 24px rgba(212, 160, 23, 0.25), var(--shadow-lg);
+            transform: translateY(-2px);
+            box-shadow: 0 0 32px rgba(212, 160, 23, 0.35), 0 0 80px rgba(212, 160, 23, 0.12), var(--shadow-lg);
+        }
+
+        /* Editoriale Emphasis-Woerter in Headings: Serif-Kursiv (Everlast-Signatur) */
+        .hl {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--accent-light);
+            letter-spacing: 0;
+        }
+
+        /* Sektions-Label mit pulsierendem Strich (dezent, Everlast-ebRotate-Inspiration) */
+        .section-label {
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .section-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 10px;
+            height: 2px;
+            background: var(--accent);
+            transform: translateY(-50%);
+            animation: labelPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes labelPulse {
+            0%, 100% { width: 10px; opacity: 1; }
+            50% { width: 16px; opacity: 0.6; }
         }
 
         .btn-secondary {
@@ -243,6 +297,14 @@ const {
                 opacity: 1 !important;
                 transform: none !important;
                 transition: none !important;
+            }
+            .btn-primary::after,
+            .section-label::before,
+            .orb,
+            .marquee-track,
+            .step-num,
+            .phase-num {
+                animation: none !important;
             }
         }
 

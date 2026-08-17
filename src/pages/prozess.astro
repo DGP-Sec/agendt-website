@@ -19,7 +19,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 
   <!-- PROCESS STEPS DETAILED -->
   <Section
-    title="Die 4 Phasen im Detail"
+    title="Die 4 Phasen <em class='hl'>im Detail.</em>"
     intro="Jede Phase hat ein klares Ergebnis. Sie wissen jederzeit, wo Sie stehen und was als nächstes kommt."
   >
     <div class="phases reveal-stagger">
@@ -172,6 +172,14 @@ import ScrollReveal from '../components/ScrollReveal.astro';
     color: var(--accent);
     line-height: 1;
     opacity: 0.8;
+    animation: phaseGlow 4.8s ease-in-out infinite;
+  }
+  .phase:nth-child(2) .phase-num { animation-delay: 1.2s; }
+  .phase:nth-child(3) .phase-num { animation-delay: 2.4s; }
+  .phase:nth-child(4) .phase-num { animation-delay: 3.6s; }
+  @keyframes phaseGlow {
+    0%, 20%, 100% { opacity: 0.55; text-shadow: none; }
+    9% { opacity: 1; text-shadow: 0 0 22px rgba(212, 160, 23, 0.45); }
   }
   .phase-header h3 {
     font-family: 'Space Grotesk', sans-serif;

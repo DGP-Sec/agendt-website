@@ -28,11 +28,11 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
           <span class="stat-label">Tage bis zum Prototyp</span>
         </div>
         <div class="stat">
-          <span class="stat-num">< 24h</span>
+          <span class="stat-num" data-count="24" data-prefix="&lt; " data-suffix="h">&lt; 24h</span>
           <span class="stat-label">Antwortzeit an Werktagen</span>
         </div>
         <div class="stat">
-          <span class="stat-num">100%</span>
+          <span class="stat-num" data-count="100" data-suffix="%">100%</span>
           <span class="stat-label">DSGVO-konforme Architektur</span>
         </div>
         <div class="stat">
@@ -43,10 +43,17 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     </div>
   </div>
 
+  <!-- TECH-MARQUEE: endloses Laufband unseres Stacks (pausiert bei Hover) -->
+  <div class="tech-marquee" aria-label="Verwendete Technologien">
+    <div class="marquee-track">
+      <span class="tech-chip">n8n</span><span class="tech-chip">Ollama</span><span class="tech-chip">Llama</span><span class="tech-chip">Python</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Next.js</span><span class="tech-chip">PostgreSQL</span><span class="tech-chip">Docker</span><span class="tech-chip">GitHub Actions</span><span class="tech-chip">Cloudflare</span><span class="tech-chip">OpenAI-kompatible APIs</span><span class="tech-chip">IMAP / SMTP</span><span class="tech-chip">n8n</span><span class="tech-chip">Ollama</span><span class="tech-chip">Llama</span><span class="tech-chip">Python</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Next.js</span><span class="tech-chip">PostgreSQL</span><span class="tech-chip">Docker</span><span class="tech-chip">GitHub Actions</span><span class="tech-chip">Cloudflare</span><span class="tech-chip">OpenAI-kompatible APIs</span><span class="tech-chip">IMAP / SMTP</span>
+    </div>
+  </div>
+
   <!-- PROBLEM SECTION: Loss Aversion (Kahneman/Tversky) -->
   <Section
     label="[Das Problem]"
-    title="Jeder Tag ohne Automatisierung kostet Sie bares Geld."
+    title="Jeder Tag ohne Automatisierung kostet Sie <em class='hl'>bares Geld.</em>"
     intro="Repetitive Aufgaben binden Personal, das eigentlich für Wichtigeres gebraucht wird. Während Ihre Mitarbeiter Daten abtippen, Exposés formatieren und E-Mails sortieren, macht die Konkurrenz bereits mehr mit weniger Aufwand."
   >
     <div class="pain-grid reveal-stagger">
@@ -73,7 +80,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <Section
     alt
     label="[Was wir tun]"
-    title="Automatisierung, die Ihre Prozesse übernimmt – nicht nur begleitet."
+    title="Automatisierung, die Ihre Prozesse <em class='hl'>übernimmt</em> – nicht nur begleitet."
     intro="Wir bauen nicht nur Tools. Wir bauen Systeme, die Arbeit wirklich abnehmen: vom ersten Workflow bis zur vollständigen Prozessautomatisierung."
   >
     <ul class="service-list reveal-stagger">
@@ -103,7 +110,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <!-- ZIELGRUPPE: Spezifität schafft Vertrauen -->
   <Section
     label="[Für wen]"
-    title="Zwei Branchen. Eine Lösung: weniger Wiederholung."
+    title="Zwei Branchen. Eine Lösung: <em class='hl'>weniger Wiederholung.</em>"
   >
     <div class="audience-grid reveal-stagger">
       <div class="audience-card">
@@ -133,7 +140,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <Section
     dark
     label="[So arbeiten wir]"
-    title="Vom Problem zum laufenden Workflow in 4 Schritten."
+    title="Vom Problem zum <em class='hl'>laufenden Workflow</em> in 4 Schritten."
     intro="Kein 30-Seiten-Konzept. Keine wochenlangen Analysephasen. Wir starten mit einem konkreten Prototyp und iterieren von dort."
   >
     <div class="process-grid reveal-stagger">
@@ -166,7 +173,7 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <!-- WARUM AGENDT: Differenzierung -->
   <Section
     label="[Warum agendt?]"
-    title="Daten bleiben bei Ihnen. Kontrolle bleibt bei Ihnen."
+    title="Daten bleiben bei Ihnen. <em class='hl'>Kontrolle</em> bleibt bei Ihnen."
     intro="Die meisten KI-Dienstleister schicken Ihre Daten in US-Clouds. Das ist schnell gebaut, aber ein DSGVO-Risiko. Wir machen es anders."
   >
     <div class="why-grid reveal-stagger">
@@ -192,7 +199,35 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     </div>
   </div>
 
-  <ScrollReveal />
+  <script>
+  // Count-up fuer Statistiken (Everlast-Stil), respektiert prefers-reduced-motion
+  const nums = document.querySelectorAll('.stat-num[data-count]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window && nums.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const dur = 1600;
+        const t0 = performance.now();
+        const tick = (t) => {
+          const p = Math.min((t - t0) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    nums.forEach((n) => io.observe(n));
+  }
+</script>
+
+<ScrollReveal />
   <Footer />
 </Base>
 
@@ -226,6 +261,50 @@ const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   }
   @media (max-width: 640px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
+  }
+
+  /* TECH-MARQUEE */
+  .tech-marquee {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 18px;
+    width: max-content;
+    animation: marquee 36s linear infinite;
+  }
+  .tech-marquee:hover .marquee-track { animation-play-state: paused; }
+  .tech-chip {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tech-chip:hover { color: var(--accent-light); border-color: var(--accent); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Sequenzieller Schritt-Puls (Everlast autoStepPulse-Stil) */
+  .step-num {
+    animation: stepPulse 4s ease-in-out infinite;
+  }
+  .process-step:nth-child(2) .step-num { animation-delay: 1s; }
+  .process-step:nth-child(3) .step-num { animation-delay: 2s; }
+  .process-step:nth-child(4) .step-num { animation-delay: 3s; }
+  @keyframes stepPulse {
+    0%, 18%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+    8% { box-shadow: 0 0 0 10px rgba(212, 160, 23, 0.18); }
   }
 
   /* PAIN POINTS */

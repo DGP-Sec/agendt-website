@@ -17,8 +17,8 @@ if (dark) classes.push('section-dark');
 <section class={classes.join(' ')}>
   <div class="container">
     {label && <p class="section-label">{label}</p>}
-    {title && <h2 class="section-title">{title}</h2>}
-    {intro && <p class="section-intro">{intro}</p>}
+    {title && <h2 class="section-title" set:html={title} />}
+    {intro && <p class="section-intro" set:html={intro} />}
     <slot />
   </div>
 </section>
