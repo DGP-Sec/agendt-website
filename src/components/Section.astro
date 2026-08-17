@@ -5,14 +5,16 @@ export interface Props {
   alt?: boolean;
   dark?: boolean;
   light?: boolean;
+  box?: boolean;
   center?: boolean;
 }
 
-const { title, intro, alt = false, dark = false, light = false, center = true } = Astro.props;
+const { title, intro, alt = false, dark = false, light = false, box = false, center = true } = Astro.props;
 
 const classes = ['section'];
 if (light) classes.push('section-light');
 else if (alt || dark) classes.push('section-alt');
+if (box) classes.push('shell-box');
 if (center) classes.push('has-center');
 ---
 

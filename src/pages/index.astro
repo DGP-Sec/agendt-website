@@ -135,6 +135,7 @@ const orgSchema = {
   <!-- WARUM KI-AUTOMATISIERUNG: 3 Vorteil-Karten mit Ergebnis-Zeile -->
   <Section
     light
+    box
     title="Warum KI-Automatisierung?"
     intro="Geschäftsprozesse automatisieren bedeutet mehr als Effizienzsteigerung – es ist ein strategischer Wettbewerbsvorteil."
   >
@@ -175,6 +176,7 @@ const orgSchema = {
   <!-- 3-SCHRITTE-PROZESS -->
   <Section
     alt
+    box
     title="Unser 3-Schritte-Prozess"
     intro="Von der Analyse bis zum erfolgreichen Rollout – transparent und planbar."
   >
@@ -228,6 +230,7 @@ const orgSchema = {
   <!-- ANWENDUNGSFÄLLE: 4 Branchen -->
   <Section
     light
+    box
     title="Bewährte Anwendungsfälle"
     intro="KI-Automatisierung funktioniert branchenübergreifend – hier sind vier typische Beispiele."
   >
@@ -275,6 +278,7 @@ const orgSchema = {
   <!-- TECHNOLOGIE -->
   <Section
     alt
+    box
     title="Moderne KI-Technologie – sicher in Ihrer Hand"
     intro="Wir setzen auf selbst gehostete Open-Source-Modelle und europäische Anbieter – DSGVO-konform, transparent, ohne Abhängigkeit."
   >
@@ -316,7 +320,7 @@ const orgSchema = {
   </Section>
 
   <!-- STATS BAND -->
-  <section class="stats-band section-light">
+  <section class="stats-band section-light shell-box">
     <div class="container stats-grid">
       <div class="stat">
         <span class="stat-num">3–5</span>
@@ -335,6 +339,8 @@ const orgSchema = {
 
   <!-- FAQ -->
   <Section
+    alt
+    box
     title="Häufig gestellte Fragen"
     intro="Die wichtigsten Fragen vor dem Start – ehrlich beantwortet."
   >
@@ -350,7 +356,7 @@ const orgSchema = {
   </Section>
 
   <!-- FINAL CTA -->
-  <section class="final-cta">
+  <section class="final-cta shell-box">
     <div class="container text-center">
       <h2 class="cta-title">Bereit für den nächsten Schritt?</h2>
       <p class="cta-sub">Kostenloses Erstgespräch: 20 Minuten, konkret, unverbindlich.</p>
@@ -769,8 +775,6 @@ const orgSchema = {
   /* STATS */
   .stats-band {
     background: #F3F1EB;
-    border-top: 1px solid #DAD7CE;
-    border-bottom: 1px solid #DAD7CE;
     padding: 56px 0;
   }
   .stats-grid {
@@ -832,7 +836,6 @@ const orgSchema = {
   /* FINAL CTA */
   .final-cta {
     background: var(--bg-alt);
-    border-top: 1px solid var(--border);
     padding: 96px 0;
   }
   .cta-title {
