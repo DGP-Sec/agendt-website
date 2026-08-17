@@ -9,7 +9,7 @@ const {
   description = "KI-Automatisierung für Immobilien und E-Commerce. DSGVO-konform, self-hosted, praxisnah. Prototyp in 3–5 Tagen."
 } = Astro.props;
 
-// SEO: Canonical URL (Directory-Format -> immer mit Trailing Slash)
+// SEO: Canonical URL
 const site = Astro.site ?? new URL('https://agendt.de');
 let path = Astro.url.pathname;
 if (!path.endsWith('/')) path += '/';
@@ -21,12 +21,12 @@ const canonicalURL = new URL(path, site);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#060F1E">
+    <meta name="theme-color" content="#111827">
     <title>{title}</title>
     <meta name="description" content={description}>
     <link rel="canonical" href={canonicalURL}>
 
-    <!-- Open Graph (Social Sharing / CTR-Signal) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="agendt.de">
     <meta property="og:title" content={title}>
@@ -37,54 +37,42 @@ const canonicalURL = new URL(path, site);
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
 
-    <!-- Psychologie: Authority/Trust durch professionelle Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style is:global>
+        /* Design-System nach Vorbild kiautomatisieren.de:
+           Dark gray-900, Gold-Akzent, Inter, große zentrierte Headlines */
         :root {
-            /* Dark-Navy: Vertrauen, Autoritaet, Premium-Positionierung
-               (Singh 2006: Blau = Trust; Labrecque 2010: dunkle UIs = Kompetenz/Expertise)
-               Elevation-Prinzip: dunklere Basis, hellere Karten — Tiefe ohne harte Kontraste */
-            --bg: #060F1E;
-            --bg-alt: #0A1830;
-            --bg-dark: #030912;
-            --bg-dark-alt: #081226;
-            --card: #0C1B33;
+            --bg: #111827;
+            --bg-alt: #0B111E;
+            --bg-card: #1F2937;
+            --bg-card-hover: #263244;
+            --bg-input: #1A2332;
 
-            /* Halation-Ausgleich: helle Textstufen leicht angehoben fuer Lesbarkeit auf Navy */
-            --text: #E2E8F0;
-            --text-muted: #94A3B8;
-            --text-light: #7E93B3;
-            --text-inverse: #0A1628;
+            --text: #F3F4F6;
+            --text-muted: #9CA3AF;
+            --text-light: #6B7280;
 
-            --primary: #F1F5F9;
-            --primary-hover: #FFFFFF;
-            --primary-light: #C7D2E3;
+            --accent: #D4AF37;
+            --accent-dark: #B8941E;
+            --accent-light: #E5C558;
+            --accent-bg: rgba(212, 175, 55, 0.1);
 
-            /* Gold auf Navy: starker Isolationseffekt (Von Restorff) — CTAs stechen maximal heraus */
-            --accent: #D4A017;
-            --accent-hover: #E8B830;
-            --accent-light: #EAC65D;
-            --accent-bg: rgba(212, 160, 23, 0.10);
+            --border: #273244;
+            --border-hover: #3A4658;
 
-            --border: #1D3252;
-            --border-strong: #2C4468;
-
-            --success: #4ADE80;
-            --success-bg: rgba(74, 222, 128, 0.10);
+            --success: #34D399;
             --danger: #F87171;
-
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
-            --shadow: 0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.4);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -2px rgba(0,0,0,0.3);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.55), 0 10px 10px -5px rgba(0,0,0,0.3);
 
             --radius: 8px;
             --radius-lg: 12px;
 
-            --max-w: 1080px;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4), 0 4px 6px -2px rgba(0,0,0,0.2);
+
+            --max-w: 1152px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -94,21 +82,21 @@ const canonicalURL = new URL(path, site);
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             font-weight: 400;
-            line-height: 1.65;
+            line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        ::selection { background: var(--accent-bg); }
+        ::selection { background: rgba(212, 175, 55, 0.3); color: #fff; }
 
         h1, h2, h3, h4 {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-weight: 600;
-            line-height: 1.2;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 700;
+            line-height: 1.15;
             letter-spacing: -0.02em;
         }
 
@@ -119,209 +107,119 @@ const canonicalURL = new URL(path, site);
         }
 
         a {
-            color: var(--primary);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-strong);
-            transition: border-color 0.2s, color 0.2s;
-        }
-
-        a:hover {
             color: var(--accent);
-            border-bottom-color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
         }
 
-        /* Cogntive Ease: klare visuelle Hierarchie */
-        .section {
-            padding: 80px 0;
-        }
+        a:hover { color: var(--accent-light); }
+
+        /* Sektionen: großzügiger Abstand, zentrierte Titel (Vorbild-Stil) */
+        .section { padding: 96px 0; }
 
         .section-label {
-            font-family: 'Space Grotesk', sans-serif;
+            display: inline-block;
             font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             color: var(--accent);
             margin-bottom: 12px;
         }
 
         .section-title {
-            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-            color: var(--primary);
+            font-size: clamp(1.9rem, 4vw, 3rem);
+            color: var(--text);
             margin-bottom: 16px;
         }
 
         .section-intro {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-muted);
-            max-width: 680px;
-            margin-bottom: 48px;
+            max-width: 640px;
+            margin: 0 auto 56px;
+            text-align: center;
         }
 
-        /* Licht-Sektionen: weiße Content-Flächen mit dunkler Typografie.
-           Tokens werden hier neu geppegelt — alle Komponenten passen sich automatisch an. */
-        .section {
-            background: #FFFFFF;
-            color: #16233A;
-            --text: #16233A;
-            --text-muted: #4A5A72;
-            --text-light: #64748B;
-            --text-inverse: #FFFFFF;
-            --primary: #0C1A2E;
-            --primary-hover: #060F1E;
-            --primary-light: #33415C;
-            --accent: #8F6609;
-            --accent-hover: #7A5707;
-            --accent-light: #8F6609;
-            --accent-bg: rgba(212, 160, 23, 0.12);
-            --card: #FFFFFF;
-            --border: #E2E8F0;
-            --border-strong: #C9D4E2;
-            --bg-alt: #EEF2F8;
-            --success: #15803D;
-            --success-bg: rgba(21, 128, 61, 0.08);
-            --danger: #DC2626;
-        }
+        .section-head { text-align: center; margin-bottom: 56px; }
+        .section-head .section-title { margin-bottom: 12px; }
+        .section-head .section-intro { margin-bottom: 0; }
 
-        .section-alt {
-            background: #F4F7FB;
-            color: #16233A;
-        }
+        .section-alt { background: var(--bg-alt); }
 
         .section-dark {
-            background: var(--bg-dark);
+            background: var(--bg-alt);
             color: var(--text-muted);
-            /* Dunkel-Re-Scope: gleiche Werte wie Root (überschreibt .section-Lichtscope) */
-            --text: #E2E8F0;
-            --text-muted: #94A3B8;
-            --text-light: #7E93B3;
-            --text-inverse: #060F1E;
-            --primary: #F1F5F9;
-            --primary-hover: #FFFFFF;
-            --primary-light: #C7D2E3;
-            --accent: #D4A017;
-            --accent-hover: #E8B830;
-            --accent-light: #EAC65D;
-            --accent-bg: rgba(212, 160, 23, 0.10);
-            --card: #0C1B33;
-            --border: #1D3252;
-            --border-strong: #2C4468;
-            --bg-alt: #0A1830;
-            --success: #4ADE80;
-            --success-bg: rgba(74, 222, 128, 0.10);
-            --danger: #F87171;
         }
 
-        .section-dark .section-title { color: #fff; }
-        .section-dark .section-intro { color: var(--text-light); }
-        .section-dark a { color: var(--accent-light); }
-
-        /* Von Restorff: CTA sticht durch Farbe + Bewegung heraus (Everlast-Stil) */
+        /* Buttons: Gold-Gradient (Primär) und Gold-Outline (Sekundär) wie Vorbild */
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 0.95rem;
-            padding: 14px 28px;
-            border-radius: 100px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 16px 32px;
+            border-radius: var(--radius-lg);
             border: none;
             cursor: pointer;
-            transition: all 0.25s;
+            transition: all 0.2s;
             text-decoration: none;
-            border-bottom: none;
-            position: relative;
-            overflow: hidden;
+            white-space: nowrap;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #D4A017 0%, #E8B830 60%, #D4A017 100%);
-            background-size: 200% 100%;
-            color: #060F1E;
-            box-shadow: 0 0 24px rgba(212, 160, 23, 0.2), 0 0 60px rgba(212, 160, 23, 0.08), var(--shadow);
-        }
-
-        /* Shimmer-Sweep: Lichtreflex wandert periodisch ueber den Button */
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -80%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(105deg, transparent, rgba(255,255,255,0.35), transparent);
-            transform: skewX(-20deg);
-            animation: btnShimmer 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes btnShimmer {
-            0%, 55% { left: -80%; }
-            85%, 100% { left: 160%; }
+            background: linear-gradient(to right, var(--accent-dark), var(--accent));
+            color: #0B111E;
         }
 
         .btn-primary:hover {
-            background-position: 100% 0;
-            color: #060F1E;
-            transform: translateY(-2px);
-            box-shadow: 0 0 32px rgba(212, 160, 23, 0.35), 0 0 80px rgba(212, 160, 23, 0.12), var(--shadow-lg);
-        }
-
-        /* Editoriale Emphasis-Woerter in Headings: Serif-Kursiv (Everlast-Signatur) */
-        .hl {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-style: italic;
-            font-weight: 500;
-            color: var(--accent-light);
-            letter-spacing: 0;
-        }
-
-        /* Sektions-Label mit pulsierendem Strich (dezent, Everlast-ebRotate-Inspiration) */
-        .section-label {
-            position: relative;
-            padding-left: 18px;
-        }
-
-        .section-label::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 10px;
-            height: 2px;
-            background: var(--accent);
-            transform: translateY(-50%);
-            animation: labelPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes labelPulse {
-            0%, 100% { width: 10px; opacity: 1; }
-            50% { width: 16px; opacity: 0.6; }
+            background: linear-gradient(to right, var(--accent), var(--accent-light));
+            color: #0B111E;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--primary);
-            border: 1.5px solid var(--border-strong);
+            color: var(--accent);
+            border: 2px solid var(--accent);
         }
 
         .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: var(--bg-alt);
+            background: var(--accent-bg);
+            color: var(--accent-light);
+            border-color: var(--accent-light);
         }
 
-        .btn-large {
-            font-size: 1.05rem;
-            padding: 16px 36px;
+        .btn-large { font-size: 1.05rem; padding: 18px 36px; }
+
+        /* Emphasis-Woerter in Headlines: Gold-Akzent */
+        .hl {
+            color: var(--accent);
+            font-style: normal;
         }
 
-        /* Hilfsklassen */
         .text-center { text-align: center; }
-        .mt-0 { margin-top: 0 !important; }
 
-        /* Scroll-Animationen: sanftes Fade-in beim Sichtbarwerden */
+        /* Karten (Vorbild: gray-800, 8-12px radius, Border bei Hover) */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Scroll-Reveal */
         .reveal {
             opacity: 0;
             transform: translateY(20px);
@@ -333,17 +231,13 @@ const canonicalURL = new URL(path, site);
             transform: translateY(0);
         }
 
-        /* Stagger: verschachtelte Elemente leicht versetzt */
         .reveal-stagger > * {
             opacity: 0;
             transform: translateY(16px);
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .reveal-stagger.visible > * {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
 
         .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
         .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.08s; }
@@ -352,28 +246,16 @@ const canonicalURL = new URL(path, site);
         .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.32s; }
         .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.40s; }
 
-        /* Respektiert prefers-reduced-motion (Accessibility) */
         @media (prefers-reduced-motion: reduce) {
-            .reveal,
-            .reveal-stagger > *,
-            .reveal.visible,
-            .reveal-stagger.visible > * {
+            .reveal, .reveal-stagger > *, .reveal.visible, .reveal-stagger.visible > * {
                 opacity: 1 !important;
                 transform: none !important;
                 transition: none !important;
             }
-            .btn-primary::after,
-            .section-label::before,
-            .orb,
-            .marquee-track,
-            .step-num,
-            .phase-num {
-                animation: none !important;
-            }
         }
 
         @media (max-width: 640px) {
-            .section { padding: 56px 0; }
+            .section { padding: 64px 0; }
         }
     </style>
 </head>

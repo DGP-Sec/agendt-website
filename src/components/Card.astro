@@ -15,23 +15,9 @@ const { title, body, icon } = Astro.props;
 </div>
 
 <style>
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 32px 28px;
-    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-  }
-
-  .card:hover {
-    border-color: var(--accent-light);
-    transform: translateY(-3px);
-    box-shadow: 0 0 24px rgba(212, 160, 23, 0.08), var(--shadow-lg);
-  }
-
   .card-icon {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,18 +25,17 @@ const { title, body, icon } = Astro.props;
     border-radius: var(--radius);
     margin-bottom: 20px;
     color: var(--accent);
+    font-size: 1.4rem;
   }
 
   .card-icon :global(svg) {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
 
   .card-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--primary);
+    font-size: 1.15rem;
+    color: var(--text);
     margin-bottom: 10px;
   }
 

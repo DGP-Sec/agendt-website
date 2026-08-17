@@ -2,470 +2,685 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
-import ServiceItem from '../components/ServiceItem.astro';
-import Card from '../components/Card.astro';
+import QuizFinder from '../components/QuizFinder.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 
-// SVG Icons (inline für Performance)
-const iconProcess = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>';
-const iconContent = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
-const iconShield = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
-const iconServer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>';
+// FAQ sinngemäß nach Vorbild-Struktur, mit unseren Zahlen
+const faqs = [
+  {
+    q: 'Wie schnell kann KI-Automatisierung implementiert werden?',
+    a: 'Ein lauffähiger Prototyp steht in 3–5 Werktagen. Die vollständige Umsetzung dauert je nach Umfang 1–4 Wochen. Wir starten bewusst mit dem Prozess, der sofort Mehrwert schafft.',
+  },
+  {
+    q: 'Welche Kosten entstehen bei KI-Automatisierung?',
+    a: 'Der Einstieg (KI-Scan) ist kostenlos. Ein Prototyp startet ab 1.500 € Festpreis, eine Voll-Automatisierung ab 4.500 €. Alle Details auf unserer Preisseite.',
+  },
+  {
+    q: 'Welche Prozesse können automatisiert werden?',
+    a: 'Fast alle wiederkehrenden Prozesse: E-Mail-Bearbeitung, Kundenanfragen, Datenerfassung, Rechnungsprüfung, Lead-Qualifizierung, Terminkoordination, Reporting und vieles mehr.',
+  },
+  {
+    q: 'Ist KI-Automatisierung sicher und datenschutzkonform?',
+    a: 'Ja. Wir setzen vorrangig auf self-hosted Modelle und europäische Infrastruktur – Ihre Daten verlassen Ihr Netzwerk nicht. Alles wird DSGVO-konform dokumentiert.',
+  },
+  {
+    q: 'Brauchen wir technisches Know-how für KI-Automatisierung?',
+    a: 'Nein. Wir übernehmen die komplette Umsetzung und schulen Ihr Team. Sie konzentrieren sich auf Ihre Prozesse, wir auf die Technik.',
+  },
+  {
+    q: 'Wie messen wir den Erfolg der KI-Automatisierung?',
+    a: 'Wir definieren gemeinsam klare KPIs: Zeitersparnis, Kostenreduktion, Fehlerquote, Durchsatzgeschwindigkeit. Sie erhalten transparente, nachvollziehbare Ergebnisse.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'agendt.de',
+  url: 'https://agendt.de',
+  email: 'hello@agendt.de',
+  description: 'KI-Automatisierung für Immobilien und E-Commerce. DSGVO-konform, self-hosted, praxisnah.',
+};
 ---
 
-<Base>
+<Base
+  title="Geschäftsprozesse mit KI automatisieren | agendt.de"
+  description="Sparen Sie bis zu 70% Zeit bei Routineaufgaben: E-Mails, Kundenanfragen, Datenerfassung und mehr – mit DSGVO-konformer KI. Prototyp in 3–5 Tagen."
+>
   <Header />
-  <Hero />
 
-  <!-- STATS BAR: Social Proof durch konkrete Zahlen (Cialdini) -->
-  <div class="stats-bar">
-    <div class="container">
-      <div class="stats-grid reveal-stagger">
-        <div class="stat">
-          <span class="stat-num">3–5</span>
-          <span class="stat-label">Tage bis zum Prototyp</span>
+  <!-- HERO: Große Headline, 2 CTAs, 3 Trust-Badges, Visual rechts -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1 class="hero-title">Geschäftsprozesse automatisieren mit KI</h1>
+        <p class="hero-sub">
+          Sparen Sie bis zu 70% Zeit bei Routineaufgaben. Automatisieren Sie E-Mails,
+          Kundenanfragen, Datenerfassung und mehr – mit intelligenter KI-Technologie.
+        </p>
+        <div class="hero-cta">
+          <a href="/kontakt/" class="btn btn-primary btn-large">Kostenlose Beratung</a>
+          <a href="#ki-finder" class="btn btn-secondary btn-large">KI-Lösung finden</a>
         </div>
-        <div class="stat">
-          <span class="stat-num" data-count="24" data-prefix="&lt; " data-suffix="h">&lt; 24h</span>
-          <span class="stat-label">Antwortzeit an Werktagen</span>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <span class="badge-icon">&#9889;</span>
+            <span>Prototyp in 3–5 Tagen</span>
+          </div>
+          <div class="hero-badge">
+            <span class="badge-icon">&#128274;</span>
+            <span>DSGVO-konform</span>
+          </div>
+          <div class="hero-badge">
+            <span class="badge-icon">&#127919;</span>
+            <span>Individuelle Lösungen</span>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-num" data-count="100" data-suffix="%">100%</span>
-          <span class="stat-label">DSGVO-konforme Architektur</span>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hv-panel">
+          <div class="hv-head">
+            <span class="hv-dot"></span><span class="hv-dot"></span><span class="hv-dot"></span>
+            <span class="hv-title">Workflow · live</span>
+          </div>
+          <div class="hv-rows">
+            <div class="hv-row"><span class="hv-icon">&#9993;</span><span class="hv-label">E-Mail eingeht</span><span class="hv-status ok">&#10003;</span></div>
+            <div class="hv-arrow">&#8595;</div>
+            <div class="hv-row"><span class="hv-icon">&#129302;</span><span class="hv-label">KI klassifiziert</span><span class="hv-status ok">&#10003;</span></div>
+            <div class="hv-arrow">&#8595;</div>
+            <div class="hv-row"><span class="hv-icon">&#128202;</span><span class="hv-label">CRM aktualisiert</span><span class="hv-status ok">&#10003;</span></div>
+            <div class="hv-arrow">&#8595;</div>
+            <div class="hv-row"><span class="hv-icon">&#128197;</span><span class="hv-label">Termin gebucht</span><span class="hv-status run">&#9679;</span></div>
+          </div>
+          <div class="hv-foot">n8n · self-hosted · 0 ms API-Latenz</div>
         </div>
-        <div class="stat">
-          <span class="stat-num">0</span>
-          <span class="stat-label">US-Cloud-Abhängigkeit</span>
-        </div>
+        <div class="hv-glow hv-glow-1"></div>
+        <div class="hv-glow hv-glow-2"></div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- TECH-MARQUEE: endloses Laufband unseres Stacks (pausiert bei Hover) -->
-  <div class="tech-marquee" aria-label="Verwendete Technologien">
-    <div class="marquee-track">
-      <span class="tech-chip">n8n</span><span class="tech-chip">Ollama</span><span class="tech-chip">Llama</span><span class="tech-chip">Python</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Next.js</span><span class="tech-chip">PostgreSQL</span><span class="tech-chip">Docker</span><span class="tech-chip">GitHub Actions</span><span class="tech-chip">Cloudflare</span><span class="tech-chip">OpenAI-kompatible APIs</span><span class="tech-chip">IMAP / SMTP</span><span class="tech-chip">n8n</span><span class="tech-chip">Ollama</span><span class="tech-chip">Llama</span><span class="tech-chip">Python</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Next.js</span><span class="tech-chip">PostgreSQL</span><span class="tech-chip">Docker</span><span class="tech-chip">GitHub Actions</span><span class="tech-chip">Cloudflare</span><span class="tech-chip">OpenAI-kompatible APIs</span><span class="tech-chip">IMAP / SMTP</span>
-    </div>
-  </div>
+  <!-- QUIZ FINDER -->
+  <QuizFinder />
 
-  <!-- PROBLEM SECTION: Loss Aversion (Kahneman/Tversky) -->
+  <!-- WARUM KI-AUTOMATISIERUNG: 3 Vorteil-Karten mit Ergebnis-Zeile -->
   <Section
-    label="[Das Problem]"
-    title="Jeder Tag ohne Automatisierung kostet Sie <em class='hl'>bares Geld.</em>"
-    intro="Repetitive Aufgaben binden Personal, das eigentlich für Wichtigeres gebraucht wird. Während Ihre Mitarbeiter Daten abtippen, Exposés formatieren und E-Mails sortieren, macht die Konkurrenz bereits mehr mit weniger Aufwand."
-  >
-    <div class="pain-grid reveal-stagger">
-      <div class="pain-item">
-        <span class="pain-icon">&#9888;</span>
-        <p><strong>Manuelle Datenpflege</strong> zwischen CRM, Shop und Portalen – stündlich, täglich, fehleranfällig.</p>
-      </div>
-      <div class="pain-item">
-        <span class="pain-icon">&#9888;</span>
-        <p><strong>Wiederkehrende Kundenanfragen</strong>, die immer ähnlich sind und ehemalig viel Zeit kosten.</p>
-      </div>
-      <div class="pain-item">
-        <span class="pain-icon">&#9888;</span>
-        <p><strong>Inhalte müssen erstellt werden</strong> – Exposés, Produktbeschreibungen, Social-Media-Posts. Immer wieder von vorn.</p>
-      </div>
-      <div class="pain-item">
-        <span class="pain-icon">&#9888;</span>
-        <p><strong>Datenflut ohne Struktur</strong> – Dokumente, E-Mails und Informationen, die nicht durchsuchbar sind.</p>
-      </div>
-    </div>
-  </Section>
-
-  <!-- SERVICES SECTION: Lösungen mit Outcomes -->
-  <Section
-    alt
-    label="[Was wir tun]"
-    title="Automatisierung, die Ihre Prozesse <em class='hl'>übernimmt</em> – nicht nur begleitet."
-    intro="Wir bauen nicht nur Tools. Wir bauen Systeme, die Arbeit wirklich abnehmen: vom ersten Workflow bis zur vollständigen Prozessautomatisierung."
-  >
-    <ul class="service-list reveal-stagger">
-      <ServiceItem
-        title="Multi-Agent Content Factory"
-        description="Recherche, Texterstellung, Qualitätsprüfung und Veröffentlichung in einem automatisierten Workflow. Für Social Media, Blogs, Exposés und Newsrooms."
-        outcome="Inhalte in Minuten statt Stunden, konsistente Qualität, 24/7 Verfügbarkeit."
-      />
-      <ServiceItem
-        title="Workflow-Automatisierung mit n8n"
-        description="Verbindung von CRM, Shop-System, E-Mail, Datenbanken und APIs zu robusten, wartbaren Prozessen. Inklusive Fehlerbehandlung und Monitoring."
-        outcome="Manuelle Dateneingabe drastisch reduziert, Prozesse laufen zuverlässig 24/7."
-      />
-      <ServiceItem
-        title="Lokale KI-Deployment (LLM)"
-        description="Eigene Sprachmodelle auf Ihrer Infrastruktur mit Ollama und Llama. Keine Cloud-Abhängigkeit, keine Datenflüsse nach aussen."
-        outcome="Vollständige Kontrolle über Daten und Modelle, keine API-Kosten, DSGVO-sicher."
-      />
-      <ServiceItem
-        title="Intelligente Dokumentenverarbeitung"
-        description="Automatische Extraktion, Klassifizierung und Verarbeitung von Dokumenten, Rechnungen, Verträgen und E-Mails mit KI."
-        outcome="Stunden manueller Erfassung pro Woche eingespart, weniger Fehler, schnellere Durchlaufzeiten."
-      />
-    </ul>
-  </Section>
-
-  <!-- ZIELGRUPPE: Spezifität schafft Vertrauen -->
-  <Section
-    label="[Für wen]"
-    title="Zwei Branchen. Eine Lösung: <em class='hl'>weniger Wiederholung.</em>"
-  >
-    <div class="audience-grid reveal-stagger">
-      <div class="audience-card">
-        <div class="audience-icon" set:html={iconContent} />
-        <h3>Immobilienwirtschaft</h3>
-        <ul>
-          <li>Exposés automatisch aus Rohdaten generieren</li>
-          <li>Anfragen vorqualifizieren und an den richtigen Mitarbeiter leiten</li>
-          <li>Objektdaten zwischen Portalen synchronisieren</li>
-          <li>Terminkoordination automatisieren</li>
-        </ul>
-      </div>
-      <div class="audience-card">
-        <div class="audience-icon" set:html={iconServer} />
-        <h3>E-Commerce</h3>
-        <ul>
-          <li>Produktbeschreibungen in Großen Mengen generieren</li>
-          <li>Kundenanfragen klassifizieren und automatisch beantworten</li>
-          <li>Retouren-Workflows beschleunigen</li>
-          <li>Lageralerts und Bestellvorgänge automatisieren</li>
-        </ul>
-      </div>
-    </div>
-  </Section>
-
-  <!-- PROZESS: Zeigarnik-Effekt (Schritte motivieren zum Abschließen) -->
-  <Section
-    dark
-    label="[So arbeiten wir]"
-    title="Vom Problem zum <em class='hl'>laufenden Workflow</em> in 4 Schritten."
-    intro="Kein 30-Seiten-Konzept. Keine wochenlangen Analysephasen. Wir starten mit einem konkreten Prototyp und iterieren von dort."
-  >
-    <div class="process-grid reveal-stagger">
-      <div class="process-step">
-        <div class="step-num">1</div>
-        <h3>Analyse</h3>
-        <p>Gemeinsam identifizieren wir den Prozess mit dem größten Automatisierungspotenzial. Kostenloser Ersttermin, 20 Minuten.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">2</div>
-        <h3>Prototyp</h3>
-        <p>In 3–5 Tagen bauen wir einen ersten lauffähigen Workflow, den Sie in Ihrem Betrieb testen können.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">3</div>
-        <h3>Iteration</h3>
-        <p>Wir verfeinern den Workflow basierend auf Ihrem Feedback, bis er zuverlässig und handhabbar ist.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">4</div>
-        <h3>Übergabe</h3>
-        <p>Vollständige Dokumentation, kurze Schulung Ihres Teams. Optional: Wartung und Weiterentwicklung.</p>
-      </div>
-    </div>
-    <div class="process-cta">
-      <a href="/kontakt/" class="btn btn-primary btn-large">Schritt 1 starten →</a>
-    </div>
-  </Section>
-
-  <!-- WARUM AGENDT: Differenzierung -->
-  <Section
-    label="[Warum agendt?]"
-    title="Daten bleiben bei Ihnen. <em class='hl'>Kontrolle</em> bleibt bei Ihnen."
-    intro="Die meisten KI-Dienstleister schicken Ihre Daten in US-Clouds. Das ist schnell gebaut, aber ein DSGVO-Risiko. Wir machen es anders."
+    label="Warum KI-Automatisierung?"
+    title="Warum KI-Automatisierung?"
+    intro="Geschäftsprozesse automatisieren bedeutet mehr als Effizienzsteigerung – es ist ein strategischer Wettbewerbsvorteil."
   >
     <div class="why-grid reveal-stagger">
-      <Card title="Self-Hosted First" body="Lokale Sprachmodelle auf Ihrer Infrastruktur. Wenn Sie wollen, funktioniert alles ohne Internetverbindung." icon={iconServer} />
-      <Card title="DSGVO von Tag 1" body="Klare Datenflüsse, dokumentierte Schnittstellen, Verarbeitungsverzeichnis-tauglich. Keine Grauzonen." icon={iconShield} />
-      <Card title="Schnell statt bürokratisch" body="Statt monatelanger Konzeptphasen: ein Prototyp in unter einer Woche. Danach iterieren wir gemeinsam." icon={iconProcess} />
-      <Card title="Transparent & ehrlich" body="Sie verstehen, was passiert. Keine Blackbox. Volle Dokumentation. Keine versteckten Abhängigkeiten." icon={iconContent} />
+      <div class="card why-card">
+        <div class="card-icon">&#9201;</div>
+        <h3 class="card-title">Zeit sparen durch intelligente Automatisierung</h3>
+        <p class="card-body">
+          Ihre Mitarbeiter verbringen täglich Stunden mit wiederkehrenden Aufgaben: E-Mails sortieren,
+          Daten eingeben, Anfragen beantworten, Termine koordinieren. KI-Automatisierung übernimmt diese
+          Routine – präzise, schnell und rund um die Uhr.
+        </p>
+        <p class="why-result"><span class="why-result-label">Ergebnis:</span> Bis zu 70% Zeitersparnis bei Routineaufgaben</p>
+      </div>
+      <div class="card why-card">
+        <div class="card-icon">&#128176;</div>
+        <h3 class="card-title">Kosten senken mit skalierbarer KI</h3>
+        <p class="card-body">
+          Manuelle Prozesse sind teuer – durch Personalkosten, Fehler und fehlende Skalierbarkeit.
+          Self-hosted KI-Systeme arbeiten ohne laufende API-Kosten und wachsen mit, ohne dass Aufwand
+          und Kosten linear mitsteigen.
+        </p>
+        <p class="why-result"><span class="why-result-label">Ergebnis:</span> Geringere Prozesskosten, planbare Festpreise</p>
+      </div>
+      <div class="card why-card">
+        <div class="card-icon">&#128737;</div>
+        <h3 class="card-title">Fehlerquote minimieren durch Automatisierung</h3>
+        <p class="card-body">
+          Menschliche Fehler bei monotonen Aufgaben sind unvermeidlich – jeder kostet Zeit, Geld oder
+          Kundenvertrauen. Automatisierte Prozesse arbeiten reproduzierbar genau und dokumentieren jeden
+          Schritt für volle Nachvollziehbarkeit.
+        </p>
+        <p class="why-result"><span class="why-result-label">Ergebnis:</span> Deutlich weniger Fehler, lückenlose Protokolle</p>
+      </div>
     </div>
   </Section>
 
-  <!-- FINAL CTA: Scarcity + Reciprocity -->
-  <div class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <p class="cta-label">Kostenlos. Unverbindlich. In 24 Stunden.</p>
-        <h2 class="cta-title">Bereit, Ihren ersten Workflow zu automatisieren?</h2>
-        <p class="cta-text">
-          Vereinbaren Sie ein 20-minütiges Erstgespräch. Wir analysieren gemeinsam, welcher Prozess sich am schnellsten automatisieren lässt – kostenlos und ohne Verpflichtung.
+  <!-- 3-SCHRITTE-PROZESS -->
+  <Section
+    alt
+    label="Unser Prozess"
+    title="Unser 3-Schritte-Prozess"
+    intro="Von der Analyse bis zum erfolgreichen Rollout – transparent und planbar."
+  >
+    <div class="process-grid reveal-stagger">
+      <div class="process-col">
+        <span class="process-num">01</span>
+        <h3 class="process-title">Analyse &amp; Erstgespräch</h3>
+        <p class="process-text">
+          Wir starten mit einem intensiven Gespräch über Ihre Abläufe. Gemeinsam erstellen wir ein
+          Prozess-Mapping und identifizieren die größten Automatisierungshebel.
         </p>
-        <a href="/kontakt/" class="btn btn-primary btn-large">Kostenloses Erstgespräch buchen →</a>
-        <p class="cta-fineprint">Keine Spam. Keine Verkaufsmasche. Nur konkrete Antworten.</p>
+        <ul class="check-list">
+          <li>Detailliertes Prozess-Mapping</li>
+          <li>Potenzialanalyse mit Aufwand/Nutzen</li>
+          <li>Quick-Wins identifizieren</li>
+          <li>Priorisierung nach Wirkung</li>
+        </ul>
+      </div>
+      <div class="process-col">
+        <span class="process-num">02</span>
+        <h3 class="process-title">Prototyp &amp; Testing</h3>
+        <p class="process-text">
+          Wir entwickeln einen lauffähigen Prototyp für Ihren wichtigsten Anwendungsfall. Sie testen
+          mit echten Daten und sehen den Mehrwert, bevor Sie in die volle Umsetzung investieren.
+        </p>
+        <ul class="check-list">
+          <li>Funktionsfähiger Prototyp in 3–5 Tagen</li>
+          <li>Testing mit echten Daten</li>
+          <li>Iterative Optimierung mit Ihrem Feedback</li>
+          <li>Messbare Ergebnisse vor der Umsetzung</li>
+        </ul>
+      </div>
+      <div class="process-col">
+        <span class="process-num">03</span>
+        <h3 class="process-title">Rollout &amp; Optimierung</h3>
+        <p class="process-text">
+          Nach erfolgreichem Test überführen wir die Lösung Schritt für Schritt in Ihren Live-Betrieb.
+          Wir schulen Ihr Team, dokumentieren alles und optimieren kontinuierlich.
+        </p>
+        <ul class="check-list">
+          <li>Schrittweise Einführung im Betrieb</li>
+          <li>Training für Ihr Team</li>
+          <li>Umfassende Dokumentation</li>
+          <li>Kontinuierliche Verbesserung</li>
+        </ul>
       </div>
     </div>
-  </div>
+    <p class="process-more"><a href="/prozess/">Details zum Prozess-Ablauf →</a></p>
+  </Section>
 
-  <script>
-  // Count-up fuer Statistiken (Everlast-Stil), respektiert prefers-reduced-motion
-  const nums = document.querySelectorAll('.stat-num[data-count]');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce && 'IntersectionObserver' in window && nums.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        io.unobserve(entry.target);
-        const el = entry.target;
-        const target = parseInt(el.dataset.count, 10);
-        const prefix = el.dataset.prefix || '';
-        const suffix = el.dataset.suffix || '';
-        const dur = 1600;
-        const t0 = performance.now();
-        const tick = (t) => {
-          const p = Math.min((t - t0) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = prefix + Math.round(target * eased) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      });
-    }, { threshold: 0.4 });
-    nums.forEach((n) => io.observe(n));
-  }
-</script>
+  <!-- ANWENDUNGSFÄLLE: 4 Branchen -->
+  <Section
+    label="Anwendungsfälle"
+    title="Bewährte Anwendungsfälle"
+    intro="KI-Automatisierung funktioniert branchenübergreifend – hier sind vier typische Beispiele."
+  >
+    <div class="usecase-grid reveal-stagger">
+      <div class="card usecase-card">
+        <div class="card-icon">&#128722;</div>
+        <h3 class="card-title">E-Commerce</h3>
+        <p class="card-body">
+          <strong>KI-Chatbot</strong> beantwortet den Großteil der Standardfragen zu Bestellstatus, Rücksendungen
+          und Produkten – rund um die Uhr. <strong>Automatische Statusupdates</strong>, Versandbenachrichtigungen
+          und Follow-ups steigern die Kundenzufriedenheit.
+        </p>
+      </div>
+      <div class="card usecase-card">
+        <div class="card-icon">&#127968;</div>
+        <h3 class="card-title">Immobilienwirtschaft</h3>
+        <p class="card-body">
+          <strong>Exposé-Anfragen</strong> werden sofort beantwortet, Interessenten vorqualifiziert und
+          Besichtigungen direkt gebucht. <strong>Objektdaten</strong> fließen automatisch aus Portalen und
+          Dokumenten in Ihre Systeme.
+        </p>
+      </div>
+      <div class="card usecase-card">
+        <div class="card-icon">&#129309;</div>
+        <h3 class="card-title">B2B-Service</h3>
+        <p class="card-body">
+          <strong>KI-Agenten</strong> analysieren eingehende Anfragen, bewerten die Lead-Qualität und leiten an
+          den richtigen Vertriebler weiter. <strong>Automatische Follow-ups</strong> und Aktivitäts-Protokolle
+          inklusive.
+        </p>
+      </div>
+      <div class="card usecase-card">
+        <div class="card-icon">&#128202;</div>
+        <h3 class="card-title">Finance &amp; Controlling</h3>
+        <p class="card-body">
+          <strong>Automatische Extraktion</strong> von Rechnungsdaten, Abgleich mit Bestellungen und
+          Freigabe-Workflows. <strong>KI-gestützte Reports</strong> erkennen Anomalien und schaffen
+          Transparenz.
+        </p>
+      </div>
+    </div>
+    <p class="process-more"><a href="/leistungen/">Weitere Einsatzbereiche entdecken →</a></p>
+  </Section>
 
-<ScrollReveal />
+  <!-- TECHNOLOGIE -->
+  <Section
+    alt
+    label="Technologie"
+    title="Moderne KI-Technologie – sicher in Ihrer Hand"
+    intro="Wir setzen auf selbst gehostete Open-Source-Modelle und europäische Anbieter – DSGVO-konform, transparent, ohne Abhängigkeit."
+  >
+    <div class="tech-grid">
+      <div class="tech-visual" aria-hidden="true">
+        <div class="tv-stack">
+          <div class="tv-chip tv-chip-1">n8n</div>
+          <div class="tv-chip tv-chip-2">Ollama · Llama</div>
+          <div class="tv-chip tv-chip-3">Qdrant</div>
+          <div class="tv-chip tv-chip-4">Docker</div>
+        </div>
+        <div class="tv-glow"></div>
+      </div>
+      <div class="tech-features">
+        <div class="tech-feature">
+          <span class="tf-icon">&#128274;</span>
+          <div>
+            <h3>DSGVO-konform &amp; sicher</h3>
+            <p>Daten bleiben auf Ihrer Infrastruktur oder bei europäischen Anbietern. Alle Datenflüsse werden dokumentiert.</p>
+          </div>
+        </div>
+        <div class="tech-feature">
+          <span class="tf-icon">&#129302;</span>
+          <div>
+            <h3>Passende KI-Modelle</h3>
+            <p>Wir wählen pro Anwendungsfall das passende Modell: lokal, offen und unabhängig – statt Standard-Cloud.</p>
+          </div>
+        </div>
+        <div class="tech-feature">
+          <span class="tf-icon">&#128204;</span>
+          <div>
+            <h3>Skalierbar &amp; offen</h3>
+            <p>Open Source statt Vendor-Lock-in: Was wir bauen, gehört Ihnen – und wächst mit Ihrem Unternehmen.</p>
+          </div>
+        </div>
+        <a href="/kontakt/" class="btn btn-primary">Jetzt beraten lassen</a>
+      </div>
+    </div>
+  </Section>
+
+  <!-- STATS BAND -->
+  <section class="stats-band">
+    <div class="container stats-grid">
+      <div class="stat">
+        <span class="stat-num">3–5</span>
+        <span class="stat-label">Tage bis zum lauffähigen Prototyp</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">70%</span>
+        <span class="stat-label">Zeitersparnis bei Routineaufgaben (bis zu)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">DSGVO-konforme Architektur</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <Section
+    label="FAQ"
+    title="Häufig gestellte Fragen"
+    intro="Die wichtigsten Fragen vor dem Start – ehrlich beantwortet."
+  >
+    <div class="faq-list reveal">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a} {f.q.includes('Kosten') && <a href="/preise/">Mehr zu unseren Preisen</a>}</p>
+        </details>
+      ))}
+    </div>
+    <p class="process-more"><a href="/faq/">Alle FAQs ansehen →</a></p>
+  </Section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container text-center">
+      <h2 class="cta-title">Bereit für den nächsten Schritt?</h2>
+      <p class="cta-sub">Kostenloses Erstgespräch: 20 Minuten, konkret, unverbindlich.</p>
+      <a href="/kontakt/" class="btn btn-primary btn-large">Jetzt Beratungstermin vereinbaren</a>
+    </div>
+  </section>
+
+  <ScrollReveal />
   <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
 </Base>
 
 <style>
-  /* STATS BAR */
-  .stats-bar {
-    background: var(--card);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 40px 0;
-  }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    text-align: center;
-  }
-  .stat-num {
-    display: block;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 700;
-    color: var(--accent-light);
-    line-height: 1.1;
-  }
-  .stat-label {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    margin-top: 8px;
-  }
-  @media (max-width: 640px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
-  }
-
-  /* TECH-MARQUEE */
-  .tech-marquee {
-    padding: 28px 0;
-    border-bottom: 1px solid var(--border);
+  /* HERO */
+  .hero {
+    padding: 96px 0 80px;
+    position: relative;
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   }
-  .marquee-track {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-title {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 20px;
+    letter-spacing: -0.03em;
+  }
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 32px;
+  }
+  .hero-cta {
     display: flex;
-    gap: 18px;
-    width: max-content;
-    animation: marquee 36s linear infinite;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
   }
-  .tech-marquee:hover .marquee-track { animation-play-state: paused; }
-  .tech-chip {
-    font-family: 'Space Grotesk', sans-serif;
+  .hero-badges {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 0.88rem;
     font-weight: 500;
     color: var(--text-muted);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 8px 20px;
-    white-space: nowrap;
-    transition: color 0.2s, border-color 0.2s;
   }
-  .tech-chip:hover { color: var(--accent-light); border-color: var(--accent); }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+  .badge-icon { color: var(--accent); }
 
-  /* Sequenzieller Schritt-Puls (Everlast autoStepPulse-Stil) */
-  .step-num {
-    animation: stepPulse 4s ease-in-out infinite;
-  }
-  .process-step:nth-child(2) .step-num { animation-delay: 1s; }
-  .process-step:nth-child(3) .step-num { animation-delay: 2s; }
-  .process-step:nth-child(4) .step-num { animation-delay: 3s; }
-  @keyframes stepPulse {
-    0%, 18%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
-    8% { box-shadow: 0 0 0 10px rgba(212, 160, 23, 0.18); }
-  }
-
-  /* PAIN POINTS */
-  .pain-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-  .pain-item {
-    display: flex;
-    gap: 16px;
-    padding: 24px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    align-items: flex-start;
-  }
-  .pain-icon {
-    font-size: 1.4rem;
-    color: var(--danger);
-    flex-shrink: 0;
-  }
-  .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
-  .pain-item strong { color: var(--text); }
-  @media (max-width: 640px) { .pain-grid { grid-template-columns: 1fr; } }
-
-  /* SERVICE LIST */
-  .service-list { list-style: none; }
-
-  /* AUDIENCE */
-  .audience-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-  }
-  .audience-card {
-    background: var(--card);
+  /* Hero-Visual: Workflow-Panel */
+  .hero-visual { position: relative; }
+  .hv-panel {
+    position: relative;
+    z-index: 1;
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 36px 32px;
-    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-  }
-  .audience-card:hover {
-    transform: translateY(-4px);
+    overflow: hidden;
     box-shadow: var(--shadow-lg);
-    border-color: var(--accent-light);
   }
-  .audience-icon {
-    width: 48px; height: 48px;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--accent-bg);
+  .hv-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    background: var(--bg-input);
+    border-bottom: 1px solid var(--border);
+  }
+  .hv-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-hover); }
+  .hv-dot:first-child { background: var(--danger); opacity: 0.7; }
+  .hv-dot:nth-child(2) { background: var(--accent); opacity: 0.7; }
+  .hv-dot:nth-child(3) { background: var(--success); opacity: 0.7; }
+  .hv-title { margin-left: 8px; font-size: 0.75rem; color: var(--text-light); font-family: ui-monospace, monospace; }
+  .hv-rows { padding: 20px 16px; }
+  .hv-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
+    padding: 12px 14px;
+  }
+  .hv-icon { font-size: 1rem; }
+  .hv-label { flex: 1; font-size: 0.88rem; color: var(--text-muted); font-weight: 500; }
+  .hv-status { font-size: 0.8rem; }
+  .hv-status.ok { color: var(--success); }
+  .hv-status.run { color: var(--accent); animation: hvPulse 1.6s ease-in-out infinite; }
+  @keyframes hvPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+  .hv-arrow {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    padding: 4px 0;
+  }
+  .hv-foot {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem;
+    color: var(--text-light);
+    font-family: ui-monospace, monospace;
+  }
+  .hv-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .hv-glow-1 {
+    width: 260px; height: 260px;
+    top: -60px; right: -40px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+    animation: hvFloat 14s ease-in-out infinite;
+  }
+  .hv-glow-2 {
+    width: 200px; height: 200px;
+    bottom: -50px; left: -30px;
+    background: radial-gradient(circle, rgba(59, 90, 148, 0.25) 0%, transparent 70%);
+    animation: hvFloat 18s ease-in-out infinite reverse;
+  }
+  @keyframes hvFloat { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-24px, 20px); } }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 480px; margin: 0 auto; }
+  }
+
+  /* WARUM */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .why-card { display: flex; flex-direction: column; }
+  .why-result {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+    font-weight: 600;
     color: var(--accent);
-    margin-bottom: 20px;
   }
-  .audience-icon :global(svg) { width: 24px; height: 24px; }
-  .audience-card h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.25rem;
-    color: var(--primary);
-    margin-bottom: 16px;
+  .why-result-label { color: var(--text-light); font-weight: 500; }
+  @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
+
+  /* PROZESS */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
-  .audience-card ul {
-    list-style: none;
+  .process-col {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
   }
-  .audience-card li {
+  .process-num {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    opacity: 0.85;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+  }
+  .process-title { font-size: 1.2rem; color: var(--text); margin-bottom: 12px; }
+  .process-text { font-size: 0.94rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px; }
+  .check-list { list-style: none; }
+  .check-list li {
     position: relative;
-    padding-left: 24px;
-    font-size: 0.96rem;
+    padding-left: 26px;
+    font-size: 0.9rem;
     color: var(--text-muted);
-    margin-bottom: 12px;
-    line-height: 1.5;
+    margin-bottom: 10px;
   }
-  .audience-card li::before {
+  .check-list li::before {
     content: '\2713';
     position: absolute;
     left: 0;
     color: var(--success);
     font-weight: 700;
   }
-  @media (max-width: 768px) { .audience-grid { grid-template-columns: 1fr; } }
+  .process-more { text-align: center; margin-top: 40px; font-weight: 600; }
+  @media (max-width: 900px) { .process-grid { grid-template-columns: 1fr; } }
 
-  /* PROCESS */
-  .process-grid {
+  /* USECASES */
+  .usecase-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-  }
-  .process-step {
-    position: relative;
-  }
-  .step-num {
-    width: 48px; height: 48px;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--accent);
-    color: var(--text-inverse);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    border-radius: 50%;
-    margin-bottom: 20px;
-  }
-  .process-step h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.15rem;
-    color: #fff;
-    margin-bottom: 10px;
-  }
-  .process-step p {
-    font-size: 0.92rem;
-    color: var(--text-light);
-    line-height: 1.6;
-  }
-  .process-cta {
-    text-align: center;
-    margin-top: 48px;
-  }
-  @media (max-width: 768px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
-
-  /* WHY GRID */
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
-  @media (max-width: 960px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .why-grid { grid-template-columns: 1fr; } }
+  .usecase-card .card-body strong { color: var(--text); }
+  @media (max-width: 760px) { .usecase-grid { grid-template-columns: 1fr; } }
 
-  /* FINAL CTA */
-  .cta-section {
-    background: var(--bg-alt);
-    padding: 100px 0;
+  /* TECH */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 48px;
+    align-items: center;
   }
-  .cta-content {
-    text-align: center;
-    max-width: 640px;
+  .tech-visual { position: relative; }
+  .tv-stack {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 340px;
     margin: 0 auto;
   }
-  .cta-label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+  .tv-chip {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 22px;
+    text-align: center;
+  }
+  .tv-chip-1 { transform: rotate(-2deg); }
+  .tv-chip-2 { transform: rotate(1.5deg); border-color: rgba(212, 175, 55, 0.4); color: var(--accent); }
+  .tv-chip-3 { transform: rotate(-1deg); }
+  .tv-chip-4 { transform: rotate(2deg); }
+  .tv-glow {
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(circle at 60% 40%, rgba(212, 175, 55, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .tech-features { display: flex; flex-direction: column; gap: 24px; }
+  .tech-feature {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .tf-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-bg);
+    border-radius: var(--radius);
     color: var(--accent);
-    margin-bottom: 16px;
+    font-size: 1.2rem;
+  }
+  .tech-feature h3 { font-size: 1.1rem; color: var(--text); margin-bottom: 6px; }
+  .tech-feature p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.6; }
+  .tech-features .btn { align-self: flex-start; margin-top: 8px; padding: 14px 26px; font-size: 0.95rem; }
+  @media (max-width: 900px) { .tech-grid { grid-template-columns: 1fr; } }
+
+  /* STATS */
+  .stats-band {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 0;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    text-align: center;
+  }
+  .stat-num {
+    display: block;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+  @media (max-width: 640px) { .stats-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+  /* FAQ */
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item summary {
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: var(--text);
+    padding: 22px 0;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 36px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 1.4rem;
+    font-weight: 500;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item p {
+    font-size: 0.96rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding-bottom: 22px;
+    max-width: 680px;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    padding: 96px 0;
   }
   .cta-title {
-    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-    color: var(--primary);
-    margin-bottom: 16px;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    color: var(--text);
+    margin-bottom: 14px;
   }
-  .cta-text {
+  .cta-sub {
     font-size: 1.1rem;
     color: var(--text-muted);
     margin-bottom: 32px;
-  }
-  .cta-fineprint {
-    margin-top: 16px;
-    font-size: 0.85rem;
-    color: var(--text-light);
   }
 </style>

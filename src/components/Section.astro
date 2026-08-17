@@ -5,19 +5,20 @@ export interface Props {
   intro?: string;
   alt?: boolean;
   dark?: boolean;
+  center?: boolean;
 }
 
-const { label, title, intro, alt = false, dark = false } = Astro.props;
+const { label, title, intro, alt = false, dark = false, center = true } = Astro.props;
 
 const classes = ['section'];
-if (alt) classes.push('section-alt');
-if (dark) classes.push('section-dark');
+if (alt || dark) classes.push('section-alt');
+if (center) classes.push('has-center');
 ---
 
 <section class={classes.join(' ')}>
   <div class="container">
-    {label && <p class="section-label">{label}</p>}
-    {title && <h2 class="section-title" set:html={title} />}
+    {label && <p class="section-label" style={center ? 'text-align:center;display:block;' : ''}>{label}</p>}
+    {title && <h2 class="section-title" set:html={title} style={center ? 'text-align:center;' : ''} />}
     {intro && <p class="section-intro" set:html={intro} />}
     <slot />
   </div>

@@ -1,0 +1,279 @@
+---
+// Interaktiver KI-Finder nach Vorbild kiautomatisieren.de:
+// 5 Schritte, Progress-Bar, Zurück-Navigation, Empfehlung + Kontakt-CTA am Ende.
+// Kein Backend nötig: Abschluss per mailto mit vorausgefüllten Antworten.
+---
+
+<section class="quiz-section" id="ki-finder">
+  <div class="container">
+    <div class="quiz-head">
+      <span class="section-label">KI-FINDER</span>
+      <h2 class="section-title">Finden Sie Ihre passende KI-Lösung</h2>
+      <p class="quiz-sub">Beantworten Sie 4 kurze Fragen und erhalten Sie eine individuelle Empfehlung für Ihre KI-Automatisierung.</p>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-label">
+          <span>Schritt <span class="quiz-step-current">1</span> von <span class="quiz-step-total">5</span></span>
+          <span class="quiz-progress-percent">20%</span>
+        </div>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" style="width: 20%;"></div>
+        </div>
+      </div>
+
+      <div class="quiz-body">
+        <h3 class="quiz-question">Was möchten Sie automatisieren?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="Kundenservice & Support (Chatbot)" data-rec="/leistungen/chatbot/">Kundenservice &amp; Support (Chatbot)</button>
+          <button class="quiz-option" data-value="Geschäftsprozesse automatisieren" data-rec="/leistungen/automatisierung/">Geschäftsprozesse automatisieren</button>
+          <button class="quiz-option" data-value="Datenanalyse & Auswertungen" data-rec="/leistungen/ki-agent/">Datenanalyse &amp; Auswertungen</button>
+          <button class="quiz-option" data-value="Noch nicht sicher" data-rec="/leistungen/ki-beratung/">Ich bin mir noch nicht sicher</button>
+        </div>
+      </div>
+
+      <div class="quiz-body" hidden>
+        <h3 class="quiz-question">Wie groß ist Ihr Unternehmen?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="1-10 Mitarbeiter">1–10 Mitarbeiter</button>
+          <button class="quiz-option" data-value="11-50 Mitarbeiter">11–50 Mitarbeiter</button>
+          <button class="quiz-option" data-value="51-200 Mitarbeiter">51–200 Mitarbeiter</button>
+          <button class="quiz-option" data-value="Mehr als 200 Mitarbeiter">Mehr als 200 Mitarbeiter</button>
+        </div>
+      </div>
+
+      <div class="quiz-body" hidden>
+        <h3 class="quiz-question">Wann möchten Sie starten?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="So schnell wie möglich">So schnell wie möglich</button>
+          <button class="quiz-option" data-value="In 1-3 Monaten">In 1–3 Monaten</button>
+          <button class="quiz-option" data-value="In 3-6 Monaten">In 3–6 Monaten</button>
+          <button class="quiz-option" data-value="Nur informieren">Ich möchte mich nur informieren</button>
+        </div>
+      </div>
+
+      <div class="quiz-body" hidden>
+        <h3 class="quiz-question">Welches Budget planen Sie ein?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="Unter 5.000 €">Unter 5.000 €</button>
+          <button class="quiz-option" data-value="5.000 - 15.000 €">5.000 – 15.000 €</button>
+          <button class="quiz-option" data-value="15.000 - 50.000 €">15.000 – 50.000 €</button>
+          <button class="quiz-option" data-value="Über 50.000 €">Über 50.000 €</button>
+          <button class="quiz-option" data-value="Noch unsicher">Bin mir noch unsicher</button>
+        </div>
+      </div>
+
+      <div class="quiz-body" hidden>
+        <h3 class="quiz-question">Ihre Empfehlung ist fertig.</h3>
+        <p class="quiz-result-text">
+          Basierend auf Ihren Angaben empfehlen wir Ihnen:
+          <a class="quiz-result-link" href="/leistungen/ki-beratung/">KI-Beratung</a>.
+          Im kostenlosen Erstgespräch feilen wir die Empfehlung gemeinsam fein – inklusive Preisrahmen.
+        </p>
+        <div class="quiz-cta-row">
+          <a class="btn btn-primary" id="quiz-mailto" href="mailto:hello@agendt.de">Empfehlung anfordern →</a>
+          <a class="btn btn-secondary quiz-rec-link" href="/leistungen/ki-beratung/">Empfohlene Lösung ansehen</a>
+        </div>
+      </div>
+
+      <button class="quiz-back" hidden>&#8592; Zurück</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quiz-section {
+    padding: 96px 0;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .quiz-head { text-align: center; margin-bottom: 40px; }
+  .quiz-head .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 10px; }
+  .quiz-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .quiz-card {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+  }
+
+  .quiz-progress-wrap { margin-bottom: 28px; }
+  .quiz-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .quiz-progress-percent { color: var(--accent); font-weight: 600; }
+  .quiz-progress-bar {
+    height: 6px;
+    background: var(--bg-input);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-dark), var(--accent));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-question {
+    font-size: 1.35rem;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quiz-option {
+    width: 100%;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+
+  .quiz-option:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+    transform: translateX(4px);
+  }
+
+  .quiz-result-text {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .quiz-result-link { font-weight: 600; }
+  .quiz-cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .quiz-cta-row .btn { padding: 14px 26px; font-size: 0.95rem; }
+
+  .quiz-back {
+    margin-top: 24px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 6px 0;
+    transition: color 0.2s;
+  }
+  .quiz-back:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .quiz-section { padding: 64px 0; }
+    .quiz-card { padding: 24px 20px; }
+  }
+</style>
+
+<script>
+  const steps = [...document.querySelectorAll('.quiz-card .quiz-body')];
+  const backBtn = document.querySelector('.quiz-back') as HTMLButtonElement;
+  const fill = document.querySelector('.quiz-progress-fill') as HTMLElement;
+  const stepCurrent = document.querySelector('.quiz-step-current') as HTMLElement;
+  const percent = document.querySelector('.quiz-progress-percent') as HTMLElement;
+  const mailto = document.getElementById('quiz-mailto') as HTMLAnchorElement;
+  const recLink = document.querySelector('.quiz-rec-link') as HTMLAnchorElement;
+  const resultText = document.querySelector('.quiz-result-text') as HTMLElement;
+  const TOTAL = 5;
+
+  let current = 0;
+  const answers: string[] = [];
+
+  function show(i: number) {
+    current = i;
+    steps.forEach((s, idx) => {
+      (s as HTMLElement).hidden = idx !== i;
+    });
+    const pct = Math.round(((i + 1) / TOTAL) * 100);
+    fill!.style.width = pct + '%';
+    stepCurrent!.textContent = String(i + 1);
+    percent!.textContent = pct + '%';
+    backBtn!.hidden = i === 0;
+
+    // Letzter Schritt: Empfehlung + mailto zusammensetzen
+    if (i === TOTAL - 1) {
+      const first = steps[0].querySelector('.quiz-option[data-value="' + cssEscape(answers[0] ?? '') + '"]');
+      const rec = first?.getAttribute('data-rec') ?? '/leistungen/ki-beratung/';
+      const recName = recLinkText(rec);
+      recLink!.setAttribute('href', rec);
+      const strong = document.createElement('a');
+      strong.href = rec;
+      strong.className = 'quiz-result-link';
+      strong.textContent = recName;
+      resultText!.innerHTML = 'Basierend auf Ihren Angaben empfehlen wir Ihnen: ';
+      resultText!.appendChild(strong);
+      resultText!.append('. Im kostenlosen Erstgespräch feilen wir die Empfehlung gemeinsam fein – inklusive Preisrahmen.');
+
+      const body = 'KI-Finder Antworten:\n' +
+        '1) Automatisierungsziel: ' + (answers[0] ?? '-') + '\n' +
+        '2) Unternehmensgröße: ' + (answers[1] ?? '-') + '\n' +
+        '3) Startzeitraum: ' + (answers[2] ?? '-') + '\n' +
+        '4) Budget: ' + (answers[3] ?? '-') + '\n\n' +
+        'Bitte senden Sie mir die Empfehlung / ein Angebot zu.';
+      mailto!.setAttribute('href', 'mailto:hello@agendt.de?subject=' +
+        encodeURIComponent('KI-Finder: ' + (answers[0] ?? 'Anfrage')) +
+        '&body=' + encodeURIComponent(body));
+    }
+  }
+
+  function recLinkText(href: string): string {
+    const map: Record<string, string> = {
+      '/leistungen/chatbot/': 'KI-Chatbot',
+      '/leistungen/automatisierung/': 'Prozessautomatisierung',
+      '/leistungen/ki-agent/': 'KI-Agenten',
+      '/leistungen/ki-beratung/': 'KI-Beratung',
+    };
+    return map[href] ?? 'KI-Beratung';
+  }
+
+  function cssEscape(s: string): string {
+    return s.replace(/"/g, '\\"');
+  }
+
+  steps.forEach((step, idx) => {
+    step.querySelectorAll('.quiz-option').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        answers[idx] = (btn as HTMLElement).dataset.value ?? '';
+        show(Math.min(idx + 1, TOTAL - 1));
+      });
+    });
+  });
+
+  backBtn!.addEventListener('click', () => {
+    show(Math.max(current - 1, 0));
+  });
+
+  show(0);
+</script>

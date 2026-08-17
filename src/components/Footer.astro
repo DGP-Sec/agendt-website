@@ -1,5 +1,4 @@
 ---
-// Footer: Vertrauen durch Transparenz und Vollständigkeit (Stanford Credibility)
 const year = new Date().getFullYear();
 ---
 
@@ -17,22 +16,21 @@ const year = new Date().getFullYear();
       </div>
 
       <div class="footer-col">
-        <h4>Navigation</h4>
+        <h4>Services</h4>
+        <a href="/leistungen/ki-beratung/">KI-Beratung</a>
+        <a href="/leistungen/automatisierung/">Automatisierung</a>
+        <a href="/leistungen/chatbot/">Chatbot</a>
+        <a href="/leistungen/ki-agent/">KI-Agent</a>
+        <a href="/leistungen/ki-texte/">KI-Texte</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Unternehmen</h4>
         <a href="/">Start</a>
-        <a href="/leistungen/">Leistungen</a>
         <a href="/prozess/">Prozess</a>
         <a href="/preise/">Preise</a>
         <a href="/faq/">FAQ</a>
         <a href="/kontakt/">Kontakt</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Leistungen</h4>
-        <a href="/leistungen/ki-beratung/">KI-Beratung</a>
-        <a href="/leistungen/chatbot/">KI-Chatbot</a>
-        <a href="/leistungen/ki-agent/">KI-Agenten</a>
-        <a href="/leistungen/ki-texte/">KI-Texte</a>
-        <a href="/leistungen/automatisierung/">Automatisierung</a>
       </div>
 
       <div class="footer-col">
@@ -57,35 +55,34 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
-    background: var(--bg-dark);
-    color: var(--text-light);
+    background: var(--bg-alt);
+    color: var(--text-muted);
     padding: 64px 0 32px;
-    margin-top: 0;
+    border-top: 1px solid var(--border);
   }
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
     gap: 40px;
     margin-bottom: 48px;
   }
 
   .logo {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
-    border-bottom: none;
+    font-weight: 800;
+    color: var(--text);
     letter-spacing: -0.03em;
   }
 
-  .dot { color: var(--accent-light); }
+  .dot { color: var(--accent); }
 
   .footer-desc {
     margin-top: 12px;
     font-size: 0.9rem;
     line-height: 1.6;
-    color: var(--text-light);
+    color: var(--text-muted);
   }
 
   .footer-badges {
@@ -100,44 +97,40 @@ const year = new Date().getFullYear();
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--accent-light);
-    border: 1px solid rgba(212, 160, 23, 0.3);
-    border-radius: 4px;
+    color: var(--accent);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 6px;
     padding: 4px 10px;
   }
 
   .footer-col h4 {
-    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 16px;
   }
 
   .footer-col a {
     display: block;
     font-size: 0.9rem;
-    color: var(--text-light);
-    border-bottom: none;
+    color: var(--text-muted);
     padding: 4px 0;
     transition: color 0.2s;
   }
 
-  .footer-col a:hover {
-    color: var(--accent-light);
-  }
+  .footer-col a:hover { color: var(--accent); }
 
   .footer-note {
     font-size: 0.82rem;
     color: var(--text-light);
     margin-top: 8px;
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid var(--border);
     padding-top: 24px;
     text-align: center;
   }
@@ -145,20 +138,13 @@ const year = new Date().getFullYear();
   .footer-bottom p {
     font-size: 0.82rem;
     color: var(--text-light);
-    opacity: 0.6;
   }
 
-  @media (max-width: 768px) {
-    .footer-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-    }
+  @media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
   }
-
-  @media (max-width: 480px) {
-    .footer-grid {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
+  @media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
