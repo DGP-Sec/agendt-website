@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import QuizFinder from '../components/QuizFinder.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
+import { icons } from '../lib/icons';
 
 // FAQ sinngemäß nach Vorbild-Struktur, mit unseren Zahlen
 const faqs = [
@@ -75,15 +76,15 @@ const orgSchema = {
         </div>
         <div class="hero-badges">
           <div class="hero-badge">
-            <span class="badge-icon">&#9889;</span>
+            <span class="badge-icon" set:html={icons.zap} />
             <span>Prototyp in 3–5 Tagen</span>
           </div>
           <div class="hero-badge">
-            <span class="badge-icon">&#128274;</span>
+            <span class="badge-icon" set:html={icons.shield} />
             <span>DSGVO-konform</span>
           </div>
           <div class="hero-badge">
-            <span class="badge-icon">&#127919;</span>
+            <span class="badge-icon" set:html={icons.target} />
             <span>Individuelle Lösungen</span>
           </div>
         </div>
@@ -96,13 +97,13 @@ const orgSchema = {
             <span class="hv-title">Workflow · live</span>
           </div>
           <div class="hv-rows">
-            <div class="hv-row"><span class="hv-icon">&#9993;</span><span class="hv-label">E-Mail eingeht</span><span class="hv-status ok">&#10003;</span></div>
+            <div class="hv-row"><span class="hv-icon" set:html={icons.mail} /><span class="hv-label">E-Mail eingeht</span><span class="hv-status ok">&#10003;</span></div>
             <div class="hv-arrow">&#8595;</div>
-            <div class="hv-row"><span class="hv-icon">&#129302;</span><span class="hv-label">KI klassifiziert</span><span class="hv-status ok">&#10003;</span></div>
+            <div class="hv-row"><span class="hv-icon" set:html={icons.bot} /><span class="hv-label">KI klassifiziert</span><span class="hv-status ok">&#10003;</span></div>
             <div class="hv-arrow">&#8595;</div>
-            <div class="hv-row"><span class="hv-icon">&#128202;</span><span class="hv-label">CRM aktualisiert</span><span class="hv-status ok">&#10003;</span></div>
+            <div class="hv-row"><span class="hv-icon" set:html={icons.chart} /><span class="hv-label">CRM aktualisiert</span><span class="hv-status ok">&#10003;</span></div>
             <div class="hv-arrow">&#8595;</div>
-            <div class="hv-row"><span class="hv-icon">&#128197;</span><span class="hv-label">Termin gebucht</span><span class="hv-status run">&#9679;</span></div>
+            <div class="hv-row"><span class="hv-icon" set:html={icons.calendar} /><span class="hv-label">Termin gebucht</span><span class="hv-status run">&#9679;</span></div>
           </div>
           <div class="hv-foot">n8n · self-hosted · 0 ms API-Latenz</div>
         </div>
@@ -117,13 +118,12 @@ const orgSchema = {
 
   <!-- WARUM KI-AUTOMATISIERUNG: 3 Vorteil-Karten mit Ergebnis-Zeile -->
   <Section
-    label="Warum KI-Automatisierung?"
     title="Warum KI-Automatisierung?"
     intro="Geschäftsprozesse automatisieren bedeutet mehr als Effizienzsteigerung – es ist ein strategischer Wettbewerbsvorteil."
   >
     <div class="why-grid reveal-stagger">
       <div class="card why-card">
-        <div class="card-icon">&#9201;</div>
+        <div class="card-icon" set:html={icons.clock} />
         <h3 class="card-title">Zeit sparen durch intelligente Automatisierung</h3>
         <p class="card-body">
           Ihre Mitarbeiter verbringen täglich Stunden mit wiederkehrenden Aufgaben: E-Mails sortieren,
@@ -133,7 +133,7 @@ const orgSchema = {
         <p class="why-result"><span class="why-result-label">Ergebnis:</span> Bis zu 70% Zeitersparnis bei Routineaufgaben</p>
       </div>
       <div class="card why-card">
-        <div class="card-icon">&#128176;</div>
+        <div class="card-icon" set:html={icons.coins} />
         <h3 class="card-title">Kosten senken mit skalierbarer KI</h3>
         <p class="card-body">
           Manuelle Prozesse sind teuer – durch Personalkosten, Fehler und fehlende Skalierbarkeit.
@@ -143,7 +143,7 @@ const orgSchema = {
         <p class="why-result"><span class="why-result-label">Ergebnis:</span> Geringere Prozesskosten, planbare Festpreise</p>
       </div>
       <div class="card why-card">
-        <div class="card-icon">&#128737;</div>
+        <div class="card-icon" set:html={icons.shieldCheck} />
         <h3 class="card-title">Fehlerquote minimieren durch Automatisierung</h3>
         <p class="card-body">
           Menschliche Fehler bei monotonen Aufgaben sind unvermeidlich – jeder kostet Zeit, Geld oder
@@ -158,7 +158,6 @@ const orgSchema = {
   <!-- 3-SCHRITTE-PROZESS -->
   <Section
     alt
-    label="Unser Prozess"
     title="Unser 3-Schritte-Prozess"
     intro="Von der Analyse bis zum erfolgreichen Rollout – transparent und planbar."
   >
@@ -211,13 +210,12 @@ const orgSchema = {
 
   <!-- ANWENDUNGSFÄLLE: 4 Branchen -->
   <Section
-    label="Anwendungsfälle"
     title="Bewährte Anwendungsfälle"
     intro="KI-Automatisierung funktioniert branchenübergreifend – hier sind vier typische Beispiele."
   >
     <div class="usecase-grid reveal-stagger">
       <div class="card usecase-card">
-        <div class="card-icon">&#128722;</div>
+        <div class="card-icon" set:html={icons.cart} />
         <h3 class="card-title">E-Commerce</h3>
         <p class="card-body">
           <strong>KI-Chatbot</strong> beantwortet den Großteil der Standardfragen zu Bestellstatus, Rücksendungen
@@ -226,7 +224,7 @@ const orgSchema = {
         </p>
       </div>
       <div class="card usecase-card">
-        <div class="card-icon">&#127968;</div>
+        <div class="card-icon" set:html={icons.home} />
         <h3 class="card-title">Immobilienwirtschaft</h3>
         <p class="card-body">
           <strong>Exposé-Anfragen</strong> werden sofort beantwortet, Interessenten vorqualifiziert und
@@ -235,7 +233,7 @@ const orgSchema = {
         </p>
       </div>
       <div class="card usecase-card">
-        <div class="card-icon">&#129309;</div>
+        <div class="card-icon" set:html={icons.briefcase} />
         <h3 class="card-title">B2B-Service</h3>
         <p class="card-body">
           <strong>KI-Agenten</strong> analysieren eingehende Anfragen, bewerten die Lead-Qualität und leiten an
@@ -244,7 +242,7 @@ const orgSchema = {
         </p>
       </div>
       <div class="card usecase-card">
-        <div class="card-icon">&#128202;</div>
+        <div class="card-icon" set:html={icons.chart} />
         <h3 class="card-title">Finance &amp; Controlling</h3>
         <p class="card-body">
           <strong>Automatische Extraktion</strong> von Rechnungsdaten, Abgleich mit Bestellungen und
@@ -259,7 +257,6 @@ const orgSchema = {
   <!-- TECHNOLOGIE -->
   <Section
     alt
-    label="Technologie"
     title="Moderne KI-Technologie – sicher in Ihrer Hand"
     intro="Wir setzen auf selbst gehostete Open-Source-Modelle und europäische Anbieter – DSGVO-konform, transparent, ohne Abhängigkeit."
   >
@@ -275,21 +272,21 @@ const orgSchema = {
       </div>
       <div class="tech-features">
         <div class="tech-feature">
-          <span class="tf-icon">&#128274;</span>
+          <span class="tf-icon" set:html={icons.shield} />
           <div>
             <h3>DSGVO-konform &amp; sicher</h3>
             <p>Daten bleiben auf Ihrer Infrastruktur oder bei europäischen Anbietern. Alle Datenflüsse werden dokumentiert.</p>
           </div>
         </div>
         <div class="tech-feature">
-          <span class="tf-icon">&#129302;</span>
+          <span class="tf-icon" set:html={icons.bot} />
           <div>
             <h3>Passende KI-Modelle</h3>
             <p>Wir wählen pro Anwendungsfall das passende Modell: lokal, offen und unabhängig – statt Standard-Cloud.</p>
           </div>
         </div>
         <div class="tech-feature">
-          <span class="tf-icon">&#128204;</span>
+          <span class="tf-icon" set:html={icons.pin} />
           <div>
             <h3>Skalierbar &amp; offen</h3>
             <p>Open Source statt Vendor-Lock-in: Was wir bauen, gehört Ihnen – und wächst mit Ihrem Unternehmen.</p>
@@ -320,7 +317,6 @@ const orgSchema = {
 
   <!-- FAQ -->
   <Section
-    label="FAQ"
     title="Häufig gestellte Fragen"
     intro="Die wichtigsten Fragen vor dem Start – ehrlich beantwortet."
   >
@@ -396,7 +392,8 @@ const orgSchema = {
     font-weight: 500;
     color: var(--text-muted);
   }
-  .badge-icon { color: var(--accent); }
+  .badge-icon { color: var(--accent); display: inline-flex; }
+  .badge-icon :global(svg) { width: 16px; height: 16px; }
 
   /* Hero-Visual: Workflow-Panel */
   .hero-visual { position: relative; }
@@ -432,7 +429,8 @@ const orgSchema = {
     border-radius: var(--radius);
     padding: 12px 14px;
   }
-  .hv-icon { font-size: 1rem; }
+  .hv-icon { display: inline-flex; color: var(--accent); }
+  .hv-icon :global(svg) { width: 16px; height: 16px; }
   .hv-label { flex: 1; font-size: 0.88rem; color: var(--text-muted); font-weight: 500; }
   .hv-status { font-size: 0.8rem; }
   .hv-status.ok { color: var(--success); }
@@ -474,6 +472,20 @@ const orgSchema = {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-visual { max-width: 480px; margin: 0 auto; }
   }
+
+  /* Icon-Styling fuer Karten auf der Startseite */
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-bg);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    color: var(--accent);
+  }
+  .card-icon :global(svg) { width: 24px; height: 24px; }
 
   /* WARUM */
   .why-grid {
@@ -597,8 +609,8 @@ const orgSchema = {
     background: var(--accent-bg);
     border-radius: var(--radius);
     color: var(--accent);
-    font-size: 1.2rem;
   }
+  .tf-icon :global(svg) { width: 20px; height: 20px; }
   .tech-feature h3 { font-size: 1.1rem; color: var(--text); margin-bottom: 6px; }
   .tech-feature p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.6; }
   .tech-features .btn { align-self: flex-start; margin-top: 8px; padding: 14px 26px; font-size: 0.95rem; }

@@ -4,39 +4,40 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
+import { icons } from '../lib/icons';
 
 const services = [
   {
     href: '/leistungen/ki-beratung/',
-    icon: '&#127919;',
+    icon: 'target',
     title: 'KI-Beratung',
     short: 'Für den Einstieg',
     desc: 'Potenzialanalyse, Prozess-Mapping und KI-Strategie: Wir finden heraus, wo KI bei Ihnen wirklich etwas bringt – ehrlich bewertet, mit klarer Roadmap.',
   },
   {
     href: '/leistungen/chatbot/',
-    icon: '&#128172;',
+    icon: 'chat',
     title: 'KI-Chatbot',
     short: 'Für Kundenkommunikation',
     desc: 'Beantwortet Anfragen rund um die Uhr, qualifiziert Leads und bucht Termine – auf Ihrer Website, self-hosted und DSGVO-konform.',
   },
   {
     href: '/leistungen/ki-agent/',
-    icon: '&#129302;',
+    icon: 'bot',
     title: 'KI-Agenten',
     short: 'Für autonome Aufgabenketten',
     desc: 'Agenten, die selbstständig handeln: E-Mail-Triage, Datenextraktion, Recherche und Reporting – koordiniert als Multi-Agent-System.',
   },
   {
     href: '/leistungen/ki-texte/',
-    icon: '&#9997;',
+    icon: 'pen',
     title: 'KI-Texte',
     short: 'Für Content-Produktion',
     desc: 'Produktbeschreibungen, Exposé-Texte und SEO-Content in Ihrer Markensprache – mit menschlicher Qualitätssicherung vor jeder Veröffentlichung.',
   },
   {
     href: '/leistungen/automatisierung/',
-    icon: '&#9881;',
+    icon: 'gear',
     title: 'Automatisierung',
     short: 'Für Prozesse und Systeme',
     desc: 'n8n-Workflows, Dokumentenverarbeitung und Systemintegrationen: Prozesse, die automatisch laufen – auf Ihrer Infrastruktur.',
@@ -58,7 +59,6 @@ const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <!-- HERO -->
   <section class="page-hero">
     <div class="container">
-      <p class="hero-label">[Leistungen]</p>
       <h1 class="page-title">Wir automatisieren das, <em class="hl">was Sie aufhält.</em></h1>
       <p class="page-sub">Jedes Unternehmen hat repetitive Prozesse. Wir identifizieren sie, bauen Workflows und sorgen dafür, dass sie stabil laufen – ohne Ihre Daten in US-Clouds zu schicken.</p>
       <div class="page-cta">
@@ -69,14 +69,13 @@ const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 
   <!-- SERVICE HUB -->
   <Section
-    label="[Im Überblick]"
     title="Fünf Wege zu <em class='hl'>weniger Routine.</em>"
     intro="Jede Leistung ist einzeln buchbar – und in Kombination stärker. Beginnen wir immer mit dem Prozess, der Ihnen den größten Nutzen bringt."
   >
     <div class="hub-grid reveal-stagger">
       {services.map((s) => (
         <a href={s.href} class="hub-card">
-          <span class="hub-icon" set:html={s.icon} />
+          <span class="hub-icon" set:html={icons[s.icon]} />
           <p class="hub-short">{s.short}</p>
           <h3 class="hub-title">{s.title}</h3>
           <p class="hub-desc">{s.desc}</p>
@@ -89,7 +88,6 @@ const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <!-- TECH STACK -->
   <Section
     dark
-    label="[Technologien]"
     title="Tools, auf die wir uns verlassen."
     intro="Open-Source zuerst. Das bedeutet: keine teuren Lizenzen, keine Vendor-Lock-ins, volle Transparenz."
   >
@@ -120,7 +118,6 @@ const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <!-- FAQ: Objection Handling -->
   <Section
     alt
-    label="[Häufige Fragen]"
     title="Was Geschäftsführer uns zuerst fragen."
   >
     <div class="faq-list reveal">
@@ -224,9 +221,9 @@ const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     display: flex; align-items: center; justify-content: center;
     background: var(--accent-bg);
     border-radius: var(--radius);
-    font-size: 1.5rem;
     margin-bottom: 20px;
   }
+  .hub-icon :global(svg) { width: 24px; height: 24px; }
   .hub-short {
     font-family: 'Inter', sans-serif;
     font-size: 0.75rem;

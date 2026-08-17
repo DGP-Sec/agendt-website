@@ -1,15 +1,18 @@
 ---
+import { icons } from '../lib/icons';
+
 export interface Props {
   title: string;
   body: string;
-  icon?: string;
+  icon?: string; // Key aus src/lib/icons.ts
 }
 
 const { title, body, icon } = Astro.props;
+const iconSvg = icon ? icons[icon] : undefined;
 ---
 
 <div class="card">
-  {icon && <div class="card-icon" set:html={icon} />}
+  {iconSvg && <div class="card-icon" set:html={iconSvg} />}
   <h3 class="card-title">{title}</h3>
   <p class="card-body">{body}</p>
 </div>
@@ -25,7 +28,6 @@ const { title, body, icon } = Astro.props;
     border-radius: var(--radius);
     margin-bottom: 20px;
     color: var(--accent);
-    font-size: 1.4rem;
   }
 
   .card-icon :global(svg) {

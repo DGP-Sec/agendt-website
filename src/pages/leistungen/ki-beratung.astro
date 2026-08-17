@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/Section.astro';
 import Card from '../../components/Card.astro';
 import ScrollReveal from '../../components/ScrollReveal.astro';
+import { icons } from '../../lib/icons';
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -69,7 +70,6 @@ const faqSchema = {
 
   <section class="page-hero">
     <div class="container">
-      <p class="hero-label">[KI-Beratung]</p>
       <h1 class="page-title">KI-Einsatz, der sich <em class="hl">rechnet.</em></h1>
       <p class="page-sub">
         Die meisten Unternehmen wissen nicht, wo KI ihnen wirklich hilft – und wo sie Geld verbrennt.
@@ -82,34 +82,31 @@ const faqSchema = {
   </section>
 
   <Section
-    label="[Das Problem]"
     title="Zwischen Hype-Druck <em class='hl'>und Nichtstun.</em>"
     intro="Überall KI-News, überall Buzzwords – und im Alltag dieselben manuellen Abläufe wie vor fünf Jahren. Die zwei teuersten Reaktionen: blind investieren oder abwarten."
   >
     <div class="pain-list">
-      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Buzzword-Paralyse:</strong> Jeder sagt, Sie müssten etwas mit KI machen. Niemand sagt, was genau – und was es bringt.</p></div>
-      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Verlorene Pilotprojekte:</strong> Eine Studie nach der anderen verkalkuliert sich, weil Prozess und Technik nicht zusammen gedacht wurden.</p></div>
-      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Fehlende interne Priorität:</strong> Zu viele potenzielle Use-Cases, zu wenig Zeit – am Ende bleibt alles beim Alten.</p></div>
-      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Berater ohne Umsetzungs-Erfahrung:</strong> Strategie-Folien ohne Codeszeile ignorieren, was technisch wirklich trägt.</p></div>
+      <div class="pain-item"><span class="pain-icon" set:html={icons.alert} /><p><strong>Buzzword-Paralyse:</strong> Jeder sagt, Sie müssten etwas mit KI machen. Niemand sagt, was genau – und was es bringt.</p></div>
+      <div class="pain-item"><span class="pain-icon" set:html={icons.alert} /><p><strong>Verlorene Pilotprojekte:</strong> Eine Studie nach der anderen verkalkuliert sich, weil Prozess und Technik nicht zusammen gedacht wurden.</p></div>
+      <div class="pain-item"><span class="pain-icon" set:html={icons.alert} /><p><strong>Fehlende interne Priorität:</strong> Zu viele potenzielle Use-Cases, zu wenig Zeit – am Ende bleibt alles beim Alten.</p></div>
+      <div class="pain-item"><span class="pain-icon" set:html={icons.alert} /><p><strong>Berater ohne Umsetzungs-Erfahrung:</strong> Strategie-Folien ohne Codeszeile ignorieren, was technisch wirklich trägt.</p></div>
     </div>
   </Section>
 
   <Section
     alt
-    label="[Die Lösung]"
     title="Wie unsere <em class='hl'>KI-Beratung</em> arbeitet."
     intro="Wir beraten nicht aus der Distanz: Wer die Roadmap schreibt, baut auch die Workflows. Deshalb ist unsere Beratung radikal praktisch."
   >
     <div class="feature-grid">
-      <Card title="Prozess-Analyse" body="Wir gehen Ihre Abläufe durch: Wo fließen Daten, wo stockt es, welche Schritte sind reine Routine? Ergebnis ist ein Prozess-Mapping mit Automatisierungspotenzialen." icon="&#128295;" />
-      <Card title="Ehrliche Bewertung" body="Jeder Kandidat wird nach Aufwand, Nutzen und Risiko bewertet. Was sich nicht rechnet, sagen wir klar – das spart mehr Geld als jede Implementierung." icon="&#9878;" />
-      <Card title="KI-Strategie & Roadmap" body="Eine priorisierte Empfehlung: womit starten, was später, was gar nicht. Mit konkreten Festpreisen statt vagen Budgetrahmen." icon="&#128506;" />
-      <Card title="Proof statt Powerpoint" body="Der Abschluss der Beratung ist ein lauffähiger Prototyp für den wichtigsten Use-Case – echtes System, echte Daten, echtes Ergebnis." icon="&#9989;" />
+      <Card title="Prozess-Analyse" body="Wir gehen Ihre Abläufe durch: Wo fließen Daten, wo stockt es, welche Schritte sind reine Routine? Ergebnis ist ein Prozess-Mapping mit Automatisierungspotenzialen." icon="wrench" />
+      <Card title="Ehrliche Bewertung" body="Jeder Kandidat wird nach Aufwand, Nutzen und Risiko bewertet. Was sich nicht rechnet, sagen wir klar – das spart mehr Geld als jede Implementierung." icon="scale" />
+      <Card title="KI-Strategie & Roadmap" body="Eine priorisierte Empfehlung: womit starten, was später, was gar nicht. Mit konkreten Festpreisen statt vagen Budgetrahmen." icon="map" />
+      <Card title="Proof statt Powerpoint" body="Der Abschluss der Beratung ist ein lauffähiger Prototyp für den wichtigsten Use-Case – echtes System, echte Daten, echtes Ergebnis." icon="checkCircle" />
     </div>
   </Section>
 
   <Section
-    label="[Ablauf]"
     title="Vom Erstgespräch zur Roadmap <em class='hl'>in Tagen.</em>"
   >
     <ol class="mini-process">
@@ -123,7 +120,6 @@ const faqSchema = {
 
   <Section
     alt
-    label="[Einordnung]"
     title="Beratung, die zur Umsetzung passt <em class='hl'>– nicht dazu führt.</em>"
     intro="KI-Beratung ist bei uns kein eigenes Geschäftsmodell, sondern der Einstieg in die Umsetzung. Das ändert die Perspektive: Wir empfehlen nur, was wir selbst verantworten würden."
   >
@@ -151,7 +147,7 @@ const faqSchema = {
     </div>
   </Section>
 
-  <Section alt label="[FAQ]" title="Häufige Fragen <em class='hl'>zur KI-Beratung.</em>">
+  <Section alt title="Häufige Fragen <em class='hl'>zur KI-Beratung.</em>">
     <div class="faq-list">
       {faqs.map((f) => (
         <details class="faq-item">
@@ -202,7 +198,8 @@ const faqSchema = {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 24px;
   }
-  .pain-icon { color: var(--danger); flex-shrink: 0; font-size: 1.3rem; }
+  .pain-icon { color: var(--accent); flex-shrink: 0; display: inline-flex; }
+  .pain-icon :global(svg) { width: 20px; height: 20px; }
   .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
   .pain-item strong { color: var(--text); }
   @media (max-width: 768px) { .pain-list { grid-template-columns: 1fr; } }

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { icons } from '../lib/icons';
 import Section from '../components/Section.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 ---
@@ -11,7 +12,6 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 
   <section class="page-hero">
     <div class="container">
-      <p class="hero-label">[Kontakt]</p>
       <h1 class="page-title">Schreiben Sie uns.<br>Wir antworten schnell.</h1>
       <p class="page-sub">Beschreiben Sie kurz, welchen Prozess Sie automatisieren möchten. Wir melden uns mit einem konkreten Vorschlag – nicht mit einem Verkaufs-Pitch.</p>
     </div>
@@ -55,24 +55,23 @@ import ScrollReveal from '../components/ScrollReveal.astro';
   <!-- WHAT TO EXPECT: Reduces uncertainty (Cognitive Ease) -->
   <Section
     dark
-    label="[Was Sie erwarten können]"
     title="Keine Überraschungen. Keine Verkaufsdruck."
   >
     <div class="expect-grid reveal-stagger">
       <div class="expect-item">
-        <span class="expect-check">&#10003;</span>
+        <span class="expect-check" set:html={icons.checkCircle} />
         <p><strong>Kostenlose Analyse:</strong> Wir schauen uns Ihren Prozess an und sagen Ihnen, ob sich Automatisierung lohnt – auch wenn die Antwort <em>nein</em> ist.</p>
       </div>
       <div class="expect-item">
-        <span class="expect-check">&#10003;</span>
+        <span class="expect-check" set:html={icons.checkCircle} />
         <p><strong>Konkrete Empfehlung:</strong> Statt "KI für alles" bekommen Sie einen spezifischen Vorschlag für Ihren ersten Workflow.</p>
       </div>
       <div class="expect-item">
-        <span class="expect-check">&#10003;</span>
+        <span class="expect-check" set:html={icons.checkCircle} />
         <p><strong>Ehrliche Einschätzung:</strong> Wenn ein Prozess besser manuell bleibt, sagen wir das. Unser Ziel ist Ihr Erfolg, nicht ein Verkauf.</p>
       </div>
       <div class="expect-item">
-        <span class="expect-check">&#10003;</span>
+        <span class="expect-check" set:html={icons.checkCircle} />
         <p><strong>Keine Folge-Mails:</strong> Wir setzen Sie nicht auf einen Newsletter. Eine Antwort, ein Vorschlag, Ihre Entscheidung.</p>
       </div>
     </div>
@@ -185,11 +184,11 @@ import ScrollReveal from '../components/ScrollReveal.astro';
     align-items: flex-start;
   }
   .expect-check {
-    color: var(--success);
-    font-size: 1.3rem;
-    font-weight: 700;
+    color: var(--accent);
     flex-shrink: 0;
+    display: inline-flex;
   }
+  .expect-check :global(svg) { width: 20px; height: 20px; }
   .expect-item p {
     font-size: 0.96rem;
     color: var(--text-light);

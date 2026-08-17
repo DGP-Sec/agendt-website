@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/Section.astro';
 import Card from '../../components/Card.astro';
 import ScrollReveal from '../../components/ScrollReveal.astro';
+import { icons } from '../../lib/icons';
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -69,7 +70,6 @@ const faqSchema = {
 
   <section class="page-hero">
     <div class="container">
-      <p class="hero-label">[Automatisierung]</p>
       <h1 class="page-title">Prozesse, die laufen <em class="hl">– ohne Sie.</em></h1>
       <p class="page-sub">
         Mit n8n-Workflows und KI-Bausteinen automatisieren wir Ihre Geschäftsprozesse von Anfang bis Ende:
@@ -79,34 +79,31 @@ const faqSchema = {
   </section>
 
   <Section
-    label="[Das Problem]"
     title="Ihre Systeme wissen nicht, <em class='hl'>was die anderen tun.</em>"
     intro="Die meiste Routinearbeit entsteht nicht aus Komplexität, sondern aus Bruchstellen: Informationen müssen von System zu System getragen, abgeglichen und nachgefasst werden – von Menschen."
   >
     <div class="pain-list">
-      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Dateninseln:</strong> Aufträge im Shopsystem, Kunden im CRM, Belege im Postfach – der Abgleich passiert per Hand.</p></div>
-      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Dokumenten-Berg:</strong> Rechnungen, Verträge, Aufträge: erfassen, prüfen, einsortieren – täglich aufs Neue.</p></div>
-      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Manuelles Nachfassen:</strong> Bestellungen bestätigen, Zahlungen zuordnen, Status nachhalten – Routine, die Fehler verursacht, wenn sie unterbleibt.</p></div>
-      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Cloud-Stolpersteine:</strong> Automatisierungsdienste aus den USA rechnen pro Aufgabe ab und verarbeiten Ihre Daten in Drittländer.</p></div>
+      <div class="pain-item"><span class="pain-icon" set:html={icons.alert} /><p><strong>Dateninseln:</strong> Aufträge im Shopsystem, Kunden im CRM, Belege im Postfach – der Abgleich passiert per Hand.</p></div>
+      <div class="pain-item"><span class="pain-icon" set:html={icons.alert} /><p><strong>Dokumenten-Berg:</strong> Rechnungen, Verträge, Aufträge: erfassen, prüfen, einsortieren – täglich aufs Neue.</p></div>
+      <div class="pain-item"><span class="pain-icon" set:html={icons.alert} /><p><strong>Manuelles Nachfassen:</strong> Bestellungen bestätigen, Zahlungen zuordnen, Status nachhalten – Routine, die Fehler verursacht, wenn sie unterbleibt.</p></div>
+      <div class="pain-item"><span class="pain-icon" set:html={icons.alert} /><p><strong>Cloud-Stolpersteine:</strong> Automatisierungsdienste aus den USA rechnen pro Aufgabe ab und verarbeiten Ihre Daten in Drittländer.</p></div>
     </div>
   </Section>
 
   <Section
     alt
-    label="[Die Lösung]"
     title="Was wir <em class='hl'>automatisieren.</em>"
     intro="Jeder Workflow wird auf Ihren Prozess zugeschnitten – mit n8n als Orchestrierung und KI-Bausteinen dort, wo Sprachverständnis oder Dokumentenlesung gebraucht wird."
   >
     <div class="feature-grid">
-      <Card title="Datenflüsse" body="Systeme verbinden und Daten automatisch übertragen: Aufträge, Kunden, Bestände, Belege – ohne manuelles Übertragen." icon="&#128256;" />
-      <Card title="Dokumentenverarbeitung" body="Rechnungen, Verträge und Formulare werden gelesen, geprüft und strukturiert an Systeme und Ablage übergeben." icon="&#128196;" />
-      <Card title="Follow-up-Automatik" body="Bestätigungen, Erinnerungen, Statusmeldungen: Ihr Prozess fasst automatisch nach – pünktlich und zuverlässig." icon="&#9203;" />
-      <Card title="Reporting-Pipelines" body="Kennzahlen aus allen Quellen konsolidieren und als Report liefern – täglich, wöchentlich, monatlich." icon="&#128202;" />
+      <Card title="Datenflüsse" body="Systeme verbinden und Daten automatisch übertragen: Aufträge, Kunden, Bestände, Belege – ohne manuelles Übertragen." icon="flow" />
+      <Card title="Dokumentenverarbeitung" body="Rechnungen, Verträge und Formulare werden gelesen, geprüft und strukturiert an Systeme und Ablage übergeben." icon="doc" />
+      <Card title="Follow-up-Automatik" body="Bestätigungen, Erinnerungen, Statusmeldungen: Ihr Prozess fasst automatisch nach – pünktlich und zuverlässig." icon="clock" />
+      <Card title="Reporting-Pipelines" body="Kennzahlen aus allen Quellen konsolidieren und als Report liefern – täglich, wöchentlich, monatlich." icon="chart" />
     </div>
   </Section>
 
   <Section
-    label="[Technik]"
     title="n8n: Ihre Infrastruktur, <em class='hl'>Ihre Regeln.</em>"
     intro="Wir arbeiten mit selbst gehostetem n8n auf Servern, die Sie kontrollieren. Open Source, keine Kosten pro Ausführung, keine Daten in US-Clouds – und die Workflows gehören Ihnen."
   >
@@ -120,7 +117,6 @@ const faqSchema = {
 
   <Section
     alt
-    label="[Branchen]"
     title="Typische Projekte <em class='hl'>aus Ihrer Branche.</em>"
   >
     <div class="branchen-grid">
@@ -144,7 +140,6 @@ const faqSchema = {
   </Section>
 
   <Section
-    label="[Ablauf]"
     title="Vom Prozess zum laufenden Workflow <em class='hl'>in 4 Schritten.</em>"
   >
     <ol class="mini-process">
@@ -164,7 +159,7 @@ const faqSchema = {
     </div>
   </Section>
 
-  <Section alt label="[FAQ]" title="Häufige Fragen <em class='hl'>zur Automatisierung.</em>">
+  <Section alt title="Häufige Fragen <em class='hl'>zur Automatisierung.</em>">
     <div class="faq-list">
       {faqs.map((f) => (
         <details class="faq-item">
@@ -215,7 +210,8 @@ const faqSchema = {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 24px;
   }
-  .pain-icon { color: var(--danger); flex-shrink: 0; font-size: 1.3rem; }
+  .pain-icon { color: var(--accent); flex-shrink: 0; display: inline-flex; }
+  .pain-icon :global(svg) { width: 20px; height: 20px; }
   .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
   .pain-item strong { color: var(--text); }
   @media (max-width: 768px) { .pain-list { grid-template-columns: 1fr; } }
