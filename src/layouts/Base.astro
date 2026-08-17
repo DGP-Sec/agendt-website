@@ -8,6 +8,12 @@ const {
   title = "agendt.de — KI-Automatisierung für Unternehmen",
   description = "KI-Automatisierung für Immobilien und E-Commerce. DSGVO-konform, self-hosted, praxisnah. Prototyp in 3–5 Tagen."
 } = Astro.props;
+
+// SEO: Canonical URL (Directory-Format -> immer mit Trailing Slash)
+const site = Astro.site ?? new URL('https://agendt.de');
+let path = Astro.url.pathname;
+if (!path.endsWith('/')) path += '/';
+const canonicalURL = new URL(path, site);
 ---
 
 <!DOCTYPE html>
@@ -18,6 +24,18 @@ const {
     <meta name="theme-color" content="#0A1628">
     <title>{title}</title>
     <meta name="description" content={description}>
+    <link rel="canonical" href={canonicalURL}>
+
+    <!-- Open Graph (Social Sharing / CTR-Signal) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="agendt.de">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:url" content={canonicalURL}>
+    <meta property="og:locale" content="de_DE">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
 
     <!-- Psychologie: Authority/Trust durch professionelle Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,0 +1,310 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import Card from '../../components/Card.astro';
+import ScrollReveal from '../../components/ScrollReveal.astro';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Leistungen', item: 'https://agendt.de/leistungen/' },
+    { '@type': 'ListItem', position: 2, name: 'Automatisierung', item: 'https://agendt.de/leistungen/automatisierung/' },
+  ],
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Prozessautomatisierung mit n8n und KI',
+  provider: { '@type': 'Organization', name: 'agendt.de', url: 'https://agendt.de', email: 'hello@agendt.de' },
+  areaServed: 'DE',
+  serviceType: 'Prozessautomatisierung',
+  description: 'Prozessautomatisierung mit n8n und KI: Workflows, Dokumentenverarbeitung und Systemintegrationen, die Routinearbeit zuverlässig übernehmen. Selbst gehostet, DSGVO-konform.',
+};
+
+const faqs = [
+  {
+    q: 'Was ist n8n und warum setzen Sie darauf?',
+    a: 'n8n ist eine Open-Source-Automatisierungsplattform, die sich selbst hosten lässt. Wir verbinden damit Ihre Systeme – E-Mail, CRM, Datenbanken, APIs – zu Workflows. Der Vorteil gegenüber US-Cloud-Diensten wie Zapier: Die Automatisierung läuft auf Ihrer Infrastruktur, es fallen keine laufenden Kosten pro Aufgabe an, und Ihre Daten bleiben bei Ihnen.',
+  },
+  {
+    q: 'Welche Prozesse eignen sich für Automatisierung?',
+    a: 'Alles, was wiederkehrend, regelbasiert und digital ist: Dateneingabe und -abgleich, Dokumentenverarbeitung, Benachrichtigungen, Reports, Auftragserfassung, Follow-ups. Im kostenlosen Erstgespräch identifizieren wir gemeinsam die Prozesse mit dem größten Zeitgewinn.',
+  },
+  {
+    q: 'Was kostet die Automatisierung eines Prozesses?',
+    a: 'Ein erster automatisierter Prozess startet als Prototyp ab 1.500 € Festpreis. Mehrstufige Automatisierungen mit mehreren Systemanbindungen kalkulieren wir projektspezifisch ab 4.500 €. Der Betrieb auf Ihrer Infrastruktur kostet danach nichts Extra.',
+  },
+  {
+    q: 'Was passiert, wenn ein Workflow fehlschlägt?',
+    a: 'Wir bauen Fehlerbehandlung direkt ein: Benachrichtigungen bei Fehlern, Wiederholungen bei temporären Ausfällen und Protokolle für jede Ausführung. Optional übernehmen wir Monitoring und Weiterentwicklung im Betrieb – oder Ihr Team übernimmt das mit unserer Dokumentation.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="Prozessautomatisierung mit n8n & KI | agendt.de"
+  description="Prozessautomatisierung mit n8n und KI: Workflows, Dokumentenverarbeitung, Systemintegrationen. Self-hosted, DSGVO-konform, Prototyp in 3–5 Tagen."
+>
+  <Header />
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="/leistungen/">Leistungen</a> <span>/</span> <span>Automatisierung</span>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[Automatisierung]</p>
+      <h1 class="page-title">Prozesse, die laufen <em class="hl">– ohne Sie.</em></h1>
+      <p class="page-sub">
+        Mit n8n-Workflows und KI-Bausteinen automatisieren wir Ihre Geschäftsprozesse von Anfang bis Ende:
+        Daten fließen automatisch zwischen Systemen, Dokumente werden verarbeitet, Reports entstehen von selbst.
+      </p>
+    </div>
+  </section>
+
+  <Section
+    label="[Das Problem]"
+    title="Ihre Systeme wissen nicht, <em class='hl'>was die anderen tun.</em>"
+    intro="Die meiste Routinearbeit entsteht nicht aus Komplexität, sondern aus Bruchstellen: Informationen müssen von System zu System getragen, abgeglichen und nachgefasst werden – von Menschen."
+  >
+    <div class="pain-list">
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Dateninseln:</strong> Aufträge im Shopsystem, Kunden im CRM, Belege im Postfach – der Abgleich passiert per Hand.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Dokumenten-Berg:</strong> Rechnungen, Verträge, Aufträge: erfassen, prüfen, einsortieren – täglich aufs Neue.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Manuelles Nachfassen:</strong> Bestellungen bestätigen, Zahlungen zuordnen, Status nachhalten – Routine, die Fehler verursacht, wenn sie unterbleibt.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Cloud-Stolpersteine:</strong> Automatisierungsdienste aus den USA rechnen pro Aufgabe ab und verarbeiten Ihre Daten in Drittländer.</p></div>
+    </div>
+  </Section>
+
+  <Section
+    alt
+    label="[Die Lösung]"
+    title="Was wir <em class='hl'>automatisieren.</em>"
+    intro="Jeder Workflow wird auf Ihren Prozess zugeschnitten – mit n8n als Orchestrierung und KI-Bausteinen dort, wo Sprachverständnis oder Dokumentenlesung gebraucht wird."
+  >
+    <div class="feature-grid">
+      <Card title="Datenflüsse" body="Systeme verbinden und Daten automatisch übertragen: Aufträge, Kunden, Bestände, Belege – ohne manuelles Übertragen." icon="&#128256;" />
+      <Card title="Dokumentenverarbeitung" body="Rechnungen, Verträge und Formulare werden gelesen, geprüft und strukturiert an Systeme und Ablage übergeben." icon="&#128196;" />
+      <Card title="Follow-up-Automatik" body="Bestätigungen, Erinnerungen, Statusmeldungen: Ihr Prozess fasst automatisch nach – pünktlich und zuverlässig." icon="&#9203;" />
+      <Card title="Reporting-Pipelines" body="Kennzahlen aus allen Quellen konsolidieren und als Report liefern – täglich, wöchentlich, monatlich." icon="&#128202;" />
+    </div>
+  </Section>
+
+  <Section
+    label="[Technik]"
+    title="n8n: Ihre Infrastruktur, <em class='hl'>Ihre Regeln.</em>"
+    intro="Wir arbeiten mit selbst gehostetem n8n auf Servern, die Sie kontrollieren. Open Source, keine Kosten pro Ausführung, keine Daten in US-Clouds – und die Workflows gehören Ihnen."
+  >
+    <div class="tech-grid">
+      <div class="tech-item"><h3>n8n</h3><p>Open-Source-Orchestrierung: 400+ Integrationen, selbst gehostet, Ihre Workflows bleiben Ihr Eigentum.</p></div>
+      <div class="tech-item"><h3>KI-Bausteine</h3><p>Lokale Sprachmodelle für Klassifikation, Extraktion und Textgenerierung – nur wo KI wirklich hilft.</p></div>
+      <div class="tech-item"><h3>APIs &amp; Systeme</h3><p>Shopsysteme, CRM, ERP, Datenbanken, E-Mail, Kalender: verbunden über saubere Schnittstellen.</p></div>
+      <div class="tech-item"><h3>Monitoring</h3><p>Ausführungsprotokolle, Fehlerbenachrichtigung, Wiederholungslogik – Automatisierung mit Sichtbarkeit.</p></div>
+    </div>
+  </Section>
+
+  <Section
+    alt
+    label="[Branchen]"
+    title="Typische Projekte <em class='hl'>aus Ihrer Branche.</em>"
+  >
+    <div class="branchen-grid">
+      <div class="branche-card">
+        <h3>Immobilienwirtschaft</h3>
+        <ul>
+          <li>Interessenten automatisch erfassen, qualifizieren und ins CRM übertragen</li>
+          <li>Betreuungsverträge und Nebenkostenabrechnungen automatisiert verarbeiten</li>
+          <li>Objektstatus, Besichtigungen und Nachfassen als durchgängiger Workflow</li>
+        </ul>
+      </div>
+      <div class="branche-card">
+        <h3>E-Commerce</h3>
+        <ul>
+          <li>Bestellprozess von der Bestätigung bis zur Versandbenachrichtigung automatisiert</li>
+          <li>Lieferantenkommunikation und Bestandsabgleich zwischen Systemen</li>
+          <li>Retouren-Handling mit automatischer Klassifikation und Gutschrift-Vorbereitung</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section
+    label="[Ablauf]"
+    title="Vom Prozess zum laufenden Workflow <em class='hl'>in 4 Schritten.</em>"
+  >
+    <ol class="mini-process">
+      <li><strong>Analyse:</strong> Wir zerlegen Ihren Prozess und finden die Automatisierungshebel.</li>
+      <li><strong>Prototyp:</strong> Ein Ende-zu-Ende-Workflow, lauffähig an echten Daten.</li>
+      <li><strong>Iteration:</strong> Ausbau und Härtung im Betrieb, Schulung Ihres Teams.</li>
+      <li><strong>Übergabe:</strong> Dokumentation, Übergabegespräch – oder Betrieb durch uns.</li>
+    </ol>
+    <p class="crosslink">Details zum Ablauf: <a href="/prozess/">Unser Prozess</a> · <a href="/preise/">Pakete und Preise</a> · Kundennähe statt Blackbox: <a href="/leistungen/chatbot/">Chatbots</a> und <a href="/leistungen/ki-agent/">KI-Agenten</a> passen dazu</p>
+  </Section>
+
+  <Section dark>
+    <div class="text-center">
+      <h2 class="section-title">Welcher Prozess soll zuerst laufen?</h2>
+      <p class="section-intro" style="margin: 0 auto 32px;">Kostenlose Analyse: Wir finden gemeinsam den Prozess mit dem größten Hebel.</p>
+      <a href="/kontakt/" class="btn btn-primary btn-large">Automatisierung starten →</a>
+    </div>
+  </Section>
+
+  <Section alt label="[FAQ]" title="Häufige Fragen <em class='hl'>zur Automatisierung.</em>">
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <ScrollReveal />
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>
+
+<style>
+  .breadcrumb {
+    background: var(--bg-dark);
+    padding: 14px 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb a { color: var(--text-light); border-bottom: none; }
+  .breadcrumb a:hover { color: var(--accent-light); }
+  .breadcrumb span { color: var(--text-light); margin: 0 6px; opacity: 0.6; }
+
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    padding: 80px 0 60px;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary); margin-bottom: 20px; line-height: 1.2; max-width: 720px;
+  }
+  .page-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; }
+
+  .pain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .pain-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .pain-icon { color: #F87171; flex-shrink: 0; font-size: 1.3rem; }
+  .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
+  .pain-item strong { color: var(--text); }
+  @media (max-width: 768px) { .pain-list { grid-template-columns: 1fr; } }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .tech-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+  }
+  .tech-item h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; color: var(--primary); margin-bottom: 10px;
+  }
+  .tech-item p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
+  @media (max-width: 960px) { .tech-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .tech-grid { grid-template-columns: 1fr; } }
+
+  .branchen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .branche-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 36px 32px;
+  }
+  .branche-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem; color: var(--primary); margin-bottom: 16px;
+  }
+  .branche-card ul { list-style: none; }
+  .branche-card li {
+    position: relative; padding-left: 24px;
+    font-size: 0.96rem; color: var(--text-muted);
+    margin-bottom: 12px; line-height: 1.5;
+  }
+  .branche-card li::before {
+    content: '\\2713'; position: absolute; left: 0;
+    color: var(--success); font-weight: 700;
+  }
+  @media (max-width: 768px) { .branchen-grid { grid-template-columns: 1fr; } }
+
+  .mini-process { list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .mini-process li {
+    counter-increment: step; position: relative;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    font-size: 0.93rem; color: var(--text-muted); line-height: 1.55;
+  }
+  .mini-process li::before {
+    content: counter(step);
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: var(--text-inverse);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem; margin-bottom: 16px;
+    animation: stepPulse 4s ease-in-out infinite;
+  }
+  .mini-process li:nth-child(2)::before { animation-delay: 1s; }
+  .mini-process li:nth-child(3)::before { animation-delay: 2s; }
+  .mini-process li:nth-child(4)::before { animation-delay: 3s; }
+  @keyframes stepPulse {
+    0%, 18%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+    8% { box-shadow: 0 0 0 10px rgba(212, 160, 23, 0.18); }
+  }
+  .mini-process strong { color: var(--text); display: block; margin-bottom: 4px; }
+  @media (max-width: 960px) { .mini-process { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .mini-process { grid-template-columns: 1fr; } }
+
+  .crosslink { margin-top: 32px; font-size: 0.95rem; color: var(--text-muted); }
+
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item summary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--primary);
+    padding: 24px 0; cursor: pointer; list-style: none;
+    position: relative; padding-right: 36px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent); font-size: 1.4rem; font-weight: 500;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item p {
+    font-size: 0.96rem; color: var(--text-muted);
+    line-height: 1.7; padding-bottom: 24px; max-width: 680px;
+  }
+</style>

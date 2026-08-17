@@ -1,10 +1,10 @@
 ---
 const navItems = [
   { href: '/', label: 'Start' },
-  { href: '/leistungen', label: 'Leistungen' },
-  { href: '/prozess', label: 'Prozess' },
-  { href: '/dsgvo-trust', label: 'DSGVO & Trust' },
-  { href: '/kontakt', label: 'Kontakt' },
+  { href: '/leistungen/', label: 'Leistungen' },
+  { href: '/prozess/', label: 'Prozess' },
+  { href: '/preise/', label: 'Preise' },
+  { href: '/kontakt/', label: 'Kontakt' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -25,7 +25,7 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
     </nav>
-    <a href="/kontakt" class="btn btn-primary header-cta">Kostenloses Erstgespräch</a>
+    <a href="/kontakt/" class="btn btn-primary header-cta">Kostenloses Erstgespräch</a>
     <button class="nav-toggle" aria-label="Menu" id="nav-toggle">
       <span></span><span></span><span></span>
     </button>
@@ -34,7 +34,7 @@ const currentPath = Astro.url.pathname;
     {navItems.map((item) => (
       <a href={item.href}>{item.label}</a>
     ))}
-    <a href="/kontakt" class="btn btn-primary" style="margin-top:12px;">Kostenloses Erstgespräch</a>
+    <a href="/kontakt/" class="btn btn-primary" style="margin-top:12px;">Kostenloses Erstgespräch</a>
   </nav>
 </header>
 

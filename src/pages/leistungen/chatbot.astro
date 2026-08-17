@@ -1,0 +1,310 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import Card from '../../components/Card.astro';
+import ScrollReveal from '../../components/ScrollReveal.astro';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Leistungen', item: 'https://agendt.de/leistungen/' },
+    { '@type': 'ListItem', position: 2, name: 'KI-Chatbot', item: 'https://agendt.de/leistungen/chatbot/' },
+  ],
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'KI-Chatbot-Entwicklung',
+  provider: { '@type': 'Organization', name: 'agendt.de', url: 'https://agendt.de', email: 'hello@agendt.de' },
+  areaServed: 'DE',
+  serviceType: 'KI-Chatbot-Entwicklung',
+  description: 'Entwicklung individueller KI-Chatbots für Websites: beantwortet Kundenanfragen rund um die Uhr, qualifiziert Leads und bucht Termine. Selbst gehostet und DSGVO-konform.',
+};
+
+const faqs = [
+  {
+    q: 'Was kostet ein KI-Chatbot von agendt.de?',
+    a: 'Ein Chatbot-Prototyp startet als Festpreis-Projekt ab 1.500 €. Der Umfang hängt von der Anzahl der Datenquellen und Integrationen ab. Nach dem kostenlosen Erstgespräch erhalten Sie ein transparentes Festpreis-Angebot.',
+  },
+  {
+    q: 'Wie lange dauert die Entwicklung?',
+    a: 'Ein lauffähiger Prototyp ist in 3–5 Tagen einsatzbereit. Danach iterieren wir gemeinsam auf Basis echter Gespräche – so wird der Chatbot von Woche zu Woche besser.',
+  },
+  {
+    q: 'Wo laufen die Daten meiner Kunden?',
+    a: 'Auf Ihrer Infrastruktur oder bei europäischen Anbietern. Wir setzen selbst gehostete Sprachmodelle ein, wo es sinnvoll ist – Kundendaten verlassen dabei Ihr Netzwerk nicht. Alle Datenflüsse werden für Ihr Verarbeitungsverzeichnis dokumentiert.',
+  },
+  {
+    q: 'Kann der Chatbot an unsere bestehenden Systeme angebunden werden?',
+    a: 'Ja. Typische Anbindungen sind Ihre Website, Kalendersysteme für Terminbuchungen, CRM-Systeme und E-Mail-Postfächer. Über n8n-Workflows verbinden wir den Chatbot mit nahezu jedem System, das eine API bietet.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="KI-Chatbot für Immobilien & E-Commerce | agendt.de"
+  description="KI-Chatbot-Entwicklung: beantwortet Kundenanfragen 24/7, qualifiziert Leads und bucht Termine. Selbst gehostet, DSGVO-konform, Prototyp in 3–5 Tagen."
+>
+  <Header />
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="/leistungen/">Leistungen</a> <span>/</span> <span>KI-Chatbot</span>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[KI-Chatbots]</p>
+      <h1 class="page-title">Chatbots, die Anfragen beantworten <em class="hl">– und Termine buchen.</em></h1>
+      <p class="page-sub">
+        Ein KI-Chatbot auf Ihrer Website beantwortet Kundenfragen rund um die Uhr, qualifiziert Anfragen
+        automatisch und vereinbart Termine – während Ihr Team sich um die eigentliche Arbeit kümmert.
+      </p>
+    </div>
+  </section>
+
+  <Section
+    label="[Das Problem]"
+    title="Anfragen gehen verloren, <em class='hl'>während niemand am Telefon ist.</em>"
+    intro="Jede unbeantwortete Anfrage ist potenziell verlorener Umsatz. Abends, am Wochenende, in der Mittagspause: Ihre Kunden stellen Fragen genau dann, wenn sie gerade entstehen."
+  >
+    <div class="pain-list">
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Exposé-Anfragen um 21 Uhr</strong> bleiben bis zum nächsten Morgen liegen – der Interessent längst beim Wettbewerber.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Immer dieselben Fragen:</strong> Öffnungszeiten, Verfügbarkeit, Preise – Ihr Team beantwortet sie täglich aufs Neue.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Unqualifizierte Leads</strong> kosten Zeit im Vertrieb: Erst nach zehn Minuten Gespräch ist klar, dass es nicht passt.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>US-Chatbot-Dienste</strong> verarbeiten Kundendaten außerhalb Europas – ein Datenschutzrisiko, das Kunden ernst nehmen.</p></div>
+    </div>
+  </Section>
+
+  <Section
+    alt
+    label="[Die Lösung]"
+    title="Was unser <em class='hl'>KI-Chatbot</em> leistet."
+    intro="Kein generischer Bot mit holprigen Antworten, sondern ein auf Ihre Inhalte trainierter Assistent, der Ihre Sprache spricht und Ihre Systeme nutzt."
+  >
+    <div class="feature-grid">
+      <Card title="24/7 Antworten" body="Der Chatbot beantwortet Fragen zu Objekten, Produkten, Verfügbarkeiten und Abläufen – sofort, zu jeder Uhrzeit, in Ihrem Ton." icon="&#128172;" />
+      <Card title="Lead-Qualifizierung" body="Durch gezielte Rückfragen ermittelt der Chatbot Budget, Zeitrahmen und Bedarf – und übergibt nur fertige, qualifizierte Leads an Ihr Team." icon="&#127919;" />
+      <Card title="Terminbuchung" body="Direkt im Gespräch: Der Chatbot prüft Ihren Kalender und vereinbart Besichtigungen oder Beratungsgespräche – ohne Rückfragen per E-Mail." icon="&#128197;" />
+      <Card title="Ihre Daten, Ihr Server" body="Selbst gehostete Sprachmodelle und europäische Infrastruktur: Gesprächsdaten verlassen Ihr Netzwerk nicht. DSGVO-konform by design." icon="&#128274;" />
+    </div>
+  </Section>
+
+  <Section
+    label="[Branchen]"
+    title="Konkrete Einsatzszenarien <em class='hl'>bei Ihren Kunden.</em>"
+  >
+    <div class="branchen-grid">
+      <div class="branche-card">
+        <h3>Immobilienwirtschaft</h3>
+        <ul>
+          <li>Exposé-Anfragen sofort beantworten: Fläche, Kaufpreis, Nebenkosten, Verfügbarkeit</li>
+          <li>Besichtigungstermine direkt in den Maklerkalender buchen</li>
+          <li>Interessenten vorqualifizieren: Eigenkapital, Finanzierung, Zeitrahmen</li>
+          <li>Nachfassen bei Interessenten, die noch unentschlossen sind</li>
+        </ul>
+      </div>
+      <div class="branche-card">
+        <h3>E-Commerce</h3>
+        <ul>
+          <li>Produktfragen beantworten: Material, Maße, Lieferzeiten, Kompatibilität</li>
+          <li>Bestellstatus und Versandinformationen rund um die Uhr</li>
+          <li>Retouren und Größenfragen vor Klärung durch den Support</li>
+          <li>Warenkorb-Abbruchprävention durch rechtzeitige Hilfe</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section
+    alt
+    label="[Ablauf]"
+    title="In 3–5 Tagen <em class='hl'>zum laufenden Chatbot.</em>"
+    intro="Wir arbeiten in kurzen Iterationen: Erst der Kern, dann Ausbau auf Basis echter Gespräche."
+  >
+    <ol class="mini-process">
+      <li><strong>Analyse:</strong> Wir identifizieren Ihre häufigsten Anfragen und Datenquellen.</li>
+      <li><strong>Prototyp:</strong> Chatbot auf Ihren Inhalten, eingebunden auf Ihrer Website.</li>
+      <li><strong>Iteration:</strong> Wir verfeinern Antworten anhand echter Gespräche.</li>
+      <li><strong>Übergabe:</strong> Dokumentation und Einweisung – Sie behalten die Kontrolle.</li>
+    </ol>
+    <p class="crosslink">Mehr zum Ablauf: <a href="/prozess/">Unser Prozess in vier Phasen</a> · <a href="/preise/">Transparente Preise</a></p>
+  </Section>
+
+  <Section
+    label="[Technik]"
+    title="Self-hosted statt <em class='hl'>Blackbox.</em>"
+    intro="Unsere Chatbots laufen mit selbst gehosteten Sprachmodellen (z. B. Llama über Ollama) oder europäischen API-Anbietern – je nach Anforderung. Alle Datenflüsse werden dokumentiert, die Architektur bleibt Ihre."
+  >
+    <div class="tech-note">
+      <p>Sie möchten wissen, wie genau die DSGVO-konforme Architektur aussieht? <a href="/dsgvo-trust/">Hier geht es zu unserem Datenschutz-Ansatz</a>.</p>
+    </div>
+  </Section>
+
+  <Section dark>
+    <div class="text-center">
+      <h2 class="section-title">Bereit für einen Chatbot, der arbeitet?</h2>
+      <p class="section-intro" style="margin: 0 auto 32px;">Kostenloses Erstgespräch. In 20 Minuten wissen wir, ob und wie ein Chatbot bei Ihnen hilft.</p>
+      <a href="/kontakt/" class="btn btn-primary btn-large">Kostenloses Erstgespräch →</a>
+    </div>
+  </Section>
+
+  <Section alt label="[FAQ]" title="Häufige Fragen <em class='hl'>zum KI-Chatbot.</em>">
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <ScrollReveal />
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>
+
+<style>
+  .breadcrumb {
+    background: var(--bg-dark);
+    padding: 14px 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb a { color: var(--text-light); border-bottom: none; }
+  .breadcrumb a:hover { color: var(--accent-light); }
+  .breadcrumb span { color: var(--text-light); margin: 0 6px; opacity: 0.6; }
+
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    padding: 80px 0 60px;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    max-width: 720px;
+  }
+  .page-sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 640px;
+  }
+
+  .pain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .pain-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .pain-icon { color: #F87171; flex-shrink: 0; font-size: 1.3rem; }
+  .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
+  .pain-item strong { color: var(--text); }
+  @media (max-width: 768px) { .pain-list { grid-template-columns: 1fr; } }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  .branchen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .branche-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 36px 32px;
+  }
+  .branche-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem; color: var(--primary); margin-bottom: 16px;
+  }
+  .branche-card ul { list-style: none; }
+  .branche-card li {
+    position: relative; padding-left: 24px;
+    font-size: 0.96rem; color: var(--text-muted);
+    margin-bottom: 12px; line-height: 1.5;
+  }
+  .branche-card li::before {
+    content: '\\2713'; position: absolute; left: 0;
+    color: var(--success); font-weight: 700;
+  }
+  @media (max-width: 768px) { .branchen-grid { grid-template-columns: 1fr; } }
+
+  .mini-process { list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .mini-process li {
+    counter-increment: step; position: relative;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    font-size: 0.93rem; color: var(--text-muted); line-height: 1.55;
+  }
+  .mini-process li::before {
+    content: counter(step);
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: var(--text-inverse);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    margin-bottom: 16px;
+    animation: stepPulse 4s ease-in-out infinite;
+  }
+  .mini-process li:nth-child(2)::before { animation-delay: 1s; }
+  .mini-process li:nth-child(3)::before { animation-delay: 2s; }
+  .mini-process li:nth-child(4)::before { animation-delay: 3s; }
+  @keyframes stepPulse {
+    0%, 18%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+    8% { box-shadow: 0 0 0 10px rgba(212, 160, 23, 0.18); }
+  }
+  .mini-process strong { color: var(--text); display: block; margin-bottom: 4px; }
+  @media (max-width: 960px) { .mini-process { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .mini-process { grid-template-columns: 1fr; } }
+
+  .crosslink { margin-top: 32px; font-size: 0.95rem; color: var(--text-muted); }
+  .tech-note p { color: var(--text-muted); font-size: 1rem; }
+
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item summary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--primary);
+    padding: 24px 0; cursor: pointer; list-style: none;
+    position: relative; padding-right: 36px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent); font-size: 1.4rem; font-weight: 500;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item p {
+    font-size: 0.96rem; color: var(--text-muted);
+    line-height: 1.7; padding-bottom: 24px; max-width: 680px;
+  }
+</style>

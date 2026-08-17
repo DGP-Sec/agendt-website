@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://agendt.de/sitemap-index.xml

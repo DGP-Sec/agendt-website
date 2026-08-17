@@ -1,0 +1,279 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import Card from '../../components/Card.astro';
+import ScrollReveal from '../../components/ScrollReveal.astro';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Leistungen', item: 'https://agendt.de/leistungen/' },
+    { '@type': 'ListItem', position: 2, name: 'KI-Texte', item: 'https://agendt.de/leistungen/ki-texte/' },
+  ],
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'KI-Texterstellung',
+  provider: { '@type': 'Organization', name: 'agendt.de', url: 'https://agendt.de', email: 'hello@agendt.de' },
+  areaServed: 'DE',
+  serviceType: 'KI-Texterstellung',
+  description: 'KI-gestützte Texterstellung mit menschlicher Qualitätssicherung: Produktbeschreibungen, Exposé-Texte, SEO-Content und Newsletter in Ihrer Markensprache – schnell, konsistent, DSGVO-konform.',
+};
+
+const faqs = [
+  {
+    q: 'Klingen KI-Texte nicht nach Roboter?',
+    a: 'Roh ausgegebene KI-Texte tun das. Unsere Systeme arbeiten mit Ihrer Markensprache: Wir trainieren den Prozess auf Ihre besten bestehenden Texte und richten Tonalität, Struktur und Wortwahl explizit aus. Jeder Text durchläuft eine Qualitätsprüfung, bevor er live geht.',
+  },
+  {
+    q: 'Welche Textarten eignen sich für KI-Automatisierung?',
+    a: 'Alles mit wiederkehrender Struktur: Produktbeschreibungen, Exposé-Texte, Kategorietexte, Newsletter, Social-Posts, Meta-Descriptions. Sehr individuelle Texte wie Leitartikel oder Positionierungsaussagen bleiben Menschen vorbehalten – die KI unterstützt beim Recherche- und Rohentwurf-Teil.',
+  },
+  {
+    q: 'Wie funktioniert der Prozess?',
+    a: 'In einem Workshop definieren wir Ihre Markensprache und Textmuster. Dann bauen wir die Pipeline: Daten rein (Produktdaten, Objektdaten), Text raus, geprüft und formatiert. Sie Reviewen über eine Oberfläche oder direkt im System – die finale Freigabe bleibt bei Ihnen.',
+  },
+  {
+    q: 'Was kostet die Textautomatisierung?',
+    a: 'Der Aufbau einer Text-Pipeline startet als Festpreis ab 1.500 €. Danach entstehen je nach Setup laufende Kosten für Betrieb – oder gar keine, wenn die Pipeline self-hosted auf Ihrer Infrastruktur läuft.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="KI-Texte: Exposés, Produkttexte & SEO-Content | agendt.de"
+  description="KI-Texterstellung mit menschlicher Qualitätssicherung: Produktbeschreibungen, Exposé-Texte, SEO-Content. In Ihrer Markensprache, DSGVO-konform, ab Festpreis."
+>
+  <Header />
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="/leistungen/">Leistungen</a> <span>/</span> <span>KI-Texte</span>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[KI-Texte]</p>
+      <h1 class="page-title">Texte, die klingen wie Sie <em class="hl">– nur schneller.</em></h1>
+      <p class="page-sub">
+        Produktbeschreibungen, Exposé-Texte, SEO-Content, Newsletter: Wir automatisieren Ihre
+        Textproduktion mit KI – in Ihrer Markensprache und mit menschlicher Qualitätssicherung vor jeder Veröffentlichung.
+      </p>
+    </div>
+  </section>
+
+  <Section
+    label="[Das Problem]"
+    title="Gute Texte sind teuer. <em class='hl'>Schleche Texte kosten Kunden.</em>"
+    intro="Content entscheidet über Rankings und Conversion. Aber zwischen 200 Produktseiten, dem wöchentlichen Newsletter und frischen Exposés bleibt keine Zeit für Qualität."
+  >
+    <div class="pain-list">
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Der Textberg wächst:</strong> Neue Produkte, neue Objekte, neue Seiten – der Rückstand wird größer, nicht kleiner.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Inkonsistente Qualität:</strong> Je nach Tag, Schreiber und Deadline klingt Ihre Marke mal so, mal so.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Copy-Paste-Gefahr:</strong> Doppelte Beschreibungen schaden Rankings und wirken auf Kunden billig.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Agentur-Preise:</strong> Externe Texter kosten pro Wort und brauchen Vorlauf – bei jeder Änderung wieder.</p></div>
+    </div>
+  </Section>
+
+  <Section
+    alt
+    label="[Die Lösung]"
+    title="Wie unsere <em class='hl'>Text-Pipeline</em> arbeitet."
+    intro="Kein anonymer KI-Generator, sondern ein eingerichteter Prozess: Ihre Daten und Ihre Markensprache rein, geprüfte Texte raus."
+  >
+    <div class="feature-grid">
+      <Card title="Ihre Markensprache" body="Wir analysieren Ihre besten Texte und definieren Tonalität, Struktur und Vokabular. Die KI schreibt danach – nicht nach generischem Mittelmaß." icon="&#127908;" />
+      <Card title="Daten statt Rätsel" body="Produktdaten, Objektdaten, Fakten: Die Pipeline schreibt aus Ihren strukturierten Daten – halluzinierte Details gibt es nicht." icon="&#128202;" />
+      <Card title="Human Review" body="Qualitätssicherung vor Veröffentlichung: Stichproben, Vollprüfung oder Freigabe-Workflow – Sie bestimmen das Maß." icon="&#128065;" />
+      <Card title="Masse + Einzigartigkeit" body="Hunderte Varianten ohne Duplikate: Jeder Text wird individuell erzeugt und auf Einzigartigkeit geprüft." icon="&#128221;" />
+    </div>
+  </Section>
+
+  <Section
+    label="[Texttypen]"
+    title="Was die Pipeline <em class='hl'>liefert.</em>"
+  >
+    <div class="texttypes-grid">
+      <div class="texttype"><h3>Produktbeschreibungen</h3><p>Aus Ihren Produktdaten: strukturiert, verkaufsstark, SEO-optimiert – für 50 oder 5.000 Artikel.</p></div>
+      <div class="texttype"><h3>Exposé-Texte</h3><p>Objektbeschreibungen, die Lage, Ausstattung und Zielgruppe passend adressieren – aus den Objektdaten generiert.</p></div>
+      <div class="texttype"><h3>SEO-Content</h3><p>Kategorietexte, Landingpage-Content, Meta-Descriptions – suchmaschinenorientiert, ohne Keyword-Spam.</p></div>
+      <div class="texttype"><h3>Newsletter &amp; Social</h3><p>Wiederkehrende Formate automatisch vorbereitet: Angebot der Woche, Neuigkeiten, Saisonkampagnen.</p></div>
+    </div>
+  </Section>
+
+  <Section
+    alt
+    label="[Branchen]"
+    title="Texte, die <em class='hl'>verkaufen.</em>"
+  >
+    <div class="branchen-grid">
+      <div class="branche-card">
+        <h3>Immobilienwirtschaft</h3>
+        <ul>
+          <li>Exposé-Texte aus Objektdaten – konsistent und in Ihrer Sprache</li>
+          <li>Lagebeschreibungen mit recherchierten Umgebungsdaten</li>
+          <li>Objekt-Newsletter und Markttrends für Ihr Portfolio</li>
+        </ul>
+      </div>
+      <div class="branche-card">
+        <h3>E-Commerce</h3>
+        <ul>
+          <li>Produkttexte für den kompletten Katalog, auch bei 10.000+ SKUs</li>
+          <li>Kategorie- und Landingpage-Texte für bessere Rankings</li>
+          <li>Saisonale Kampagnentexte und Newsletter-Varianten</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section
+    label="[Technik]"
+    title="Self-hosted Modelle <em class='hl'>für Ihre Texte.</em>"
+    intro="Textpipelines laufen bei uns bevorzugt mit selbst gehosteten Sprachmodellen: Ihre Produkt- und Objektdaten verlassen Ihr Netzwerk nicht – ein echter Vorteil bei sensiblen Marktdaten."
+  >
+    <div class="tech-note">
+      <p>Mehr zur Architektur: <a href="/dsgvo-trust/">DSGVO &amp; Trust</a> · Der Ablauf: <a href="/prozess/">Unser Prozess</a> · <a href="/preise/">Preise im Überblick</a></p>
+    </div>
+  </Section>
+
+  <Section dark>
+    <div class="text-center">
+      <h2 class="section-title">Satteln Sie den Textberg um.</h2>
+      <p class="section-intro" style="margin: 0 auto 32px;">Kostenloses Erstgespräch: Wir schauen uns Ihre Textsituation an und sagen Ihnen, was sich automatisieren lässt.</p>
+      <a href="/kontakt/" class="btn btn-primary btn-large">Text-Pipeline besprechen →</a>
+    </div>
+  </Section>
+
+  <Section alt label="[FAQ]" title="Häufige Fragen <em class='hl'>zu KI-Texten.</em>">
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <ScrollReveal />
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>
+
+<style>
+  .breadcrumb {
+    background: var(--bg-dark);
+    padding: 14px 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb a { color: var(--text-light); border-bottom: none; }
+  .breadcrumb a:hover { color: var(--accent-light); }
+  .breadcrumb span { color: var(--text-light); margin: 0 6px; opacity: 0.6; }
+
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    padding: 80px 0 60px;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary); margin-bottom: 20px; line-height: 1.2; max-width: 720px;
+  }
+  .page-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; }
+
+  .pain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .pain-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .pain-icon { color: #F87171; flex-shrink: 0; font-size: 1.3rem; }
+  .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
+  .pain-item strong { color: var(--text); }
+  @media (max-width: 768px) { .pain-list { grid-template-columns: 1fr; } }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  .texttypes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .texttype {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+  }
+  .texttype h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; color: var(--primary); margin-bottom: 10px;
+  }
+  .texttype p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
+  @media (max-width: 960px) { .texttypes-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .texttypes-grid { grid-template-columns: 1fr; } }
+
+  .branchen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .branche-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 36px 32px;
+  }
+  .branche-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem; color: var(--primary); margin-bottom: 16px;
+  }
+  .branche-card ul { list-style: none; }
+  .branche-card li {
+    position: relative; padding-left: 24px;
+    font-size: 0.96rem; color: var(--text-muted);
+    margin-bottom: 12px; line-height: 1.5;
+  }
+  .branche-card li::before {
+    content: '\\2713'; position: absolute; left: 0;
+    color: var(--success); font-weight: 700;
+  }
+  @media (max-width: 768px) { .branchen-grid { grid-template-columns: 1fr; } }
+
+  .tech-note p { color: var(--text-muted); font-size: 1rem; }
+
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item summary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--primary);
+    padding: 24px 0; cursor: pointer; list-style: none;
+    position: relative; padding-right: 36px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent); font-size: 1.4rem; font-weight: 500;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item p {
+    font-size: 0.96rem; color: var(--text-muted);
+    line-height: 1.7; padding-bottom: 24px; max-width: 680px;
+  }
+</style>

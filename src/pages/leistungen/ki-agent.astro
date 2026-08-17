@@ -1,0 +1,295 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import Card from '../../components/Card.astro';
+import ScrollReveal from '../../components/ScrollReveal.astro';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Leistungen', item: 'https://agendt.de/leistungen/' },
+    { '@type': 'ListItem', position: 2, name: 'KI-Agenten', item: 'https://agendt.de/leistungen/ki-agent/' },
+  ],
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'KI-Agenten-Entwicklung',
+  provider: { '@type': 'Organization', name: 'agendt.de', url: 'https://agendt.de', email: 'hello@agendt.de' },
+  areaServed: 'DE',
+  serviceType: 'KI-Agenten-Entwicklung',
+  description: 'Entwicklung autonomer KI-Agenten: übernehmen selbstständig Aufgabenketten wie Recherche, E-Mail-Sortierung, Datenextraktion und Reporting. Multi-Agent-Systeme, selbst gehostet und DSGVO-konform.',
+};
+
+const faqs = [
+  {
+    q: 'Was ist der Unterschied zwischen einem KI-Agenten und einem Chatbot?',
+    a: 'Ein Chatbot antwortet auf Fragen. Ein KI-Agent handelt: Er zerlegt Aufgaben in Teilschritte, führt sie selbstständig aus und liefert ein Ergebnis – zum Beispiel eine recherchierte Marktübersicht oder eine vorbereitete Antwort auf eine Kundenmail. Agenten arbeiten im Hintergrund, ohne dass jemand fragen muss.',
+  },
+  {
+    q: 'Was kostet ein KI-Agent?',
+    a: 'Ein erster Agent als Festpreis-Prototyp startet ab 1.500 €. Komplexere Multi-Agent-Systeme mit mehreren Integrationen kalkulieren wir projektspezifisch. Das kostenlose Erstgespräch klärt, welche Aufgabe sich am ehesten lohnt.',
+  },
+  {
+    q: 'Wie sicher ist das, wenn eine KI selbstständig handelt?',
+    a: 'Agenten arbeiten nach klar definierten Regeln und in abgegrenzten Rollen. Kritische Schritte – etwa der Versand einer E-Mail – können als Freigabe-Schritt eingerichtet werden: Der Agent bereitet vor, ein Mensch bestätigt. Sie bestimmen, wie viel Autonomie der Agent erhält.',
+  },
+  {
+    q: 'Mit welchen Systemen können Agenten arbeiten?',
+    a: 'Alles, was eine Schnittstelle hat: E-Mail-Postfächer, CRM, Tabellen, Datenbanken, Websites, PDF-Dokumente. Über n8n-Workflows verbinden wir Agenten mit Ihrer bestehenden Softwarelandschaft.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="KI-Agenten für Ihr Unternehmen entwickeln | agendt.de"
+  description="KI-Agenten übernehmen selbstständig Aufgabenketten: Recherche, E-Mail-Triage, Datenextraktion, Reporting. Multi-Agent-Systeme, DSGVO-konform, selbst gehostet."
+>
+  <Header />
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="/leistungen/">Leistungen</a> <span>/</span> <span>KI-Agenten</span>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[KI-Agenten]</p>
+      <h1 class="page-title">Agenten, die Aufgaben <em class="hl">selbstständig erledigen.</em></h1>
+      <p class="page-sub">
+        Ein KI-Agent antwortet nicht nur – er handelt. Er recherchiert, sortiert, extrahiert und erstellt
+        Berichte, während Ihr Team schläft. Wir bauen Agenten, die in Ihren Systemen arbeiten statt nur zu plaudern.
+      </p>
+    </div>
+  </section>
+
+  <Section
+    label="[Das Problem]"
+    title="Wertschöpfende Arbeit <em class='hl'>ertrinkt in Routine.</em>"
+    intro="Ihr Team ist nicht zu langsam – es ist mit Aufgaben beschäftigt, die keine Entscheidung brauchen: zusammenfassen, zuordnen, nachschlagen, zusammenkopieren."
+  >
+    <div class="pain-list">
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>E-Mail-Flut:</strong> Jeden Morgen 40 neue Mails – 30 davon sind Routine, die trotzdem geöffnet, gelesen und verschoben werden will.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Daten abtippen:</strong> Informationen aus PDFs, Mails und Portalen landen manuell in Tabellen und Systemen.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Recherche-Routine:</strong> Immer dieselben Marktdaten, Objektinfos und Wettbewerbschecks – zeitraubend, aber notwendig.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Reporting:</strong> Jede Woche Zahlen aus drei Systemen zusammensuchen, statt das einmal einzurichten.</p></div>
+    </div>
+  </Section>
+
+  <Section
+    alt
+    label="[Die Lösung]"
+    title="Was unser <em class='hl'>KI-Agent</em> übernimmt."
+    intro="Agenten von agendt.de arbeiten als Multi-Agent-Systeme: spezialisierte Agenten mit klaren Rollen, koordiniert über einen Orchestrator – eingebunden in Ihre Systeme über n8n."
+  >
+    <div class="feature-grid">
+      <Card title="E-Mail-Triage" body="Eingehende Mails werden gelesen, klassifiziert, priorisiert und mit Entwurfsantwort vorbereitet. Ihr Team entscheidet nur noch bei echten Fällen." icon="&#9993;" />
+      <Card title="Datenextraktion" body="Rechnungen, Verträge, Exposés und Formulare: Der Agent liest Dokumente und trägt die Daten strukturiert in Ihre Systeme ein." icon="&#128202;" />
+      <Card title="Recherche-Agenten" body="Wiederkehrende Rechercheaufgaben – Marktbeobachtung, Objektdaten, Wettbewerbspreise – laufen automatisch und liefern aufbereitete Ergebnisse." icon="&#128269;" />
+      <Card title="Reporting" body="Wöchentliche Reports entstehen automatisch aus Ihren Quelldaten: Zahlen konsolidiert, formatiert, pünktlich im Postfach." icon="&#128200;" />
+    </div>
+  </Section>
+
+  <Section
+    label="[Wie Agenten arbeiten]"
+    title="Ein Agent. <em class='hl'>Vier Schritte.</em> Ohne Sie."
+  >
+    <ol class="agent-cycle">
+      <li><strong>Planen:</strong> Der Agent zerlegt die Aufgabe in Teilschritte und legt die Reihenfolge fest.</li>
+      <li><strong>Ausführen:</strong> Er ruft Daten ab, liest Dokumente, nutzt Werkzeuge und Schnittstellen.</li>
+      <li><strong>Prüfen:</strong> Ergebnisse werden validiert – bei Unklarheiten fragt der Agent nach oder eskaliert.</li>
+      <li><strong>Liefern:</strong> Das fertige Ergebnis landet dort, wo Sie es brauchen: Mail, Tabelle, System.</li>
+    </ol>
+    <p class="crosslink">Sie möchten eher Kundenkommunikation automatisieren? <a href="/leistungen/chatbot/">Unser KI-Chatbot antwortet Ihren Kunden</a></p>
+  </Section>
+
+  <Section
+    alt
+    label="[Branchen]"
+    title="Wo Agenten <em class='hl'>sofort wirken.</em>"
+  >
+    <div class="branchen-grid">
+      <div class="branche-card">
+        <h3>Immobilienwirtschaft</h3>
+        <ul>
+          <li>Interessenten-Mails qualifizieren und Besichtigungen automatisch koordinieren</li>
+          <li>Objektdaten aus Portalen und Exposés in die Verwaltungssoftware übertragen</li>
+          <li>Marktlage und Vergleichsobjekte für Bewertungen regelmäßig aufbereiten</li>
+        </ul>
+      </div>
+      <div class="branche-card">
+        <h3>E-Commerce</h3>
+        <ul>
+          <li>Lieferanten-Mails auswerten: Bestellbestätigungen, Verfügbarkeiten, Änderungen</li>
+          <li>Produktdaten aus Datenblättern und Lieferantenkatalogen strukturieren</li>
+          <li>Wettbewerbsbeobachtung: Preise und Sortimente im Blick, automatisch</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section
+    label="[Kontrolle]"
+    title="Autonomie <em class='hl'>nach Ihren Regeln.</em>"
+    intro="KI-Agenten sind dann wertvoll, wenn sie vertrauenswürdig arbeiten. Deshalb: klar abgegrenzte Rollen, dokumentierte Regeln und Freigabe-Schritte überall dort, wo es um kritische Aktionen geht."
+  >
+    <div class="tech-note">
+      <p>Datenschutz und Datenhoheit sind bei Agenten-Systemen zentral – <a href="/dsgvo-trust/">unsere DSGVO-Architektur</a> gilt auch hier. Der Ablauf ist bei allen Projekten gleich: <a href="/prozess/">vier Phasen, ein fester Rahmen</a>.</p>
+    </div>
+  </Section>
+
+  <Section dark>
+    <div class="text-center">
+      <h2 class="section-title">Welche Aufgabe soll Ihr Agent übernehmen?</h2>
+      <p class="section-intro" style="margin: 0 auto 32px;">Im kostenlosen Erstgespräch finden wir die Aufgabe mit dem größten Hebel.</p>
+      <a href="/kontakt/" class="btn btn-primary btn-large">Agenten-Projekt starten →</a>
+    </div>
+  </Section>
+
+  <Section alt label="[FAQ]" title="Häufige Fragen <em class='hl'>zu KI-Agenten.</em>">
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <ScrollReveal />
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>
+
+<style>
+  .breadcrumb {
+    background: var(--bg-dark);
+    padding: 14px 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb a { color: var(--text-light); border-bottom: none; }
+  .breadcrumb a:hover { color: var(--accent-light); }
+  .breadcrumb span { color: var(--text-light); margin: 0 6px; opacity: 0.6; }
+
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    padding: 80px 0 60px;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary); margin-bottom: 20px; line-height: 1.2; max-width: 720px;
+  }
+  .page-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; }
+
+  .pain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .pain-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .pain-icon { color: #F87171; flex-shrink: 0; font-size: 1.3rem; }
+  .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
+  .pain-item strong { color: var(--text); }
+  @media (max-width: 768px) { .pain-list { grid-template-columns: 1fr; } }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  .agent-cycle { list-style: none; counter-reset: ac; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .agent-cycle li {
+    counter-increment: ac; position: relative;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    font-size: 0.93rem; color: var(--text-muted); line-height: 1.55;
+  }
+  .agent-cycle li::before {
+    content: counter(ac);
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: var(--text-inverse);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem; margin-bottom: 16px;
+    animation: acPulse 4.8s ease-in-out infinite;
+  }
+  .agent-cycle li:nth-child(2)::before { animation-delay: 1.2s; }
+  .agent-cycle li:nth-child(3)::before { animation-delay: 2.4s; }
+  .agent-cycle li:nth-child(4)::before { animation-delay: 3.6s; }
+  @keyframes acPulse {
+    0%, 20%, 100% { opacity: 0.75; box-shadow: none; }
+    9% { opacity: 1; box-shadow: 0 0 22px rgba(212, 160, 23, 0.4); }
+  }
+  .agent-cycle strong { color: var(--text); display: block; margin-bottom: 4px; }
+  @media (max-width: 960px) { .agent-cycle { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .agent-cycle { grid-template-columns: 1fr; } }
+
+  .branchen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .branche-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 36px 32px;
+  }
+  .branche-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem; color: var(--primary); margin-bottom: 16px;
+  }
+  .branche-card ul { list-style: none; }
+  .branche-card li {
+    position: relative; padding-left: 24px;
+    font-size: 0.96rem; color: var(--text-muted);
+    margin-bottom: 12px; line-height: 1.5;
+  }
+  .branche-card li::before {
+    content: '\\2713'; position: absolute; left: 0;
+    color: var(--success); font-weight: 700;
+  }
+  @media (max-width: 768px) { .branchen-grid { grid-template-columns: 1fr; } }
+
+  .crosslink { margin-top: 32px; font-size: 0.95rem; color: var(--text-muted); }
+  .tech-note p { color: var(--text-muted); font-size: 1rem; }
+
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item summary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--primary);
+    padding: 24px 0; cursor: pointer; list-style: none;
+    position: relative; padding-right: 36px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent); font-size: 1.4rem; font-weight: 500;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item p {
+    font-size: 0.96rem; color: var(--text-muted);
+    line-height: 1.7; padding-bottom: 24px; max-width: 680px;
+  }
+</style>
