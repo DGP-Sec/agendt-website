@@ -172,6 +172,41 @@ const canonicalURL = new URL(path, site);
         }
         .section .container { position: relative; z-index: 1; }
 
+        /* Helle Sektion: entspanntes Off-White (Bone) statt reinem Weiss.
+           Tokens werden re-gescoped — Text, Gold, Karten und Borders passen sich an. */
+        .section-light {
+            background: #F3F1EB;
+            color: #1C2434;
+            --text: #1C2434;
+            --text-muted: #4B5568;
+            --text-light: #6B7280;
+            --accent: #8F6609;
+            --accent-dark: #7A5707;
+            --accent-light: #A87B0C;
+            --accent-bg: rgba(143, 102, 9, 0.09);
+            --success: #15803D;
+            --border: #DAD7CE;
+            --border-hover: #C6C2B6;
+            --card-bg: rgba(255, 255, 255, 0.62);
+            --card-bg-hover: rgba(255, 255, 255, 0.82);
+            --card-border: rgba(28, 36, 52, 0.10);
+        }
+
+        /* Waermere Glows auf hellem Grund */
+        .section-light::before {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
+        }
+        .section-light::after {
+            background: radial-gradient(circle, rgba(59, 90, 148, 0.10) 0%, transparent 70%);
+        }
+
+        .section-light .card {
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 1px 3px rgba(28, 36, 52, 0.06);
+        }
+        .section-light .card:hover {
+            box-shadow: 0 8px 28px rgba(143, 102, 9, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
         .section-alt { background: var(--bg-alt); }
 
         .section-dark {
@@ -242,12 +277,13 @@ const canonicalURL = new URL(path, site);
 
         .text-center { text-align: center; }
 
-        /* Glas-Karten: transparent + blur, Lichtkante oben, Gold-Glow bei Hover */
+        /* Glas-Karten: transparent + blur, Lichtkante oben, Gold-Glow bei Hover.
+           Farben über Tokens — .section-light überschreibt sie für helle Sektionen. */
         .card {
-            background: rgba(31, 41, 55, 0.55);
+            background: var(--card-bg, rgba(31, 41, 55, 0.55));
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.09);
+            border: 1px solid var(--card-border, rgba(255, 255, 255, 0.09));
             border-radius: var(--radius-lg);
             padding: 32px 28px;
             transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s, background 0.25s;
@@ -256,7 +292,7 @@ const canonicalURL = new URL(path, site);
 
         .card:hover {
             border-color: rgba(212, 175, 55, 0.45);
-            background: rgba(31, 41, 55, 0.68);
+            background: var(--card-bg-hover, rgba(31, 41, 55, 0.68));
             transform: translateY(-3px);
             box-shadow: 0 8px 32px rgba(212, 175, 55, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.07);
         }
