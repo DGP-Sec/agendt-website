@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+
+// FAQ-Datenstruktur: Kategorien -> Fragen (mit internen Links auf Detailseiten)
+const kategorien = [
+  {
+    titel: 'Grundlagen & Kosten',
+    icon: '&#8505;',
+    fragen: [
+      { q: 'Was kostet KI-Automatisierung bei agendt.de?', a: 'Der Einstieg (KI-Scan) ist kostenlos. Ein Prototyp startet ab 1.500 € Festpreis, eine Voll-Automatisierung ab 4.500 €. Der Betrieb ist optional ab 190 €/Monat. Alle Details: <a href="/preise/">Preise</a>.' },
+      { q: 'Wie schnell steht ein Ergebnis?', a: 'Ein lauffähiger Prototyp entsteht in 3–5 Werktagen. Die vollständige Implementierung mit Iteration dauert je nach Komplexität 1–4 Wochen. Mehr dazu im <a href="/prozess/">Prozess-Ablauf</a>.' },
+      { q: 'Müssen unsere Daten in die Cloud?', a: 'Nein. Wir arbeiten primär mit self-hosted Lösungen (Ollama, Llama, n8n auf Ihrer Infrastruktur). Wenn externe Dienste nötig sind, wählen wir europäische Anbieter. Details: <a href="/dsgvo-trust/">DSGVO &amp; Trust</a>.' },
+      { q: 'Brauchen wir eine eigene IT-Abteilung?', a: 'Nein. Wir übernehmen Setup, Konfiguration und optional den Betrieb. Sie brauchen keine Server-Admins – nur einen Ansprechpartner für die fachlichen Fragen.' },
+    ],
+  },
+  {
+    titel: 'Chatbot & KI-Agenten',
+    icon: '&#129302;',
+    fragen: [
+      { q: 'Was kann ein KI-Chatbot von uns leisten?', a: 'Er beantwortet Kundenfragen rund um die Uhr auf Basis Ihrer Inhalte, qualifiziert Leads automatisch und bucht Termine direkt in Ihrem Kalender. Details: <a href="/leistungen/chatbot/">KI-Chatbot</a>.' },
+      { q: 'Was ist der Unterschied zwischen Chatbot und KI-Agent?', a: 'Ein Chatbot antwortet auf Fragen. Ein KI-Agent handelt selbstständig: Er zerlegt Aufgaben in Teilschritte und führt sie aus – E-Mail-Triage, Datenextraktion, Recherche, Reporting. Details: <a href="/leistungen/ki-agent/">KI-Agenten</a>.' },
+      { q: 'Wie sicher sind autonom handelnde KI-Agenten?', a: 'Agenten arbeiten nach klar definierten Regeln in abgegrenzten Rollen. Kritische Schritte (z. B. E-Mail-Versand) lassen sich als Freigabe-Schritt einrichten: Der Agent bereitet vor, ein Mensch bestätigt.' },
+    ],
+  },
+  {
+    titel: 'Texte & Automatisierung',
+    icon: '&#9997;',
+    fragen: [
+      { q: 'Klingen KI-Texte nicht nach Roboter?', a: 'Nicht, wenn die Pipeline auf Ihre Markensprache trainiert ist. Wir richten Tonalität und Struktur explizit aus und jede Textart durchläuft eine Qualitätsprüfung. Details: <a href="/leistungen/ki-texte/">KI-Texte</a>.' },
+      { q: 'Was ist n8n und warum self-hosted?', a: 'n8n ist eine Open-Source-Automatisierungsplattform. Selbst gehostet läuft sie auf Ihrer Infrastruktur: keine Kosten pro Ausführung, keine Daten in US-Clouds, die Workflows gehören Ihnen. Details: <a href="/leistungen/automatisierung/">Automatisierung</a>.' },
+      { q: 'Was passiert, wenn ein Workflow fehlschlägt?', a: 'Fehlerbehandlung ist eingebaut: Benachrichtigungen bei Fehlern, Wiederholungen bei temporären Ausfällen, Protokolle für jede Ausführung. Optional übernehmen wir Monitoring und Weiterentwicklung.' },
+    ],
+  },
+  {
+    titel: 'Zusammenarbeit',
+    icon: '&#129309;',
+    fragen: [
+      { q: 'Wie starten wir am besten?', a: 'Mit dem kostenlosen KI-Scan: 20 Minuten Erstgespräch, danach wissen Sie, ob und wo sich KI bei Ihnen lohnt – mit ehrlicher Einschätzung. <a href="/kontakt/">Termin vereinbaren</a>.' },
+      { q: 'Was gehört nach dem Projekt uns?', a: 'Alles: Code, Workflows, Konfigurationen, Dokumentation. Kein Vendor-Lock-in – Sie könnten theoretisch ohne uns weiterbetreiben.' },
+      { q: 'Beraten Sie uns auch, ohne sofort umzusetzen?', a: 'Ja. Die <a href="/leistungen/ki-beratung/">KI-Beratung</a> ist ein eigenständiges Angebot: Potenzialanalyse, Bewertung und Roadmap – mit dokumentierter Übergabe, wenn Sie anders umsetzen möchten.' },
+    ],
+  },
+];
+
+const alleFragen = kategorien.flatMap((k) => k.fragen);
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: alleFragen.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') },
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'FAQ', item: 'https://agendt.de/faq/' },
+  ],
+};
+---
+
+<Base
+  title="FAQ: Häufige Fragen zur KI-Automatisierung | agendt.de"
+  description="Antworten auf häufige Fragen: Kosten, Datenschutz, Chatbot vs. KI-Agent, Ablauf und Zusammenarbeit. Alles zur KI-Automatisierung von agendt.de."
+>
+  <Header />
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[FAQ]</p>
+      <h1 class="page-title">Häufige Fragen. <em class="hl">Klare Antworten.</em></h1>
+      <p class="page-sub">
+        Alles, was uns Kundinnen und Kunden vor dem Start fragen – ehrlich beantwortet,
+        ohne Verkaufsrummel. Ihre Frage fehlt? Schreiben Sie uns.
+      </p>
+    </div>
+  </section>
+
+  {kategorien.map((k, i) => (
+    <Section alt={i % 2 === 1} label={`[${k.titel}]`} title={`${k.titel}`}>
+      <div class="faq-list">
+        {k.fragen.map((f) => (
+          <details class="faq-item">
+            <summary set:html={f.q} />
+            <p set:html={f.a} />
+          </details>
+        ))}
+      </div>
+    </Section>
+  ))}
+
+  <Section dark>
+    <div class="text-center">
+      <h2 class="section-title">Ihre Frage war nicht dabei?</h2>
+      <p class="section-intro" style="margin: 0 auto 32px;">Schreiben Sie uns – wir antworten innerhalb von 24 Stunden an Werktagen. Kostenlos und unverbindlich.</p>
+      <a href="/kontakt/" class="btn btn-primary btn-large">Frage stellen →</a>
+    </div>
+  </Section>
+
+  <ScrollReveal />
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+</Base>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    padding: 80px 0 60px;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary); margin-bottom: 20px; line-height: 1.2; max-width: 720px;
+  }
+  .page-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; }
+
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item summary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--primary);
+    padding: 24px 0; cursor: pointer; list-style: none;
+    position: relative; padding-right: 36px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent); font-size: 1.4rem; font-weight: 500;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item p {
+    font-size: 0.96rem; color: var(--text-muted);
+    line-height: 1.7; padding-bottom: 24px; max-width: 680px;
+  }
+  .faq-item p :global(a) { color: var(--primary); }
+</style>

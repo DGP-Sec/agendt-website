@@ -21,7 +21,7 @@ const canonicalURL = new URL(path, site);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0A1628">
+    <meta name="theme-color" content="#060F1E">
     <title>{title}</title>
     <meta name="description" content={description}>
     <link rel="canonical" href={canonicalURL}>
@@ -47,11 +47,11 @@ const canonicalURL = new URL(path, site);
             /* Dark-Navy: Vertrauen, Autoritaet, Premium-Positionierung
                (Singh 2006: Blau = Trust; Labrecque 2010: dunkle UIs = Kompetenz/Expertise)
                Elevation-Prinzip: dunklere Basis, hellere Karten — Tiefe ohne harte Kontraste */
-            --bg: #0A1628;
-            --bg-alt: #0E1D33;
-            --bg-dark: #060D1A;
-            --bg-dark-alt: #0C1A2E;
-            --card: #12243D;
+            --bg: #060F1E;
+            --bg-alt: #0A1830;
+            --bg-dark: #030912;
+            --bg-dark-alt: #081226;
+            --card: #0C1B33;
 
             /* Halation-Ausgleich: helle Textstufen leicht angehoben fuer Lesbarkeit auf Navy */
             --text: #E2E8F0;
@@ -74,6 +74,7 @@ const canonicalURL = new URL(path, site);
 
             --success: #4ADE80;
             --success-bg: rgba(74, 222, 128, 0.10);
+            --danger: #F87171;
 
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
             --shadow: 0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.4);
@@ -157,13 +158,58 @@ const canonicalURL = new URL(path, site);
             margin-bottom: 48px;
         }
 
+        /* Licht-Sektionen: weiße Content-Flächen mit dunkler Typografie.
+           Tokens werden hier neu geppegelt — alle Komponenten passen sich automatisch an. */
+        .section {
+            background: #FFFFFF;
+            color: #16233A;
+            --text: #16233A;
+            --text-muted: #4A5A72;
+            --text-light: #64748B;
+            --text-inverse: #FFFFFF;
+            --primary: #0C1A2E;
+            --primary-hover: #060F1E;
+            --primary-light: #33415C;
+            --accent: #8F6609;
+            --accent-hover: #7A5707;
+            --accent-light: #8F6609;
+            --accent-bg: rgba(212, 160, 23, 0.12);
+            --card: #FFFFFF;
+            --border: #E2E8F0;
+            --border-strong: #C9D4E2;
+            --bg-alt: #EEF2F8;
+            --success: #15803D;
+            --success-bg: rgba(21, 128, 61, 0.08);
+            --danger: #DC2626;
+        }
+
         .section-alt {
-            background: var(--bg-alt);
+            background: #F4F7FB;
+            color: #16233A;
         }
 
         .section-dark {
             background: var(--bg-dark);
             color: var(--text-muted);
+            /* Dunkel-Re-Scope: gleiche Werte wie Root (überschreibt .section-Lichtscope) */
+            --text: #E2E8F0;
+            --text-muted: #94A3B8;
+            --text-light: #7E93B3;
+            --text-inverse: #060F1E;
+            --primary: #F1F5F9;
+            --primary-hover: #FFFFFF;
+            --primary-light: #C7D2E3;
+            --accent: #D4A017;
+            --accent-hover: #E8B830;
+            --accent-light: #EAC65D;
+            --accent-bg: rgba(212, 160, 23, 0.10);
+            --card: #0C1B33;
+            --border: #1D3252;
+            --border-strong: #2C4468;
+            --bg-alt: #0A1830;
+            --success: #4ADE80;
+            --success-bg: rgba(74, 222, 128, 0.10);
+            --danger: #F87171;
         }
 
         .section-dark .section-title { color: #fff; }
@@ -190,9 +236,9 @@ const canonicalURL = new URL(path, site);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 60%, var(--accent) 100%);
+            background: linear-gradient(135deg, #D4A017 0%, #E8B830 60%, #D4A017 100%);
             background-size: 200% 100%;
-            color: var(--text-inverse);
+            color: #060F1E;
             box-shadow: 0 0 24px rgba(212, 160, 23, 0.2), 0 0 60px rgba(212, 160, 23, 0.08), var(--shadow);
         }
 
@@ -217,7 +263,7 @@ const canonicalURL = new URL(path, site);
 
         .btn-primary:hover {
             background-position: 100% 0;
-            color: var(--text-inverse);
+            color: #060F1E;
             transform: translateY(-2px);
             box-shadow: 0 0 32px rgba(212, 160, 23, 0.35), 0 0 80px rgba(212, 160, 23, 0.12), var(--shadow-lg);
         }

@@ -1,0 +1,275 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import Card from '../../components/Card.astro';
+import ScrollReveal from '../../components/ScrollReveal.astro';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Leistungen', item: 'https://agendt.de/leistungen/' },
+    { '@type': 'ListItem', position: 2, name: 'KI-Beratung', item: 'https://agendt.de/leistungen/ki-beratung/' },
+  ],
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'KI-Beratung und Potenzialanalyse',
+  provider: { '@type': 'Organization', name: 'agendt.de', url: 'https://agendt.de', email: 'hello@agendt.de' },
+  areaServed: 'DE',
+  serviceType: 'KI-Beratung',
+  description: 'KI-Beratung für Mittelstand: Potenzialanalyse, Prozess-Mapping, Machbarkeitsprüfung und KI-Strategie mit klarer Roadmap – ehrlich, praktisch, ohne Hype.',
+};
+
+const faqs = [
+  {
+    q: 'Was ist der Unterschied zwischen KI-Beratung und Umsetzung?',
+    a: 'Beratung ist die Analyse davor: Welche Prozesse lohnen sich, was ist technisch machbar, was kostet es, in welcher Reihenfolge sollte man vorgehen? Die Umsetzung baut dann die Workflows und Systeme. Bei uns beides aus einer Hand – die Beratung endet aber nicht in einer Powerpoint, sondern in einem lauffähigen ersten Prototyp.',
+  },
+  {
+    q: 'Für welche Unternehmen lohnt sich KI-Beratung?',
+    a: 'Für jedes Unternehmen mit wiederkehrenden digitalen Prozessen: E-Mail, Dokumente, Datenpflege, Kundenanfragen, Reporting. Gerade der Mittelstand hat oft großes Potenzial, weil viele Abläufe noch manuell sind. Ob sich KI lohnt, wissen wir nach dem ersten Gespräch – ehrlich auch dann, wenn die Antwort nein lautet.',
+  },
+  {
+    q: 'Wie läuft die KI-Beratung ab?',
+    a: 'Schritt 1: Kostenloses Erstgespräch (20 Minuten). Schritt 2: Potenzialanalyse Ihrer Prozesse. Schritt 3: Bewertung nach Aufwand, Nutzen und Risiko. Schritt 4: Empfehlung mit Priorität und Festpreis für den ersten Prototyp. Sie entscheiden, was davon umgesetzt wird.',
+  },
+  {
+    q: 'Müssen wir danach mit Ihnen umsetzen?',
+    a: 'Nein. Die Analyse und Empfehlung gehören Ihnen. Wenn Sie mit Ihrer IT oder einer anderen Agentur umsetzen möchten, liefern wir die Ergebnisse dokumentiert und übergeben sauber. Natürlich freuen wir uns, wenn wir den Prototyp bauen dürfen – aber die Entscheidung liegt komplett bei Ihnen.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="KI-Beratung: Potenzialanalyse & Strategie | agendt.de"
+  description="KI-Beratung für den Mittelstand: Potenzialanalyse, Prozess-Mapping und KI-Strategie mit klarer Roadmap. Kostenlos starten, ehrlich bewertet, ohne Hype."
+>
+  <Header />
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="/leistungen/">Leistungen</a> <span>/</span> <span>KI-Beratung</span>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-label">[KI-Beratung]</p>
+      <h1 class="page-title">KI-Einsatz, der sich <em class="hl">rechnet.</em></h1>
+      <p class="page-sub">
+        Die meisten Unternehmen wissen nicht, wo KI ihnen wirklich hilft – und wo sie Geld verbrennt.
+        Wir analysieren Ihre Prozesse, bewerten ehrlich und legen eine Roadmap fest, die umsetzbar ist.
+      </p>
+      <div class="page-cta">
+        <a href="/kontakt/" class="btn btn-primary btn-large">Kostenloser KI-Scan →</a>
+      </div>
+    </div>
+  </section>
+
+  <Section
+    label="[Das Problem]"
+    title="Zwischen Hype-Druck <em class='hl'>und Nichtstun.</em>"
+    intro="Überall KI-News, überall Buzzwords – und im Alltag dieselben manuellen Abläufe wie vor fünf Jahren. Die zwei teuersten Reaktionen: blind investieren oder abwarten."
+  >
+    <div class="pain-list">
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Buzzword-Paralyse:</strong> Jeder sagt, Sie müssten etwas mit KI machen. Niemand sagt, was genau – und was es bringt.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Verlorene Pilotprojekte:</strong> Eine Studie nach der anderen verkalkuliert sich, weil Prozess und Technik nicht zusammen gedacht wurden.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Fehlende interne Priorität:</strong> Zu viele potenzielle Use-Cases, zu wenig Zeit – am Ende bleibt alles beim Alten.</p></div>
+      <div class="pain-item"><span class="pain-icon">&#9888;</span><p><strong>Berater ohne Umsetzungs-Erfahrung:</strong> Strategie-Folien ohne Codeszeile ignorieren, was technisch wirklich trägt.</p></div>
+    </div>
+  </Section>
+
+  <Section
+    alt
+    label="[Die Lösung]"
+    title="Wie unsere <em class='hl'>KI-Beratung</em> arbeitet."
+    intro="Wir beraten nicht aus der Distanz: Wer die Roadmap schreibt, baut auch die Workflows. Deshalb ist unsere Beratung radikal praktisch."
+  >
+    <div class="feature-grid">
+      <Card title="Prozess-Analyse" body="Wir gehen Ihre Abläufe durch: Wo fließen Daten, wo stockt es, welche Schritte sind reine Routine? Ergebnis ist ein Prozess-Mapping mit Automatisierungspotenzialen." icon="&#128295;" />
+      <Card title="Ehrliche Bewertung" body="Jeder Kandidat wird nach Aufwand, Nutzen und Risiko bewertet. Was sich nicht rechnet, sagen wir klar – das spart mehr Geld als jede Implementierung." icon="&#9878;" />
+      <Card title="KI-Strategie & Roadmap" body="Eine priorisierte Empfehlung: womit starten, was später, was gar nicht. Mit konkreten Festpreisen statt vagen Budgetrahmen." icon="&#128506;" />
+      <Card title="Proof statt Powerpoint" body="Der Abschluss der Beratung ist ein lauffähiger Prototyp für den wichtigsten Use-Case – echtes System, echte Daten, echtes Ergebnis." icon="&#9989;" />
+    </div>
+  </Section>
+
+  <Section
+    label="[Ablauf]"
+    title="Vom Erstgespräch zur Roadmap <em class='hl'>in Tagen.</em>"
+  >
+    <ol class="mini-process">
+      <li><strong>KI-Scan:</strong> 20 Minuten Erstgespräch – kostenlos, unverbindlich, konkret.</li>
+      <li><strong>Analyse:</strong> Prozess-Mapping und Datenlage Ihres Unternehmens.</li>
+      <li><strong>Bewertung:</strong> Use-Cases nach Aufwand, Nutzen und Risiko priorisiert.</li>
+      <li><strong>Empfehlung:</strong> Roadmap mit Festpreis für den ersten Prototyp.</li>
+    </ol>
+    <p class="crosslink">Wie die Umsetzung danach aussieht: <a href="/prozess/">Unser Prozess</a> · Die Pakete dazu: <a href="/preise/">Preise im Überblick</a></p>
+  </Section>
+
+  <Section
+    alt
+    label="[Einordnung]"
+    title="Beratung, die zur Umsetzung passt <em class='hl'>– nicht dazu führt.</em>"
+    intro="KI-Beratung ist bei uns kein eigenes Geschäftsmodell, sondern der Einstieg in die Umsetzung. Das ändert die Perspektive: Wir empfehlen nur, was wir selbst verantworten würden."
+  >
+    <div class="ordnung-grid">
+      <div class="ordnung-item">
+        <h3>Immobilien &amp; E-Commerce</h3>
+        <p>Wir kennen die typischen Prozesslandschaften beider Branchen – von der Exposé-Erstellung über die Lead-Pflege bis zum Bestellworkflow. Das macht die Analyse schneller und die Empfehlungen konkreter.</p>
+      </div>
+      <div class="ordnung-item">
+        <h3>Technik-Realismus</h3>
+        <p>Self-hosted, Cloud oder Hybrid? Wir bewerten entlang Ihrer Datenschutz-Anforderungen, Ihrer IT-Landschaft und Ihres Budgets – nicht entlang dessen, was wir gerade verkaufen möchten.</p>
+      </div>
+      <div class="ordnung-item">
+        <h3>DSGVO von Anfang an</h3>
+        <p>Rechtliche Rahmenbedingungen sind Teil der Bewertung, nicht ein späteres Problem. Mehr dazu: <a href="/dsgvo-trust/">DSGVO &amp; Trust</a>.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section dark>
+    <div class="text-center">
+      <h2 class="section-title">Finden Sie heraus, was KI Ihnen bringt.</h2>
+      <p class="section-intro" style="margin: 0 auto 32px;">Der KI-Scan ist kostenlos – und Sie bekommen eine ehrliche Antwort, auch wenn sie „noch nicht“ lautet.</p>
+      <a href="/kontakt/" class="btn btn-primary btn-large">KI-Scan vereinbaren →</a>
+    </div>
+  </Section>
+
+  <Section alt label="[FAQ]" title="Häufige Fragen <em class='hl'>zur KI-Beratung.</em>">
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <ScrollReveal />
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>
+
+<style>
+  .breadcrumb {
+    background: var(--bg-dark);
+    padding: 14px 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb a { color: var(--text-light); border-bottom: none; }
+  .breadcrumb a:hover { color: var(--accent-light); }
+  .breadcrumb span { color: var(--text-light); margin: 0 6px; opacity: 0.6; }
+
+  .page-hero {
+    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    padding: 80px 0 60px;
+  }
+  .hero-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--primary); margin-bottom: 20px; line-height: 1.2; max-width: 720px;
+  }
+  .page-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; margin-bottom: 32px; }
+
+  .pain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .pain-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .pain-icon { color: var(--danger); flex-shrink: 0; font-size: 1.3rem; }
+  .pain-item p { font-size: 0.95rem; color: var(--text-muted); }
+  .pain-item strong { color: var(--text); }
+  @media (max-width: 768px) { .pain-list { grid-template-columns: 1fr; } }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  .mini-process { list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .mini-process li {
+    counter-increment: step;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    font-size: 0.93rem; color: var(--text-muted); line-height: 1.55;
+  }
+  .mini-process li::before {
+    content: counter(step);
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: var(--text-inverse);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem; margin-bottom: 16px;
+    animation: stepPulse 4s ease-in-out infinite;
+  }
+  .mini-process li:nth-child(2)::before { animation-delay: 1s; }
+  .mini-process li:nth-child(3)::before { animation-delay: 2s; }
+  .mini-process li:nth-child(4)::before { animation-delay: 3s; }
+  @keyframes stepPulse {
+    0%, 18%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+    8% { box-shadow: 0 0 0 10px rgba(212, 160, 23, 0.18); }
+  }
+  .mini-process strong { color: var(--text); display: block; margin-bottom: 4px; }
+  @media (max-width: 960px) { .mini-process { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .mini-process { grid-template-columns: 1fr; } }
+
+  .crosslink { margin-top: 32px; font-size: 0.95rem; color: var(--text-muted); }
+
+  .ordnung-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .ordnung-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 32px 28px;
+  }
+  .ordnung-item h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; color: var(--primary); margin-bottom: 12px;
+  }
+  .ordnung-item p { font-size: 0.94rem; color: var(--text-muted); line-height: 1.65; }
+  @media (max-width: 960px) { .ordnung-grid { grid-template-columns: 1fr; } }
+
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item summary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--primary);
+    padding: 24px 0; cursor: pointer; list-style: none;
+    position: relative; padding-right: 36px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent); font-size: 1.4rem; font-weight: 500;
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item p {
+    font-size: 0.96rem; color: var(--text-muted);
+    line-height: 1.7; padding-bottom: 24px; max-width: 680px;
+  }
+</style>

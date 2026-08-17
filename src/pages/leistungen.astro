@@ -7,6 +7,13 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 
 const services = [
   {
+    href: '/leistungen/ki-beratung/',
+    icon: '&#127919;',
+    title: 'KI-Beratung',
+    short: 'Für den Einstieg',
+    desc: 'Potenzialanalyse, Prozess-Mapping und KI-Strategie: Wir finden heraus, wo KI bei Ihnen wirklich etwas bringt – ehrlich bewertet, mit klarer Roadmap.',
+  },
+  {
     href: '/leistungen/chatbot/',
     icon: '&#128172;',
     title: 'KI-Chatbot',
@@ -63,7 +70,7 @@ const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   <!-- SERVICE HUB -->
   <Section
     label="[Im Überblick]"
-    title="Vier Wege zu <em class='hl'>weniger Routine.</em>"
+    title="Fünf Wege zu <em class='hl'>weniger Routine.</em>"
     intro="Jede Leistung ist einzeln buchbar – und in Kombination stärker. Beginnen wir immer mit dem Prozess, der Ihnen den größten Nutzen bringt."
   >
     <div class="hub-grid reveal-stagger">
@@ -251,6 +258,7 @@ const iconDocker = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
     transition: color 0.2s;
   }
   .hub-card:hover .hub-link { color: var(--accent); }
+  .hub-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
   @media (max-width: 768px) { .hub-grid { grid-template-columns: 1fr; } }
 
   /* TECH GRID */
