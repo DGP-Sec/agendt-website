@@ -174,7 +174,7 @@ const canonicalURL = new URL(path, site);
         }
         .section .container { position: relative; z-index: 1; }
 
-        /* Shell-Boxes: Sektionen als geschachtelte Behaelter auf dem Navy-Canvas.
+        /* Shell-Boxes: Sektionen als geschachtelte Behälter auf dem Navy-Canvas.
            Der Canvas bleibt zwischen und um die Boxen sichtbar. */
         .shell-box {
             width: min(1240px, calc(100% - 20px));
@@ -286,7 +286,7 @@ const canonicalURL = new URL(path, site);
             font-style: normal;
         }
 
-        /* Visuell versteckte H1: Design ohne Hero, SEO behaelt Keyword-H1 */
+        /* Visuell versteckte H1: Design ohne Hero, SEO behält Keyword-H1 */
         .sr-only {
             position: absolute;
             width: 1px; height: 1px;
@@ -298,6 +298,13 @@ const canonicalURL = new URL(path, site);
         }
 
         .text-center { text-align: center; }
+
+        /* Tastatur-Fokus: goldener Ring im Design-Ton (nur bei :focus-visible —
+           Mausklicks bleiben unberührt). Farbe folgt dem Accent-Token je Sektion. */
+        :focus-visible {
+            outline: 2px solid var(--accent, #D4AF37);
+            outline-offset: 2px;
+        }
 
         /* Glas-Karten: transparent + blur, Lichtkante oben, Gold-Glow bei Hover.
            Farben über Tokens — .section-light überschreibt sie für helle Sektionen. */
@@ -351,6 +358,13 @@ const canonicalURL = new URL(path, site);
                 opacity: 1 !important;
                 transform: none !important;
                 transition: none !important;
+            }
+            /* Alle laufenden Animationen (Hero-Workflow, Orbs, Live-Blinken)
+               fast auf null stellen — statischer Endzustand statt Loop. */
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
 
