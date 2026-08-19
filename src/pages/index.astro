@@ -69,14 +69,8 @@ const orgSchema = {
     <div class="container hero-grid">
       <div class="hero-content">
         <h1 class="hero-title">
-          Geschäftsprozesse automatisieren mit KI.
-          <span class="rotator">
-            <span class="rot-word grad">Mehr Effizienz.</span>
-            <span class="rot-word grad">Mehr Umsatz.</span>
-            <span class="rot-word grad">Mehr Zeit.</span>
-            <span class="rot-word grad">Weniger Fehler.</span>
-            <span class="rot-word grad">Mehr Skalierung.</span>
-          </span>
+          Prozesse automatisieren.<br />
+          <span class="grad"><span id="h1-type">Zeit</span></span><span class="h1-caret" aria-hidden="true"></span> sparen.
         </h1>
         <p class="hero-sub">
           Sparen Sie bis zu 70% Zeit bei Routineaufgaben. Automatisieren Sie E-Mails,
@@ -534,20 +528,31 @@ const orgSchema = {
         }
       }
 
-      // 6) Rotierende Nutzen-Zeile in der H1 (Roll-Wechsel)
-      const rotWords = document.querySelectorAll('.rot-word');
-      if (rotWords.length > 1 && !reduce) {
-        let ri = 0;
-        rotWords[0].classList.add('is-active');
-        setInterval(() => {
-          const cur = rotWords[ri];
-          ri = (ri + 1) % rotWords.length;
-          const nxt = rotWords[ri];
-          cur.classList.remove('is-active');
-          cur.classList.add('is-leaving');
-          nxt.classList.add('is-active');
-          setTimeout(() => cur.classList.remove('is-leaving'), 550);
-        }, 2700);
+      // 6) H1-Typewriter: „[X] sparen." — X wird getippt und wieder gelöscht
+      //    (gleiche Mechanik wie die Panel-Konsole, etwas langsamer getaktet)
+      const H1WORDS = ['Zeit', 'Kosten', 'Nerven', 'Ressourcen'];
+      const h1t = document.getElementById('h1-type');
+      if (h1t && !reduce) {
+        let wi = 0;
+        const typeW = (word, done) => {
+          let i = 0;
+          const t = setInterval(() => {
+            h1t.textContent = word.slice(0, ++i);
+            if (i >= word.length) { clearInterval(t); setTimeout(done, 2100); }
+          }, 70);
+        };
+        const delW = (done) => {
+          const d = setInterval(() => {
+            h1t.textContent = h1t.textContent.slice(0, -1);
+            if (!h1t.textContent.length) { clearInterval(d); setTimeout(done, 350); }
+          }, 34);
+        };
+        const nextW = () => {
+          wi = (wi + 1) % H1WORDS.length;
+          typeW(H1WORDS[wi], () => delW(nextW));
+        };
+        // „Zeit" steht bereits (server-gerendert) — kurz halten, dann Zyklus
+        setTimeout(() => delW(nextW), 2100);
       }
 
       // Ab hier: reine Maus-Interaktion — nur mit feinem Pointer und ohne Reduced-Motion
@@ -1046,32 +1051,18 @@ const orgSchema = {
   }
   @keyframes gradShift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 
-  /* ── Dynamische Überschrift (Vorbild kiberatung.de, eigenes Wording):
-     statische Keyword-Zeile + rotierende Nutzen-Zeile darunter.
-     Roll-Wechsel: aktives Wort rollt raus, neues kommt von unten.
-     Grid-Stack: alle Wörter auf derselben Zelle — Container misst sich
-     am höchsten Wort, kein Layout-Shift beim Wechsel. ── */
-  .lp .rotator {
-    display: grid;
-    overflow: hidden;
-    margin-top: 4px;
-    padding-bottom: 0.08em; /* Versal-Längen (Ü, Ö) nicht abschneiden */
+  /* ── Dynamische Überschrift: Typewriter wie in der Workflow-Konsole.
+     Statische Zeile „Prozesse automatisieren.", darunter „[X] sparen."
+     mit getipptem/gelöschtem X in Gold (schimmernder Gradient).
+     Erstes Wort („Zeit") ist server-gerendert — SEO + No-JS-Fallback. ── */
+  .lp .h1-caret {
+    display: inline-block;
+    width: 0.07em;
+    height: 0.74em;
+    margin: 0 0.14em 0 0.1em;
+    background: var(--accent);
+    animation: caretBlink 1.05s step-end infinite;
   }
-  .lp .rot-word {
-    grid-area: 1 / 1;
-    opacity: 0;
-    transform: translateY(108%);
-    filter: blur(6px);
-    transition:
-      opacity 0.45s ease,
-      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-      filter 0.45s ease;
-  }
-  /* Ohne JS / Reduced-Motion: erstes Wort statisch sichtbar */
-  .lp .rot-word:first-child { opacity: 1; transform: none; filter: none; }
-  /* Wechsel-Klassen (müssen NACH :first-child stehen — gleiche Spezifität) */
-  .lp .rot-word.is-active { opacity: 1; transform: none; filter: none; }
-  .lp .rot-word.is-leaving { opacity: 0; transform: translateY(-108%); filter: blur(6px); }
 
   /* Hero-Panel: 3D-Neigung zur Maus (JS setzt transform) */
   .lp .hero-visual { perspective: 900px; }
