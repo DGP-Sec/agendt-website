@@ -68,7 +68,16 @@ const orgSchema = {
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-content">
-        <h1 class="hero-title">Geschäftsprozesse automatisieren <span class="grad">mit KI</span></h1>
+        <h1 class="hero-title">
+          Geschäftsprozesse automatisieren mit KI.
+          <span class="rotator">
+            <span class="rot-word grad">Mehr Effizienz.</span>
+            <span class="rot-word grad">Mehr Umsatz.</span>
+            <span class="rot-word grad">Mehr Zeit.</span>
+            <span class="rot-word grad">Weniger Fehler.</span>
+            <span class="rot-word grad">Mehr Skalierung.</span>
+          </span>
+        </h1>
         <p class="hero-sub">
           Sparen Sie bis zu 70% Zeit bei Routineaufgaben. Automatisieren Sie E-Mails,
           Kundenanfragen, Datenerfassung und mehr – mit intelligenter KI-Technologie.
@@ -523,6 +532,22 @@ const orgSchema = {
           }, { threshold: 0.6 });
           counters.forEach((el) => io.observe(el));
         }
+      }
+
+      // 6) Rotierende Nutzen-Zeile in der H1 (Roll-Wechsel)
+      const rotWords = document.querySelectorAll('.rot-word');
+      if (rotWords.length > 1 && !reduce) {
+        let ri = 0;
+        rotWords[0].classList.add('is-active');
+        setInterval(() => {
+          const cur = rotWords[ri];
+          ri = (ri + 1) % rotWords.length;
+          const nxt = rotWords[ri];
+          cur.classList.remove('is-active');
+          cur.classList.add('is-leaving');
+          nxt.classList.add('is-active');
+          setTimeout(() => cur.classList.remove('is-leaving'), 550);
+        }, 2700);
       }
 
       // Ab hier: reine Maus-Interaktion — nur mit feinem Pointer und ohne Reduced-Motion
@@ -1020,6 +1045,33 @@ const orgSchema = {
     animation: gradShift 7s ease-in-out infinite alternate;
   }
   @keyframes gradShift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+  /* ── Dynamische Überschrift (Vorbild kiberatung.de, eigenes Wording):
+     statische Keyword-Zeile + rotierende Nutzen-Zeile darunter.
+     Roll-Wechsel: aktives Wort rollt raus, neues kommt von unten.
+     Grid-Stack: alle Wörter auf derselben Zelle — Container misst sich
+     am höchsten Wort, kein Layout-Shift beim Wechsel. ── */
+  .lp .rotator {
+    display: grid;
+    overflow: hidden;
+    margin-top: 4px;
+    padding-bottom: 0.08em; /* Versal-Längen (Ü, Ö) nicht abschneiden */
+  }
+  .lp .rot-word {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(108%);
+    filter: blur(6px);
+    transition:
+      opacity 0.45s ease,
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.45s ease;
+  }
+  /* Ohne JS / Reduced-Motion: erstes Wort statisch sichtbar */
+  .lp .rot-word:first-child { opacity: 1; transform: none; filter: none; }
+  /* Wechsel-Klassen (müssen NACH :first-child stehen — gleiche Spezifität) */
+  .lp .rot-word.is-active { opacity: 1; transform: none; filter: none; }
+  .lp .rot-word.is-leaving { opacity: 0; transform: translateY(-108%); filter: blur(6px); }
 
   /* Hero-Panel: 3D-Neigung zur Maus (JS setzt transform) */
   .lp .hero-visual { perspective: 900px; }
