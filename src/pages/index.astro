@@ -127,7 +127,7 @@ const orgSchema = {
               <span class="hv-status"><svg class="st-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="st-run"></span></span>
             </div>
           </div>
-          <div class="hv-foot"><span class="hv-sys">system</span><span id="hv-type"></span><span class="hv-caret"></span></div>
+          <div class="hv-foot">n8n · self-hosted · 0 ms API-Latenz</div>
         </div>
         <div class="hv-glow hv-glow-1"></div>
         <div class="hv-glow hv-glow-2"></div>
@@ -464,43 +464,7 @@ const orgSchema = {
         update();
       }
 
-      // 2) Typewriter-Logzeile im Hero-Panel
-      const LINES = [
-        'E-Mail klassifiziert: Kreditorenbuchhaltung',
-        'Rechnung erkannt und an die Buchhaltung weitergeleitet',
-        'Terminvorschlag an Kunden versendet',
-        'Anfrage beantwortet: Angebot versendet',
-        'Tagesreport erstellt und verteilt',
-      ];
-      const tw = document.getElementById('hv-type');
-      if (tw) {
-        if (reduce) {
-          tw.textContent = LINES[0];
-        } else {
-          let li = 0;
-          const type = (text, done) => {
-            let i = 0;
-            const t = setInterval(() => {
-              tw.textContent = text.slice(0, ++i);
-              if (i >= text.length) { clearInterval(t); setTimeout(done, 1900); }
-            }, 42);
-          };
-          const del = (done) => {
-            const d = setInterval(() => {
-              tw.textContent = tw.textContent.slice(0, -1);
-              if (!tw.textContent.length) { clearInterval(d); done(); }
-            }, 16);
-          };
-          const next = () => {
-            const line = LINES[li];
-            li = (li + 1) % LINES.length;
-            type(line, () => del(() => next()));
-          };
-          next();
-        }
-      }
-
-      // 3) Stats-Count-Up (70 %, 100 %) — once, beim ersten Sichtbarwerden
+      // 2) Stats-Count-Up (70 %, 100 %) — once, beim ersten Sichtbarwerden
       const counters = document.querySelectorAll('[data-count]');
       if (counters.length) {
         if (reduce) {
@@ -609,7 +573,7 @@ const orgSchema = {
     align-items: center;
   }
   .hero-title {
-    font-size: clamp(2.35rem, 5.3vw, 4.25rem);
+    font-size: clamp(2.2rem, 3.85vw, 2.9rem);
     font-weight: 800;
     color: var(--text);
     margin-bottom: 20px;
@@ -1068,27 +1032,7 @@ const orgSchema = {
   .lp .hero-visual { perspective: 900px; }
   .lp .hv-panel { transition: transform 0.18s ease-out; will-change: transform; }
 
-  /* Panel-Konsole: Typewriter-Logzeile */
-  .lp .hv-foot { display: flex; align-items: center; gap: 8px; overflow: hidden; min-height: 1.5em; }
-  .lp .hv-sys {
-    flex-shrink: 0;
-    font-size: 0.62rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    opacity: 0.75;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 4px;
-    padding: 1px 6px;
-  }
-  .lp #hv-type { white-space: nowrap; overflow: hidden; }
-  .lp .hv-caret {
-    flex-shrink: 0;
-    display: inline-block;
-    width: 7px; height: 13px;
-    background: var(--accent);
-    animation: caretBlink 1s step-end infinite;
-  }
+  /* Panel-Konsole: statische Fußzeile (Typewriter wohnt jetzt in der H1) */
   @keyframes caretBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
   /* ── Flow-Connector: goldene Pipeline zwischen den Boxen ──
