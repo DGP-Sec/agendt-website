@@ -493,7 +493,7 @@ const orgSchema = {
       }
 
       // 6) H1-Typewriter: „[X] sparen." — X wird getippt und wieder gelöscht
-      //    (gleiche Mechanik wie die Panel-Konsole, etwas langsamer getaktet)
+      //    (gleiche Mechanik wie die Workflow-Konsole, ruhig getaktet)
       const H1WORDS = ['Zeit', 'Kosten', 'Nerven', 'Ressourcen'];
       const h1t = document.getElementById('h1-type');
       if (h1t && !reduce) {
@@ -502,21 +502,21 @@ const orgSchema = {
           let i = 0;
           const t = setInterval(() => {
             h1t.textContent = word.slice(0, ++i);
-            if (i >= word.length) { clearInterval(t); setTimeout(done, 2100); }
-          }, 70);
+            if (i >= word.length) { clearInterval(t); setTimeout(done, 3200); }
+          }, 115);
         };
         const delW = (done) => {
           const d = setInterval(() => {
             h1t.textContent = h1t.textContent.slice(0, -1);
-            if (!h1t.textContent.length) { clearInterval(d); setTimeout(done, 350); }
-          }, 34);
+            if (!h1t.textContent.length) { clearInterval(d); setTimeout(done, 500); }
+          }, 55);
         };
         const nextW = () => {
           wi = (wi + 1) % H1WORDS.length;
           typeW(H1WORDS[wi], () => delW(nextW));
         };
         // „Zeit" steht bereits (server-gerendert) — kurz halten, dann Zyklus
-        setTimeout(() => delW(nextW), 2100);
+        setTimeout(() => delW(nextW), 3200);
       }
 
       // Ab hier: reine Maus-Interaktion — nur mit feinem Pointer und ohne Reduced-Motion
