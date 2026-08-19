@@ -61,12 +61,14 @@ const orgSchema = {
 >
   <Header />
 
-  <main style="--max-w: 1264px;">
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <main class="lp" style="--max-w: 1264px;">
   <!-- HERO: Große Headline, 2 CTAs, 3 Trust-Badges, Visual rechts -->
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-content">
-        <h1 class="hero-title">Geschäftsprozesse automatisieren mit KI</h1>
+        <h1 class="hero-title">Geschäftsprozesse automatisieren <span class="grad">mit KI</span></h1>
         <p class="hero-sub">
           Sparen Sie bis zu 70% Zeit bei Routineaufgaben. Automatisieren Sie E-Mails,
           Kundenanfragen, Datenerfassung und mehr – mit intelligenter KI-Technologie.
@@ -122,7 +124,7 @@ const orgSchema = {
               <span class="hv-status"><svg class="st-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="st-run"></span></span>
             </div>
           </div>
-          <div class="hv-foot">n8n · self-hosted · 0 ms API-Latenz</div>
+          <div class="hv-foot"><span class="hv-sys">system</span><span id="hv-type"></span><span class="hv-caret"></span></div>
         </div>
         <div class="hv-glow hv-glow-1"></div>
         <div class="hv-glow hv-glow-2"></div>
@@ -141,7 +143,7 @@ const orgSchema = {
     intro="Geschäftsprozesse automatisieren bedeutet mehr als Effizienzsteigerung – es ist ein strategischer Wettbewerbsvorteil."
   >
     <div class="why-grid reveal-stagger">
-      <div class="card why-card">
+      <div class="card why-card spot">
         <div class="card-icon" set:html={icons.clock} />
         <h3 class="card-title">Zeit sparen durch intelligente Automatisierung</h3>
         <p class="card-body">
@@ -151,7 +153,7 @@ const orgSchema = {
         </p>
         <p class="why-result"><span class="why-result-label">Ergebnis:</span> Bis zu 70% Zeitersparnis bei Routineaufgaben</p>
       </div>
-      <div class="card why-card">
+      <div class="card why-card spot">
         <div class="card-icon" set:html={icons.coins} />
         <h3 class="card-title">Kosten senken mit skalierbarer KI</h3>
         <p class="card-body">
@@ -161,7 +163,7 @@ const orgSchema = {
         </p>
         <p class="why-result"><span class="why-result-label">Ergebnis:</span> Geringere Prozesskosten, planbare Festpreise</p>
       </div>
-      <div class="card why-card">
+      <div class="card why-card spot">
         <div class="card-icon" set:html={icons.shieldCheck} />
         <h3 class="card-title">Fehlerquote minimieren durch Automatisierung</h3>
         <p class="card-body">
@@ -173,6 +175,8 @@ const orgSchema = {
       </div>
     </div>
   </Section>
+
+  <div class="flow-link" style="--i:0" aria-hidden="true"></div>
 
   <!-- 3-SCHRITTE-PROZESS -->
   <Section
@@ -228,6 +232,8 @@ const orgSchema = {
     <p class="process-more"><a href="/prozess/">Details zum Prozess-Ablauf →</a></p>
   </Section>
 
+  <div class="flow-link" style="--i:1" aria-hidden="true"></div>
+
   <!-- ANWENDUNGSFÄLLE: 4 Branchen -->
   <Section
     light
@@ -236,7 +242,7 @@ const orgSchema = {
     intro="KI-Automatisierung funktioniert branchenübergreifend – hier sind vier typische Beispiele."
   >
     <div class="usecase-grid reveal-stagger">
-      <div class="card usecase-card">
+      <div class="card usecase-card spot">
         <div class="card-icon" set:html={icons.cart} />
         <h3 class="card-title">E-Commerce</h3>
         <p class="card-body">
@@ -245,7 +251,7 @@ const orgSchema = {
           und Follow-ups steigern die Kundenzufriedenheit.
         </p>
       </div>
-      <div class="card usecase-card">
+      <div class="card usecase-card spot">
         <div class="card-icon" set:html={icons.home} />
         <h3 class="card-title">Immobilienwirtschaft</h3>
         <p class="card-body">
@@ -254,7 +260,7 @@ const orgSchema = {
           Dokumenten in Ihre Systeme.
         </p>
       </div>
-      <div class="card usecase-card">
+      <div class="card usecase-card spot">
         <div class="card-icon" set:html={icons.briefcase} />
         <h3 class="card-title">B2B-Service</h3>
         <p class="card-body">
@@ -263,7 +269,7 @@ const orgSchema = {
           inklusive.
         </p>
       </div>
-      <div class="card usecase-card">
+      <div class="card usecase-card spot">
         <div class="card-icon" set:html={icons.chart} />
         <h3 class="card-title">Finance &amp; Controlling</h3>
         <p class="card-body">
@@ -275,6 +281,8 @@ const orgSchema = {
     </div>
     <p class="process-more"><a href="/leistungen/">Weitere Einsatzbereiche entdecken →</a></p>
   </Section>
+
+  <div class="flow-link" style="--i:2" aria-hidden="true"></div>
 
   <!-- TECHNOLOGIE -->
   <Section
@@ -320,23 +328,27 @@ const orgSchema = {
     </div>
   </Section>
 
+  <div class="flow-link" style="--i:3" aria-hidden="true"></div>
+
   <!-- STATS BAND -->
   <section class="stats-band section-light shell-box">
-    <div class="container stats-grid">
+    <div class="container stats-grid reveal-stagger">
       <div class="stat">
         <span class="stat-num">3–5</span>
         <span class="stat-label">Tage bis zum lauffähigen Prototyp</span>
       </div>
       <div class="stat">
-        <span class="stat-num">70%</span>
+        <span class="stat-num" data-count="70" data-suffix="%">70%</span>
         <span class="stat-label">Zeitersparnis bei Routineaufgaben (bis zu)</span>
       </div>
       <div class="stat">
-        <span class="stat-num">100%</span>
+        <span class="stat-num" data-count="100" data-suffix="%">100%</span>
         <span class="stat-label">DSGVO-konforme Architektur</span>
       </div>
     </div>
   </section>
+
+  <div class="flow-link" style="--i:4" aria-hidden="true"></div>
 
   <!-- FAQ -->
   <Section
@@ -348,13 +360,15 @@ const orgSchema = {
     <div class="faq-list reveal">
       {faqs.map((f) => (
         <details class="faq-item">
-          <summary>{f.q}</summary>
+          <summary>{f.q}<span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
           <p>{f.a} {f.q.includes('Kosten') && <a href="/preise/">Mehr zu unseren Preisen</a>}</p>
         </details>
       ))}
     </div>
     <p class="process-more"><a href="/faq/">Alle FAQs ansehen →</a></p>
   </Section>
+
+  <div class="flow-link" style="--i:5" aria-hidden="true"></div>
 
   <!-- FINAL CTA -->
   <section class="final-cta shell-box">
@@ -424,6 +438,117 @@ const orgSchema = {
         });
       }, { threshold: 0.25 });
       io.observe(panel);
+    })();
+  </script>
+
+  <script>
+    // Motion-Layer: Scroll-Fortschritt, Typewriter-Konsole, Count-Up-Stats,
+    // Cursor-Spotlight, Panel-Tilt. Alles decorativ — unter Reduced-Motion
+    // bleibt die Seite voll funktional, nur ohne Bewegung.
+    (() => {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // 1) Scroll-Fortschrittsbalken (funktional, läuft auch bei Reduced-Motion)
+      const bar = document.querySelector('.scroll-progress');
+      if (bar) {
+        const update = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const p = max > 0 ? h.scrollTop / max : 0;
+          bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, p)) + ')';
+        };
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+      }
+
+      // 2) Typewriter-Logzeile im Hero-Panel
+      const LINES = [
+        'E-Mail klassifiziert: Kreditorenbuchhaltung',
+        'Rechnung erkannt und an die Buchhaltung weitergeleitet',
+        'Terminvorschlag an Kunden versendet',
+        'Anfrage beantwortet: Angebot versendet',
+        'Tagesreport erstellt und verteilt',
+      ];
+      const tw = document.getElementById('hv-type');
+      if (tw) {
+        if (reduce) {
+          tw.textContent = LINES[0];
+        } else {
+          let li = 0;
+          const type = (text, done) => {
+            let i = 0;
+            const t = setInterval(() => {
+              tw.textContent = text.slice(0, ++i);
+              if (i >= text.length) { clearInterval(t); setTimeout(done, 1900); }
+            }, 42);
+          };
+          const del = (done) => {
+            const d = setInterval(() => {
+              tw.textContent = tw.textContent.slice(0, -1);
+              if (!tw.textContent.length) { clearInterval(d); done(); }
+            }, 16);
+          };
+          const next = () => {
+            const line = LINES[li];
+            li = (li + 1) % LINES.length;
+            type(line, () => del(() => next()));
+          };
+          next();
+        }
+      }
+
+      // 3) Stats-Count-Up (70 %, 100 %) — once, beim ersten Sichtbarwerden
+      const counters = document.querySelectorAll('[data-count]');
+      if (counters.length) {
+        if (reduce) {
+          counters.forEach((el) => { el.textContent = el.dataset.count + (el.dataset.suffix || ''); });
+        } else {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              io.unobserve(e.target);
+              const el = e.target;
+              const target = parseInt(el.dataset.count, 10);
+              const suffix = el.dataset.suffix || '';
+              const t0 = performance.now();
+              const DUR = 1400;
+              const tick = (t) => {
+                const p = Math.min(1, (t - t0) / DUR);
+                const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+                el.textContent = Math.round(target * eased) + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+              };
+              requestAnimationFrame(tick);
+            });
+          }, { threshold: 0.6 });
+          counters.forEach((el) => io.observe(el));
+        }
+      }
+
+      // Ab hier: reine Maus-Interaktion — nur mit feinem Pointer und ohne Reduced-Motion
+      if (reduce || !window.matchMedia('(pointer: fine)').matches) return;
+
+      // 4) Cursor-Spotlight auf den Karten
+      document.querySelectorAll('.spot').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+      });
+
+      // 5) Hero-Panel: dezente 3D-Neigung zur Maus
+      const panel = document.querySelector('.hv-panel');
+      const visual = document.querySelector('.hero-visual');
+      if (panel && visual) {
+        visual.addEventListener('mousemove', (e) => {
+          const r = visual.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          panel.style.transform = 'rotateX(' + (-y * 3.5).toFixed(2) + 'deg) rotateY(' + (x * 4.5).toFixed(2) + 'deg)';
+        });
+        visual.addEventListener('mouseleave', () => { panel.style.transform = 'rotateX(0deg) rotateY(0deg)'; });
+      }
     })();
   </script>
   </main>
@@ -854,5 +979,242 @@ const orgSchema = {
     font-size: 1.1rem;
     color: var(--text-muted);
     margin-bottom: 32px;
+  }
+
+  /* ══════════ MOTION-LAYER: Verbindungen, Licht, Rhythmus ══════════
+     Alles transform/opacity/filter — GPU-freundlich, Reduced-Motion
+     wird zentral in Base.astro abgeschaltet. */
+
+  /* Goldener Scroll-Fortschritt ganz oben */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    z-index: 1200;
+    pointer-events: none;
+  }
+
+  /* Hero: subtiles Gold-Punktraster, zu den Rändern ausmaskiert */
+  .lp .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(212, 175, 55, 0.14) 1px, transparent 1.5px);
+    background-size: 30px 30px;
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 60% 30%, #000 20%, transparent 72%);
+    mask-image: radial-gradient(ellipse 90% 80% at 60% 30%, #000 20%, transparent 72%);
+  }
+
+  /* H1: „mit KI“ als lebendiger Gold-Gradient */
+  .lp .grad {
+    background: linear-gradient(100deg, #E5C558 0%, #D4AF37 40%, #F1DA8B 60%, #B8941E 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradShift 7s ease-in-out infinite alternate;
+  }
+  @keyframes gradShift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+  /* Hero-Panel: 3D-Neigung zur Maus (JS setzt transform) */
+  .lp .hero-visual { perspective: 900px; }
+  .lp .hv-panel { transition: transform 0.18s ease-out; will-change: transform; }
+
+  /* Panel-Konsole: Typewriter-Logzeile */
+  .lp .hv-foot { display: flex; align-items: center; gap: 8px; overflow: hidden; min-height: 1.5em; }
+  .lp .hv-sys {
+    flex-shrink: 0;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.75;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 4px;
+    padding: 1px 6px;
+  }
+  .lp #hv-type { white-space: nowrap; overflow: hidden; }
+  .lp .hv-caret {
+    flex-shrink: 0;
+    display: inline-block;
+    width: 7px; height: 13px;
+    background: var(--accent);
+    animation: caretBlink 1s step-end infinite;
+  }
+  @keyframes caretBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* ── Flow-Connector: goldene Pipeline zwischen den Boxen ──
+     Linie im Zwischenraum + wandernder Lichtpunkt (Ablauf → Ablauf). */
+  .flow-link { height: 0; position: relative; }
+  .flow-link::before {
+    content: '';
+    position: absolute;
+    left: 50%; top: -28px;
+    width: 2px; height: 56px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, transparent, rgba(212, 175, 55, 0.35) 30%, rgba(212, 175, 55, 0.35) 70%, transparent);
+  }
+  .flow-link::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 0;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.9);
+    transform: translate(-50%, -50%);
+    animation: flowDrop 2.6s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 0.4s);
+  }
+  @keyframes flowDrop {
+    0%   { transform: translate(-50%, -22px); opacity: 0; }
+    15%  { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { transform: translate(-50%, 22px); opacity: 0; }
+  }
+  @media (max-width: 640px) {
+    .flow-link::before { top: -20px; height: 40px; }
+  }
+
+  /* Karten: Cursor-Spotlight + Icon-Impuls beim Hover */
+  .lp .spot { position: relative; }
+  .lp .spot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(212, 175, 55, 0.12), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.35s;
+    pointer-events: none;
+  }
+  .lp .spot:hover::after { opacity: 1; }
+  .lp .spot .card-icon { transition: transform 0.3s ease; }
+  .lp .spot:hover .card-icon { transform: scale(1.12) rotate(-4deg); }
+
+  /* Scroll-Reveal: Karten zusätzlich von unscharf zu scharf */
+  .lp .reveal-stagger > * {
+    filter: blur(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+  }
+  .lp .reveal-stagger.visible > * { filter: blur(0); }
+
+  /* ── Prozess: Verbindungslinie 01 → 02 → 03, zeichnet sich beim
+     Scrollen, wandernder Goldpunkt, Ziffern unterbrechen die Linie ── */
+  .lp .process-grid { position: relative; }
+  .lp .process-grid::before {
+    content: '';
+    position: absolute;
+    top: 21px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4) 10%, rgba(212, 175, 55, 0.4) 90%, transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+  }
+  .lp .process-grid.visible::before { transform: scaleX(1); }
+  .lp .process-grid::after {
+    content: '';
+    position: absolute;
+    top: 17px; left: 0;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.9);
+    opacity: 0;
+  }
+  .lp .process-grid.visible::after {
+    opacity: 1;
+    animation: procDot 3.6s ease-in-out infinite;
+  }
+  @keyframes procDot {
+    0%   { left: 0%; opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+  .lp .process-num {
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    background: var(--bg-alt);
+    padding: 0 16px;
+    margin-left: -16px;
+  }
+  @media (max-width: 900px) {
+    .lp .process-grid::before, .lp .process-grid::after { display: none; }
+    .lp .process-num { background: none; padding: 0; margin-left: 0; }
+  }
+
+  /* Stats: Ziffern zählen stabil (kein Zappeln beim Count-Up) */
+  .lp .stat-num { font-variant-numeric: tabular-nums; }
+
+  /* FAQ: Chevron rotiert, Inhalt gleitet ein, offene Frage gold gerandert */
+  .lp .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+  }
+  .lp .faq-chevron {
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 50%;
+    color: var(--accent);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .lp .faq-chevron svg { width: 14px; height: 14px; }
+  .lp .faq-item[open] .faq-chevron { transform: rotate(45deg); border-color: rgba(212, 175, 55, 0.6); }
+  .lp .faq-item[open] { border-color: rgba(212, 175, 55, 0.35); }
+  .lp .faq-item[open] p { animation: faqIn 0.35s ease; }
+  @keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Final-CTA: rotierender Gold-Glint am Boxrand */
+  @property --ang { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+  .lp .final-cta { position: relative; }
+  .lp .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    padding: 1.5px;
+    background: conic-gradient(from var(--ang), transparent 0deg, transparent 250deg, rgba(212, 175, 55, 0.9) 320deg, transparent 360deg);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    animation: angSpin 6s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes angSpin { to { --ang: 360deg; } }
+
+  /* Buttons: Lichtstreifen wandert beim Hover durch */
+  .lp .btn-primary { position: relative; overflow: hidden; }
+  .lp .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.45) 50%, transparent 58%);
+    transform: translateX(-130%);
+    transition: transform 0.65s ease;
+    pointer-events: none;
+  }
+  .lp .btn-primary:hover::after { transform: translateX(130%); }
+
+  /* Final-CTA-Button: sanfter Gold-Ring-Puls */
+  .lp .final-cta .btn-primary { animation: ctaGlow 3.2s ease-in-out infinite; }
+  @keyframes ctaGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+    50% { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
   }
 </style>
